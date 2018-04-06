@@ -10,3 +10,16 @@ More **general info** on the system ( why-s & how-s) can be found in core reposi
 ```bash
 $ docker-compose -f scripts/docker-compose.yml up
 ```
+
+## Thank you
+
+I'd like to give thanks to the authors of vendor dependencies of the project.
+ You are the ones, who made development of this tool so joyful and smooth.
+ Many thanks to the contributors of:
+ 
+ - [bootstrap](https://github.com/twbs/bootstrap)
+ - [jquery](https://github.com/jquery/jquery)
+ - [octicons](https://github.com/primer/octicons/)
+ - [steem-js](https://github.com/steemit/steem-js)
+ 
+ 
