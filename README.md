@@ -6,12 +6,15 @@ More **general info** on the system ( why-s & how-s) can be found in core reposi
 
 This tool is hosted on github pages: **[jblew.github.io/steem-smartvotes-voter-page](http://jblew.github.io/steem-smartvotes-voter-page)**.
 
+<br />
 
 ### How to run in test environment?
 
 ```bash
 $ docker-compose -f scripts/docker-compose.yml up
 ```
+
+<br />
 
 ## Thank you
 I would like to thank [@noisy](https://steemit.com/@noisy) ([github.com/noisy](https://github.com/noisy)) who invented smartvotes 
