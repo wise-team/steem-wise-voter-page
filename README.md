@@ -4,5 +4,5 @@ Vote delegation system for STEEM blockchain: html tool for plenipotents to vote 
 ### How to run in test environment?
 
 ```bash
-docker-compose -f scripts/docker-compose.yml up
+$ docker-compose -f scripts/docker-compose.yml up
 ```
