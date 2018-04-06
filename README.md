@@ -12,14 +12,20 @@ $ docker-compose -f scripts/docker-compose.yml up
 ```
 
 ## Thank you
+I would like to thank [@noisy](https://steemit.com/@noisy) ([github.com/noisy](https://github.com/noisy)) who invented smartvotes 
+and is a total backer of this project. 
+Let the light of his wisdom shine down upon steem community for ever ;)
 
-I'd like to give thanks to the authors of vendor dependencies of the project.
+I also send many thanks to the authors of vendor dependencies of the project.
  You are the ones, who made development of this tool so joyful and smooth.
  Many thanks to the contributors of:
  
+ - [steem-js](https://github.com/steemit/steem-js)
  - [bootstrap](https://github.com/twbs/bootstrap)
  - [jquery](https://github.com/jquery/jquery)
  - [octicons](https://github.com/primer/octicons/)
- - [steem-js](https://github.com/steemit/steem-js)
+
  
+*I owe you a lot,<br />*
+*Jędrzej*
  
