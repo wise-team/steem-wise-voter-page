@@ -1,5 +1,13 @@
 # Contribution guide
 
+### How to run in test environment?
+
+```bash
+docker-compose -f scripts/docker-compose.yml up
+```
+
+
+
 ### How to generate sha384 integrity checksums?
 
 These checksums implement W3C recomendations on **Subresource Integrity**.
