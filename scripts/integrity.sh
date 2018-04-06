@@ -6,8 +6,5 @@ integrity=\"sha384-$(shasum -b -a 384 vendor/bootstrap/bootstrap-4.0.0.min.css |
 echo "<script src=\"vendor/jquery/jquery-3.3.1.min.js\" \
 integrity=\"sha384-$(shasum -b -a 384 vendor/jquery/jquery-3.3.1.min.js | xxd -r -p | base64)\"></script>"
 
-echo "<script src=\"vendor/popper.min.js\" \
-integrity=\"sha384-$(shasum -b -a 384 vendor/popper.min.js | xxd -r -p | base64)\"></script>"
-
 echo "<script src=\"vendor/bootstrap/bootstrap-4.0.0.min.js\" \
 integrity=\"sha384-$(shasum -b -a 384 vendor/bootstrap/bootstrap-4.0.0.min.js | xxd -r -p | base64)\"></script>"
