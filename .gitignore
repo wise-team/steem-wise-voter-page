@@ -1,0 +1,6 @@
+# Mac OS X stuff
+.DS_Store
+
+# Intelij IDEA IDE's
+/.idea/
+
