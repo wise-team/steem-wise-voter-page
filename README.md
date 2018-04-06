@@ -4,6 +4,8 @@ Vote delegation system for STEEM blockchain: html tool for plenipotents to vote 
 More **general info** on the system ( why-s & how-s) can be found in core repository: [github.com/Jblew/steem-smartvotes-core](https://github.com/Jblew/steem-smartvotes-core). Other components of smartvotes system are listed there.
 
 
+This tool is hosted on github pages: **[jblew.github.io/steem-smartvotes-voter-page](http://jblew.github.io/steem-smartvotes-voter-page)**.
+
 
 ### How to run in test environment?
 
