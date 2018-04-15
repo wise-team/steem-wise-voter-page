@@ -12,6 +12,10 @@ This tool is hosted on github pages: **[jblew.github.io/steem-smartvotes-voter-p
 
 ```bash
 $ docker-compose -f scripts/docker-compose.yml up
+
+# or
+
+$ node scripts/serve.js
 ```
 
 <br />
