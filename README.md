@@ -16,6 +16,7 @@ $ docker-compose -f scripts/docker-compose.yml up
 # or
 
 $ node scripts/serve.js
+$ node scripts/serve.js path/to/your/steem-smartvotes.file.js # For development purposes
 ```
 
 <br />

@@ -11,6 +11,11 @@ var path = require('path');
 
 var smartvotesLibraryPath = './smartvotes-lib/steem-smartvotes.min.js';
 
+if(process.argv.length > 2) {
+    smartvotesLibraryPath = process.argv[2];
+    console.log("Using smartvotes library from \""+smartvotesLibraryPath+"\".");
+}
+
 http.createServer(function (request, response) {
     console.log('request ', request.url);
 
