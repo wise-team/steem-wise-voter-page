@@ -77,7 +77,7 @@
                                 </div>
                             </div>
                             <div class="text-center">
-                                    <button type="button" class="btn btn-primary" disabled>Load rulesets</button>
+                                    <button type="button" class="btn btn-primary" id="load-rulesets-btn" disabled>Load rulesets</button>
                             </div>
                             
                         </div>
@@ -174,8 +174,44 @@ It is a TODO to add integrity check for steem-smartvotes.min.js to voter-page. -
         }
     }
 
+    function setupInputEvents() {
+        $("#voter-username, #delegator-username").keyup(function(evt) {
+            if($("#voter-username").val().length > 0 && $("#delegator-username").val().length) {
+                $("#load-rulesets-btn").prop('disabled', false);
+            }
+            else {
+                $("#load-rulesets-btn").prop('disabled', true);
+            }
+        });
+
+        $("#load-rulesets-btn").click(function() {
+            loadRulesets();
+        });
+    }
+
+    function loadRulesets() {
+        var voterUsername = $("#voter-username").val();
+        var delegatorUsername = $("#delegator-username").val();
+        if(voterUsername.length == 0 || delegatorUsername.length == 0) {
+            console.error("Before loading rulesets you must specify voter username and delegator username.");
+            $("#rules-panel").html("<div class=\"alert alert-error mb-4\">Before loading rulesets you must specify voter username and delegator username.</div>");
+        }
+        else {
+            $("#rules-panel").html("<div class=\"alert alert-info mb-4\">Loading rulesets... Please wait.</div>");
+            steemsmartvotes.SteemSmartvotes.getRulesetsOfUser(delegatorUsername, new Date(), function(error, result) {
+                if(error) {
+                    $("#rules-panel").html("<div class=\"alert alert-error mb-4\">Error when loading rulesets: "+error.message+"</div>");
+                }
+                else {
+                    $("#rules-panel").html("<pre>"+JSON.stringify(result, null, 2)+"</pre>");
+                }
+            });
+        }
+    }
+
     $(document).ready(function() {
         checkIfSmartvotesPresent();
+        setupInputEvents();
     });
 </script>
 </body>
