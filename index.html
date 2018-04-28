@@ -40,7 +40,8 @@
             <form class="needs-validation" novalidate>
                 <div class="row">
                     <div class="col-md-6 mb-4">
-                        <label for="voter-username">Your (voter) STEEM Username</label>
+                        
+                        <label for="voter-username"><span class="text-small text-muted">1.</span> Your (voter) STEEM Username</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><img src="vendor/octicons/svg/person.svg" class="octicon" alt="User icon"/></span>
@@ -52,50 +53,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 mb-4">
-                        <label for="posting-key">Your (voter) posting key WIF</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><img src="vendor/octicons/svg/key.svg" class="octicon" alt="Key icon" /></span>
-                            </div>
-                            <div class="invalid-feedback" style="width: 100%;">
-                                Your posting key is required.
-                            </div>
-                            <input type="password" class="form-control" id="posting-key" placeholder="&bull;&bull;&bull;" required>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mb-2"></div>
-
-                <div class="mb-2">
-                    <label for="post-slug">Post slug (or link to the post on steemit)</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><img src="img/steem-logo.svg" class="octicon" alt="Steem logo icon" /></span>
-                        </div>
-                        <div class="invalid-feedback" style="width: 100%;">
-                            Link or slug is required
-                        </div>
-                        <input type="text" class="form-control" id="post-slug" placeholder="@user/post-title-slug" required>
-                    </div>
-                </div>
-
-                <div class="d-block">
-                    <div class="form-check form-check-inline mb-4">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
-                        <label class="form-check-label" for="inlineRadio1">Send upvote</label>
-                    </div>
-                    <div class="form-check form-check-inline mb-4">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                        <label class="form-check-label" for="inlineRadio2">Send flag</label>
-                    </div>
-                </div>
-
-                <div class="mb-2"></div>
-
-                <div class="row">
-                    <div class="col-md-6 mb-6">
-                        <label for="delegator-username">Delegator username</label>
+                        <label for="delegator-username"><span class="text-small text-muted">2.</span> Delegator username</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><img src="vendor/octicons/svg/mortar-board.svg" class="octicon" alt="Delegator icon"/></span>
@@ -106,6 +64,67 @@
                             <input type="text" class="form-control" id="delegator-username" placeholder="Delegator username" required>
                         </div>
                     </div>
+                </div>
+
+                <div class="mb-4"><br /><br /></div>
+
+                <div class="row">
+                        <div class="col-md-10 offset-md-1 mb-4 ma-4">
+                            <div id="rules-panel">
+                                <div class="alert alert-secondary">
+                                    3. Please specify your username, your delegator username and 
+                                    click &quot;Load rulesets&quot; button. Then select ruleset.
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                    <button type="button" class="btn btn-primary" disabled>Load rulesets</button>
+                            </div>
+                            
+                        </div>
+                </div>
+
+                <div class="mb-4"><br /><br /></div>
+
+                <div class="mb-2">
+                    <label for="post-slug"><span class="text-small text-muted">4.</span> Post slug (or link to the post on steemit)</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><img src="img/steem-logo.svg" class="octicon" alt="Steem logo icon" /></span>
+                        </div>
+                        <div class="invalid-feedback" style="width: 100%;">
+                            Link or slug is required
+                        </div>
+                        <input type="text" class="form-control" id="post-slug" placeholder="@user/post-title-slug" required disabled>
+                    </div>
+                </div>
+
+                <div class="d-block">
+                    <div class="form-check form-check-inline mb-4">
+                        <span class="text-small text-muted">5. &nbsp; </span>
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked disabled>
+                        <label class="form-check-label" for="inlineRadio1">Send upvote</label>
+                    </div>
+                    <div class="form-check form-check-inline mb-4">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" disabled>
+                        <label class="form-check-label" for="inlineRadio2">Send flag</label>
+                    </div>
+                </div>
+
+                <div class="mb-2"></div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-6">
+                            <label for="posting-key"><span class="text-small text-muted">6.</span> Your (voter) posting key WIF</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><img src="vendor/octicons/svg/key.svg" class="octicon" alt="Key icon" /></span>
+                                </div>
+                                <div class="invalid-feedback" style="width: 100%;">
+                                    Your posting key is required.
+                                </div>
+                                <input type="password" class="form-control" id="posting-key" placeholder="&bull;&bull;&bull;" required disabled>
+                            </div>
+                    </div>
                     <div class="col-md-6 mb-3">
                         &nbsp;
                     </div>
@@ -113,7 +132,7 @@
 
                 <div class="mb-4"></div>
 
-                <button class="btn btn-primary btn-lg btn-block" type="submit">Send to blockchain</button>
+                <button class="btn btn-primary btn-lg btn-block" type="submit" disabled>Send to blockchain</button>
             </form>
 
             <br /><br />
