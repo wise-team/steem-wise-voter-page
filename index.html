@@ -83,37 +83,50 @@
                 </div>
 
                 <div class="mb-4"><br /><br /></div>
-
-                <div class="mb-2">
-                    <label for="post-slug"><span class="text-small text-muted">4.</span> Post slug (or link to the post on steemit)</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><img src="img/steem-logo.svg" class="octicon" alt="Steem logo icon" /></span>
+                <div class="row">
+                    <div class="col-md-12 mb-2">
+                        <label for="post-slug"><span class="text-small text-muted">4.</span> Post slug (or link to the post on steemit)</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><img src="img/steem-logo.svg" class="octicon" alt="Steem logo icon" /></span>
+                            </div>
+                            <div class="invalid-feedback" style="width: 100%;">
+                                Link to steemit or slug is required
+                            </div>
+                            <input type="text" class="form-control" id="post-slug" placeholder="category/@user/post-title-permlink" required disabled>
                         </div>
-                        <div class="invalid-feedback" style="width: 100%;">
-                            Link or slug is required
-                        </div>
-                        <input type="text" class="form-control" id="post-slug" placeholder="@user/post-title-slug" required disabled>
                     </div>
                 </div>
-
-                <div class="d-block">
-                    <div class="form-check form-check-inline mb-4">
-                        <span class="text-small text-muted">5. &nbsp; </span>
-                        <input class="form-check-input" type="radio" name="voteorder-mode" id="voteorder-mode-upvote" value="upvote" checked disabled>
-                        <label class="form-check-label" for="voteorder-mode-upvote">Send upvote</label>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="vote-weight">Vote weight</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><img src="vendor/octicons/svg/law.svg" class="octicon" alt="Vote weight icon"/></span>
+                            </div>
+                            <input type="text" class="form-control" id="vote-weight" placeholder="10000" required disabled>
+                        </div>
                     </div>
-                    <div class="form-check form-check-inline mb-4">
-                        <input class="form-check-input" type="radio" name="voteorder-mode" id="voteorder-mode-flag" value="flag" disabled>
-                        <label class="form-check-label" for="voteorder-mode-flag">Send flag</label>
-                    </div>
+                    <div class="col-md-6 mb-2">
+                            <br />
+                            <div class="d-block">
+                                <div class="form-check form-check-inline mb-4">
+                                    <input class="form-check-input" type="radio" name="voteorder-mode" id="voteorder-mode-upvote" value="upvote" checked disabled>
+                                    <label class="form-check-label" for="voteorder-mode-upvote">Send upvote</label>
+                                </div>
+                                <div class="form-check form-check-inline mb-4">
+                                    <input class="form-check-input" type="radio" name="voteorder-mode" id="voteorder-mode-flag" value="flag" disabled>
+                                    <label class="form-check-label" for="voteorder-mode-flag">Send flag</label>
+                                </div>
+                            </div>
+                        </div>
                 </div>
 
-                <div class="mb-2"></div>
+                <div class="mb-2"><br /></div>
 
                 <div class="row">
                     <div class="col-md-6 mb-6">
-                            <label for="posting-key"><span class="text-small text-muted">6.</span> Your (voter) posting key WIF</label>
+                            <label for="posting-key"><span class="text-small text-muted">5.</span> Your (voter) posting key WIF</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><img src="vendor/octicons/svg/key.svg" class="octicon" alt="Key icon" /></span>
@@ -130,8 +143,16 @@
                 </div>
 
                 <div class="mb-4"></div>
-
-                <button class="btn btn-primary btn-lg btn-block" id="send-btn" type="submit" disabled>Send to blockchain</button>
+                <div class="row">
+                    <div class="col-md-12 mb-4">
+                            <button class="btn btn-primary btn-lg btn-block" id="send-btn" type="submit" disabled>Send to blockchain</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="final-message"></div>
+                    </div>
+                </div>
             </form>
 
             <br /><br />
@@ -186,6 +207,14 @@ It is a TODO to add integrity check for steem-smartvotes.min.js to voter-page. -
         $("#load-rulesets-btn").click(function() {
             loadRulesets();
         });
+
+        $("#post-slug").change(function() {
+            validateSteemPost();
+        });
+
+        $("#send-btn").click(function() {
+            //sendSmartvote();
+        });
     }
 
     function loadRulesets() {
@@ -193,13 +222,13 @@ It is a TODO to add integrity check for steem-smartvotes.min.js to voter-page. -
         var delegatorUsername = $("#delegator-username").val();
         if(voterUsername.length == 0 || delegatorUsername.length == 0) {
             console.error("Before loading rulesets you must specify voter username and delegator username.");
-            $("#rules-panel").html("<div class=\"alert alert-error mb-4\">Before loading rulesets you must specify voter username and delegator username.</div>");
+            $("#rules-panel").html("<div class=\"alert alert-danger mb-4\">Before loading rulesets you must specify voter username and delegator username.</div>");
         }
         else {
             $("#rules-panel").html("<div class=\"alert alert-info mb-4\">Loading rulesets... Please wait.</div>");
             steemsmartvotes.SteemSmartvotes.getRulesetsOfUser(delegatorUsername, new Date(), function(error, result) {
                 if(error) {
-                    $("#rules-panel").html("<div class=\"alert alert-error mb-4\">Error when loading rulesets: "+error.message+"</div>");
+                    $("#rules-panel").html("<div class=\"alert alert-danger mb-4\">Error when loading rulesets: "+error.message+"</div>");
                 }
                 else {
                     if(result.length === 0) {
@@ -245,7 +274,58 @@ It is a TODO to add integrity check for steem-smartvotes.min.js to voter-page. -
         $("input:radio[name='voteorder-mode']").prop('disabled', false);
         $("#posting-key").prop('disabled', false);
         $("#send-btn").prop('disabled', false);
-        //$("input:radio[name='r']:checked").val()
+        $("#vote-weight").prop('disabled', false);
+    }
+
+    function validateSteemPost() {
+        var voterUsername = $("#voter-username").val();
+        try {
+            $("#final-message").html("<div class=\"alert alert-info\">Validating your voteorder...</div>");
+            var voteorder = constructVoteorder();
+            steemsmartvotes.SteemSmartvotes.validateVoteOrder(voterUsername, voteorder, new Date(), function(error, result) {
+                if(error) {
+                    $("#final-message").html("<div class=\"alert alert-danger\">"+error.message+"</div>");
+                    console.error(error);
+                }
+                else {
+                    $("#final-message").html("<div class=\"alert alert-info\">Your message is valid. You can now send it.</div>");
+                    console.log("Success!");
+                }
+            });
+            console.log(voteorder);
+        }
+        catch(err) {
+            $("#final-message").html("<div class=\"alert alert-danger\">"+err.message+"</div>");
+            console.error(err);
+        }
+    }
+
+    function constructVoteorder() {
+        // TODO validate below values
+        var voter = $("#voter-username").val();
+        var delegator = $("#delegator-username").val();
+        var weight = $("#vote-weight").val();
+        var type = $("input:radio[name='voteorder-mode']:checked").val();
+        var rulesetName = $("input:radio[name='ruleset-selector']:checked").val();
+        
+        var slug = $("#post-slug").val();
+        if(slug.length === 0) throw new Error("Slug cannot be empty.");
+        var regex = /^(?:(?:https?:\/\/steemit\.com)?\/(?:[^/]*)\/@)?([^\/]+)\/([^\/]+)$/giu;
+        var match = regex.exec(slug);
+        if(regex.length < 3) {
+            throw new Error("Wrong format. Please paste steemit link, or <category>?/@user/@permlink.");
+        }
+        var author = match[1];
+        var permlink = match[2];
+
+        return {
+            ruleset_name: rulesetName,
+            author: author,
+            permlink: permlink,
+            delegator: delegator,
+            weight: weight,
+            type: type
+        };
     }
 
     $(document).ready(function() {
