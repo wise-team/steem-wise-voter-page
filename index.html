@@ -66,20 +66,19 @@
                     </div>
                 </div>
 
-                <div class="mb-4"><br /><br /></div>
+                <div class="mb-4"><br /></div>
 
                 <div class="row">
                         <div class="col-md-10 offset-md-1 mb-4 ma-4">
+                            <div class="text-center">
+                                    <button type="button" class="btn btn-primary" id="load-rulesets-btn" disabled>Load rulesets</button>
+                            </div><br/>
                             <div id="rules-panel">
                                 <div class="alert alert-secondary">
                                     3. Please specify your username, your delegator username and 
                                     click &quot;Load rulesets&quot; button. Then select ruleset.
                                 </div>
                             </div>
-                            <div class="text-center">
-                                    <button type="button" class="btn btn-primary" id="load-rulesets-btn" disabled>Load rulesets</button>
-                            </div>
-                            
                         </div>
                 </div>
 
@@ -101,12 +100,12 @@
                 <div class="d-block">
                     <div class="form-check form-check-inline mb-4">
                         <span class="text-small text-muted">5. &nbsp; </span>
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked disabled>
-                        <label class="form-check-label" for="inlineRadio1">Send upvote</label>
+                        <input class="form-check-input" type="radio" name="voteorder-mode" id="voteorder-mode-upvote" value="upvote" checked disabled>
+                        <label class="form-check-label" for="voteorder-mode-upvote">Send upvote</label>
                     </div>
                     <div class="form-check form-check-inline mb-4">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" disabled>
-                        <label class="form-check-label" for="inlineRadio2">Send flag</label>
+                        <input class="form-check-input" type="radio" name="voteorder-mode" id="voteorder-mode-flag" value="flag" disabled>
+                        <label class="form-check-label" for="voteorder-mode-flag">Send flag</label>
                     </div>
                 </div>
 
@@ -132,7 +131,7 @@
 
                 <div class="mb-4"></div>
 
-                <button class="btn btn-primary btn-lg btn-block" type="submit" disabled>Send to blockchain</button>
+                <button class="btn btn-primary btn-lg btn-block" id="send-btn" type="submit" disabled>Send to blockchain</button>
             </form>
 
             <br /><br />
@@ -203,10 +202,50 @@ It is a TODO to add integrity check for steem-smartvotes.min.js to voter-page. -
                     $("#rules-panel").html("<div class=\"alert alert-error mb-4\">Error when loading rulesets: "+error.message+"</div>");
                 }
                 else {
-                    $("#rules-panel").html("<pre>"+JSON.stringify(result, null, 2)+"</pre>");
+                    if(result.length === 0) {
+                        $("#rules-panel").html("<div class=\"alert alert-warning mb-4\">This delegator does not exist or did not set any smartvote rules.</div>");
+                    }
+                    else {
+                        var myRules = [];
+                        for(var i in result) {
+                            var rule = result[i];
+                            if(rule.voter == voterUsername) myRules.push(rule);
+                        }
+                        if(myRules.length == 0) {
+                            $("#rules-panel").html("<div class=\"alert alert-warning mb-4\">This delegator did not set any smartvote rules for this voter.</div>");
+                        }
+                        else {
+                            showRulesets(myRules);
+                        }
+                    }
                 }
             });
         }
+    }
+
+    function showRulesets(rulesets) {
+        var rulesHtml = "";
+        for(var i in rulesets) {
+            var ruleset = rulesets[i];
+            rulesHtml += "<div class=\"card\"><div class=\"card-body\">"
+                + "<h5 class=\"card-title\">"+ruleset.name+"</h5><pre class=\"card-text\" style=\"font-size: 50%;\">"+JSON.stringify(ruleset, null, 2)+"</pre>"
+                + "<div class=\"form-check\">"
+                + "   <input style=\"padding-left: 1rem;\" class=\"form-check-input\" type=\"radio\" name=\"ruleset-selector\" id=\"ruleset-selector-"+i+"\" value=\""+ruleset.name+"\" " + (i == 0? "checked" : "") + ">"
+                + "   <label class=\"form-check-label\" for=\"ruleset-selector-"+i+"\">Select this ruleset</label>"
+                + "</div>"
+                + "</div></div><br />";
+        }
+    
+        $("#rules-panel").html("<div>" + rulesHtml + "</div>");
+        enableLastPanel();
+    }
+
+    function enableLastPanel() {
+        $("#post-slug").prop('disabled', false);
+        $("input:radio[name='voteorder-mode']").prop('disabled', false);
+        $("#posting-key").prop('disabled', false);
+        $("#send-btn").prop('disabled', false);
+        //$("input:radio[name='r']:checked").val()
     }
 
     $(document).ready(function() {
