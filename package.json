@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
+    "serve": "http-server ./",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,6 +24,7 @@
   },
   "homepage": "https://github.com/noisy-witness/steem-smartvotes-voter-page#readme",
   "dependencies": {
+    "bootstrap-vue": "^2.0.0-rc.9",
     "vue": "^2.5.2",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^6.0.0",
@@ -30,6 +32,7 @@
   },
   "devDependencies": {
     "css-loader": "^0.28.11",
+    "http-server": "^0.11.1",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
     "ts-loader": "^4.3.0",
