@@ -1,0 +1,39 @@
+{
+  "name": "steem-smartvoter-voter-page",
+  "version": "0.1.0",
+  "description": "Vote delegation system for STEEM blockchain: a voting page",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/noisy-witness/steem-smartvotes-voter-page.git"
+  },
+  "keywords": [
+    "steem",
+    "blockchain",
+    "smartvotes"
+  ],
+  "author": "Jędrzej Lewandowski <jedrzejblew@gmail.com> (https://jedrzej.lewandowski.doctor/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/noisy-witness/steem-smartvotes-voter-page/issues"
+  },
+  "homepage": "https://github.com/noisy-witness/steem-smartvotes-voter-page#readme",
+  "dependencies": {
+    "vue": "^2.5.2",
+    "vue-class-component": "^6.0.0",
+    "vue-property-decorator": "^6.0.0",
+    "vue-router": "^3.0.1"
+  },
+  "devDependencies": {
+    "css-loader": "^0.28.1",
+    "ts-loader": "^2.0.3",
+    "typescript": "^2.7.2",
+    "vue-loader": "^12.0.3",
+    "vue-template-compiler": "^2.5.2",
+    "webpack": "^2.5.0"
+  }
+}
