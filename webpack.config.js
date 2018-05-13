@@ -1,7 +1,10 @@
+'use strict';
 
-var path = require('path')
-var webpack = require('webpack')
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+var path = require('path');
+var webpack = require('webpack');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const Visualizer = require('webpack-visualizer-plugin');
+
 
 module.exports = {
   entry: './src/index.ts',
@@ -64,8 +67,10 @@ module.exports = {
   },
   devtool: '#eval-source-map',
   plugins: [
-    // make sure to include the plugin!
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+    new Visualizer({
+      filename: './statistics.html'
+    })
   ]
 }
 
