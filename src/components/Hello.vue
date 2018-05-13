@@ -2,8 +2,8 @@
 <template>
     <div>
         <div class="greeting">Hello {{name}}{{exclamationMarks}}</div>
-        <button @click="decrement">-</button>
-        <button @click="increment">+</button>
+        <b-button variant="primary" @click="decrement">-</b-button>
+        <b-button variant="primary" @click="increment">+</b-button>
     </div>
 </template>
 
