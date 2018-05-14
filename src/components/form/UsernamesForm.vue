@@ -8,10 +8,10 @@
             <b-form @submit.prevent="onSubmit">
                 <b-container fluid>
                     <b-row><b-col>
-                        <steem-username-input-component label="Your (voter) username" :icon="voterIcon" />
+                        <steem-username-input-component label="Your (voter) username" :icon="voterIcon" v-model="voterUsername" />
                     </b-col>
                     <b-col>
-                        <steem-username-input-component label="Delegator username" :icon="delegatorIcon" />
+                        <steem-username-input-component label="Delegator username" :icon="delegatorIcon" v-model="delegatorUsername" />
                     </b-col></b-row>
                 </b-container>
             </b-form>
@@ -34,8 +34,6 @@ export default Vue.extend({
     props: [],
     data() {
         return {
-            voterUsername: '',
-            delegatorUsername: ''
         }
     },
     methods: {
@@ -43,7 +41,23 @@ export default Vue.extend({
     computed: {
         arrowRightIcon () { return faArrowCircleRight; },
         voterIcon () {return faUser; },
-        delegatorIcon () { return faUserTie; }
+        delegatorIcon () { return faUserTie; },
+        voterUsername: {
+            get (): string {
+                return this.$store.state.voterUsername
+            },
+            set (value: string): void {
+                this.$store.dispatch('setVoterUsername', value);
+            }
+        },
+        delegatorUsername: {
+            get (): string {
+                return this.$store.state.delegatorUsername
+            },
+            set (value: string): void {
+                this.$store.dispatch('setDelegatorUsername', value);
+            }
+        }
     },
     components: {
         FontAwesomeIcon,

@@ -8,6 +8,7 @@ import BootstrapVue from 'bootstrap-vue';
 /**
  * Import components
  */
+import store from './store/store'
 import HelloComponent from "./components/Hello.vue";
 import HeaderComponent from "./components/Header.vue";
 import FormsComponent from "./components/form/Forms.vue";
@@ -32,6 +33,7 @@ Vue.use(BootstrapVue);
  */
 let v = new Vue({
     el: "#app",
+    store: store,
     template: `
     <b-container>
         <b-row>

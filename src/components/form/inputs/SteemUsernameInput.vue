@@ -12,7 +12,13 @@
             <b-input-group-text slot="prepend">
                 <font-awesome-icon :icon="prependIcon" />
             </b-input-group-text>
-            <b-form-input id="username-input" :state="state" v-model.trim="username"></b-form-input>
+            <input
+                type="text" class="form-control"
+                id="username-input"
+                :state="state"
+                v-bind:value="value"
+                v-on:input="$emit('input', $event.target.value)"
+            />
         </b-input-group>
     </b-form-group>
 </template>
@@ -22,10 +28,9 @@ import Vue from "vue";
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 
 export default Vue.extend({
-    props: ['label', 'icon'],
+    props: ['label', 'icon', 'value'],
     data() {
         return {
-            username: ''
         }
     },
     methods: {
@@ -33,17 +38,17 @@ export default Vue.extend({
     computed: {
         prependIcon (): any { return this.icon; },
         state (): boolean {
-            return this.username.length > 0 ? true : false;
+            return this.value.length > 0 ? true : false;
         },
         invalidFeedback (): string {
-            if (this.username.length > 0) {
+            if (this.value.length > 0) {
                 return '';
             } else {
                 return 'Please enter steem username';
             }
         },
         validFeedback (): string {
-            return this.state === true ? 'This is correct username' : '';
+            return this.state === true ? 'This is correct. Please click below to check if it exists.' : '';
         }
     },
     components: {

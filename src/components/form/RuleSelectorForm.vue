@@ -1,7 +1,7 @@
 <!-- src/components/RulesSelectorForm.vue -->
 <template>
         <div>
-
+            
         </div>
 </template>
 
