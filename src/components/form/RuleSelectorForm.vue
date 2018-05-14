@@ -1,45 +1,35 @@
 <!-- src/components/RulesSelectorForm.vue -->
 <template>
         <div>
-            
+            <h4 class="text-muted">
+                <font-awesome-icon :icon="arrowRightIcon" />
+                &nbsp; Step 2: Select a ruleset
+            </h4>
+            <p>Form goes here</p>
+            <br />
+            <br />
         </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import faArrowCircleRight from '@fortawesome/fontawesome-free-solid/faArrowCircleRight'
 
 export default Vue.extend({
     props: [],
     data() {
         return {
-            form: {
-                email: '',
-                name: '',
-                food: null,
-                checked: []
-            },
-            foods: [
-                { text: 'Select One', value: null },
-                'Carrots', 'Beans', 'Tomatoes', 'Corn'
-            ],
-            show: true
         }
     },
     methods: {
-        onSubmit () {
-            alert(JSON.stringify(this.form));
-        },
-        onReset () {
-            this.form.email = '';
-            this.form.name = '';
-            this.form.food = null;
-            this.form.checked = [];
-            /* Trick to reset/clear native browser form validation state */
-            this.show = false;
-            this.$nextTick(() => { this.show = true });
-        }
+
     },
     computed: {
+        arrowRightIcon () { return faArrowCircleRight; }
+    },
+    components: {
+        FontAwesomeIcon
     }
 });
 </script>

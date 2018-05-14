@@ -7,16 +7,15 @@
             </h4>
             <b-form @submit.prevent="onSubmit">
                 <b-container fluid>
-                    <b-row><b-col>
+                    <b-row><b-col cols="12" sm="6">
                         <steem-username-input-component label="Your (voter) username" :icon="voterIcon" v-model="voterUsername" />
                     </b-col>
-                    <b-col>
+                    <b-col cols="12" sm="6">
                         <steem-username-input-component label="Delegator username" :icon="delegatorIcon" v-model="delegatorUsername" />
                     </b-col></b-row>
                 </b-container>
             </b-form>
             <br />
-            <hr />
             <br />
         </div>
 </template>
@@ -67,7 +66,4 @@ export default Vue.extend({
 </script>
 
 <style>
-    h4 {
-        /* border-bottom: 1px solid rgba(0, 0, 0, 0.1); */
-    }
 </style>

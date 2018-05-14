@@ -3,7 +3,7 @@ import { smartvotes_ruleset } from "steem-smartvotes";
 export interface State {
     voterUsername:  string;
     delegatorUsername:  string;
-    voterExists: boolean;
-    delegatorExists: boolean;
+    voterThatExists: string;
+    delegatorThatExists: string;
     rulesets: smartvotes_ruleset [];
 }

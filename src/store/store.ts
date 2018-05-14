@@ -7,11 +7,11 @@ import { State } from "./State";
 
 Vue.use(Vuex);
 
-export const state = {
+export const state: State = {
     voterUsername: '' as string,
     delegatorUsername: '' as string,
-    voterExists: false,
-    delegatorExists: false,
+    voterThatExists: '' as string,
+    delegatorThatExists: '' as string,
     rulesets: [] as smartvotes_ruleset []
 };
 
@@ -34,15 +34,10 @@ const mutations = {
 const actions: ActionTree<State, State> = {
     setVoterUsername: ({ commit, dispatch, state }, voterUsername: string): void => {
         commit('setVoterUsername', voterUsername);
-        if(state.delegatorUsername.length > 0 && state.voterUsername.length > 0) dispatch('scheduleCheckIfUsernamesExist');
     },
     setDelegatorUsername: ({ commit, dispatch, state }, delegatorUsername: string): void => {
         commit('setDelegatorUsername', delegatorUsername);
-        if(state.delegatorUsername.length > 0 && state.voterUsername.length > 0) dispatch('scheduleCheckIfUsernamesExist');
     },
-    scheduleCheckIfUsernamesExist: ({ commit, dispatch, state }, delegatorUsername: string): void => {
-        console.log("Scheduling check...");
-    }
   /*increment: ({ commit }) => commit('increment'),
   decrement: ({ commit }) => commit('decrement'),
   incrementIfOdd ({ commit, state }) {
@@ -62,6 +57,7 @@ const actions: ActionTree<State, State> = {
 
 // getters are functions
 const getters = {
+    enableRulesLoader: (state: State) => { return state.delegatorUsername.length > 0 && state.voterUsername.length > 0; }
 };
 
 // A Vuex instance is created by combining the state, mutations, actions,
