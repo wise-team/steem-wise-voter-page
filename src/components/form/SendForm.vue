@@ -1,12 +1,14 @@
-<!-- src/components/Form.vue -->
+<!-- src/components/SendForm.vue -->
 <template>
         <div>
-            Here goes the form
+            
         </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
+
+
 
 export default Vue.extend({
     props: [],
@@ -15,9 +17,10 @@ export default Vue.extend({
         }
     },
     methods: {
-        
     },
     computed: {
+    },
+    components: {
     }
 });
 </script>

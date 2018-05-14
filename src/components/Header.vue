@@ -5,7 +5,7 @@
             <h1 class="display-3 text-muted">steem<wbr /> smart<wbr />votes</h1>
             <p class="lead">A smart tool that allows you to easily vote on behalf of your delegator. Put your posting key,
                 type a delegator's username and paste steemit link. Voila! </p>
-            <hr>
+            <p><br /><br /></p>
         </div>
 </template>
 

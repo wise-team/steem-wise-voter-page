@@ -3,12 +3,14 @@
  */
 import Vue from "vue";
 import BootstrapVue from 'bootstrap-vue';
+
+
 /**
  * Import components
  */
 import HelloComponent from "./components/Hello.vue";
 import HeaderComponent from "./components/Header.vue";
-import FormComponent from "./components/Form.vue";
+import FormsComponent from "./components/form/Forms.vue";
 import FooterComponent from "./components/Footer.vue";
 
 
@@ -44,7 +46,7 @@ let v = new Vue({
         </b-row>
         <b-row>
             <b-col>
-                <form-component />
+                <forms-component />
             </b-col>
         </b-row>
         <b-row>
@@ -57,7 +59,7 @@ let v = new Vue({
     data: { },
     components: {
         HeaderComponent,
-        FormComponent,
+        FormsComponent,
         FooterComponent
     }
 });
