@@ -23,7 +23,8 @@
         "object-literal-shorthand": false,
         "no-consecutive-blank-lines": false,
         "trailing-comma": false,
-        "curly": false
+        "curly": false,
+        "prefer-for-of": false
     },
     "rulesDirectory": []
 }

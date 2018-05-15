@@ -35,8 +35,9 @@ export const actions: ActionTree<State, State> = {
         })
         .then(Api.loadRulesets(delegatorUsername, voterUsername))
         .then((rulesets: smartvotes_ruleset []) => {
-            commit("setRulesets", rulesets);
-            commit("setRulesetLoadingState", { inProggress: false, error: "", message: ""});
+            commit("setRulesets", { rulesets: rulesets });
+            commit("setRulesetLoadingState", { inProggress: false, error: "",
+                                message: "Loaded " + rulesets.length + " rulesets" });
             commit("setRulesetsLoadedFor", { voter: voterUsername, delegator: delegatorUsername });
         })
         .catch(error => {

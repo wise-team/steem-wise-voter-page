@@ -22,9 +22,25 @@ export class Api {
     public static loadRulesets(delegator: string, voter: string): (() => Promise<smartvotes_ruleset []>) {
         return () => {
             return new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    reject(new Error("Not implemented yet"));
-                }, 2500);
+                const smartvotes = new SteemSmartvotes("username-not-required", "wif-not-requiored");
+                smartvotes.getRulesetsOfUser(delegator,
+                        (error: Error | undefined, rulesets: smartvotes_ruleset []): void => {
+                    if (error) reject(error);
+                    else {
+                        if (rulesets.length === 0) reject(new Error("Delegator (@" + delegator + ") has no rulesets."));
+                        else {
+                            const rulesetsForVoter = [];
+                            for (let i = 0; i < rulesets.length; i ++) {
+                                if (rulesets[i].voter === voter) {
+                                    rulesetsForVoter.push(rulesets[i]);
+                                }
+                            }
+                            if (rulesetsForVoter.length === 0) reject(new Error(
+                                "Delegator (@" + delegator + ") has no rulesets for this voter (@" + voter + ")."));
+                            else resolve(rulesetsForVoter);
+                        }
+                    }
+                });
             });
         };
     }
