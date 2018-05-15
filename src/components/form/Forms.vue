@@ -2,16 +2,16 @@
 <template>
         <div>
             <usernames-form />
-            <br /><br />
+            <br /><br /><br />
 
             <rule-selector-form />
-            <br /><br />
+            <br /><br /><br />
 
             <vote-data-form />
-            <br /><br />
+            <br /><br /><br />
 
             <send-form />
-            <br /><br />
+            <br /><br /><br />
         </div>
 </template>
 
