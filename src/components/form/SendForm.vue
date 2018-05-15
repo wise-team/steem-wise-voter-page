@@ -1,8 +1,8 @@
 <!-- src/components/SendForm.vue -->
 <template>
-        <div>
+        <div v-bind:class="[ isEnabled? 'component-enabled' : 'component-disabled' ]">
             <h4 class="text-muted">
-                <font-awesome-icon :icon="arrowRightIcon" />
+                <span class="icon-span"><font-awesome-icon :icon="arrowRightIcon" /></span>
                 &nbsp; Step 4: Paste your posting WIF and send
             </h4>
             <b-form @submit.prevent="onSubmit"><b-container fluid>
@@ -18,6 +18,7 @@
 
 <script lang="ts">
 import Vue from "vue";
+import { mapGetters } from 'vuex';
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 import faArrowCircleRight from '@fortawesome/fontawesome-free-solid/faArrowCircleRight'
 
@@ -34,7 +35,10 @@ export default Vue.extend({
 
     },
     computed: {
-        arrowRightIcon () { return faArrowCircleRight; }
+        arrowRightIcon () { return faArrowCircleRight; },
+        ...mapGetters({ 
+            isEnabled: 'sendFormEnabled'
+        })
     },
     components: {
         FontAwesomeIcon,

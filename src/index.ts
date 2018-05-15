@@ -2,13 +2,13 @@
  * Import Vue & dependencies
  */
 import Vue from "vue";
-import BootstrapVue from 'bootstrap-vue';
+import BootstrapVue from "bootstrap-vue";
 
 
 /**
  * Import components
  */
-import store from './store/store'
+import store from "./store/store";
 import HelloComponent from "./components/Hello.vue";
 import HeaderComponent from "./components/Header.vue";
 import FormsComponent from "./components/form/Forms.vue";
@@ -18,8 +18,9 @@ import FooterComponent from "./components/Footer.vue";
 /**
  * Import global css
  */
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
+import "./style.css";
 
 
 /**
@@ -31,7 +32,7 @@ Vue.use(BootstrapVue);
 /**
  * Start app
  */
-let v = new Vue({
+const v = new Vue({
     el: "#app",
     store: store,
     template: `

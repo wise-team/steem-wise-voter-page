@@ -1,8 +1,8 @@
 <!-- src/components/UsernamesForm.vue -->
 <template>
-        <div>
+        <div class="component-enabled">
             <h4 class="text-muted">
-                <font-awesome-icon :icon="arrowRightIcon" />
+                <span class="icon-span"><font-awesome-icon :icon="arrowRightIcon" /></span>
                 &nbsp; Step 1: Type your &amp; your delegator username
             </h4>
             <b-form @submit.prevent="onSubmit">

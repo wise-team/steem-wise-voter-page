@@ -57,7 +57,9 @@ const actions: ActionTree<State, State> = {
 
 // getters are functions
 const getters = {
-    enableRulesLoader: (state: State) => { return state.delegatorUsername.length > 0 && state.voterUsername.length > 0; }
+    rulesSelectorFormEnabled: (state: State) => { return state.delegatorUsername.length > 0 && state.voterUsername.length > 0; },
+    voteDataFormEnabled: (state: State) => false, // TODO
+    sendFormEnabled: (state: State) => false, // TODO
 };
 
 // A Vuex instance is created by combining the state, mutations, actions,

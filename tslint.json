@@ -7,7 +7,7 @@
     "rules": {
         "quotemark": [
             true,
-            "single"
+            "double"
         ],
         "indent": [
             true
@@ -17,7 +17,12 @@
         ],
         "arrow-parens": false,
         // Pending fix for shorthand property names.
-        "object-literal-sort-keys": false
+        "object-literal-sort-keys": false,
+
+        "ordered-imports": false,
+        "object-literal-shorthand": false,
+        "no-consecutive-blank-lines": false,
+        "trailing-comma": false
     },
     "rulesDirectory": []
 }
