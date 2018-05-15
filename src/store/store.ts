@@ -10,8 +10,7 @@ Vue.use(Vuex);
 export const state: State = {
     voterUsername: '' as string,
     delegatorUsername: '' as string,
-    voterThatExists: '' as string,
-    delegatorThatExists: '' as string,
+    rulesetsLoadedFor: { voter: '', delegator: '' },
     rulesets: [] as smartvotes_ruleset []
 };
 
@@ -26,7 +25,13 @@ const mutations = {
     },
     setDelegatorUsername (state: State, delegatorUsername: string) {
         state.delegatorUsername = delegatorUsername;
-    }
+    },
+    setRulesetsLoadedFor (state: State, payload: {voter: string, delegator: string}) {
+        state.rulesetsLoadedFor = { voter: payload.voter, delegator: payload.delegator };
+    },
+    setRulesets (state: State, payload: { rulesets: smartvotes_ruleset [] }) {
+        state.rulesets = payload.rulesets;
+    },
 };
 
 // actions are functions that cause side effects and can involve
@@ -34,31 +39,28 @@ const mutations = {
 const actions: ActionTree<State, State> = {
     setVoterUsername: ({ commit, dispatch, state }, voterUsername: string): void => {
         commit('setVoterUsername', voterUsername);
+        dispatch('checkRulesetsLoadedFor');
     },
     setDelegatorUsername: ({ commit, dispatch, state }, delegatorUsername: string): void => {
         commit('setDelegatorUsername', delegatorUsername);
+        dispatch('checkRulesetsLoadedFor');
     },
-  /*increment: ({ commit }) => commit('increment'),
-  decrement: ({ commit }) => commit('decrement'),
-  incrementIfOdd ({ commit, state }) {
-    if ((state.count + 1) % 2 === 0) {
-      commit('increment')
+    setRulesetsLoadedFor: ({ commit, dispatch, state }, payload: {voter: string, delegator: string}): void => {
+        commit('setRulesetsLoadedFor', payload);
+        dispatch('checkRulesetsLoadedFor');
+    },
+    checkRulesetsLoadedFor: ({ commit, dispatch, state }): void => {
+        if (state.voterUsername !== state.rulesetsLoadedFor.voter || state.delegatorUsername !== state.rulesetsLoadedFor.delegator) {
+            commit('setRulesetsLoadedFor', { voter: '', delegator: '' });
+            commit('setRulesets', { rulesets: [] });
+        }
     }
-  },
-  incrementAsync ({ commit }) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        commit('increment')
-        resolve()
-      }, 1000)
-    })
-  }*/
 };
 
 // getters are functions
 const getters = {
     rulesSelectorFormEnabled: (state: State) => { return state.delegatorUsername.length > 0 && state.voterUsername.length > 0; },
-    voteDataFormEnabled: (state: State) => false, // TODO
+    voteDataFormEnabled: (state: State) => state.rulesets.length > 0,
     sendFormEnabled: (state: State) => false, // TODO
 };
 
