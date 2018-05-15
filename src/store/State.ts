@@ -6,3 +6,10 @@ export interface State {
     rulesetsLoadedFor: { voter: string, delegator: string };
     rulesets: smartvotes_ruleset [];
 }
+
+export const state: State = {
+    voterUsername: "",
+    delegatorUsername: "",
+    rulesetsLoadedFor: { voter: "", delegator: "" },
+    rulesets: []
+};
