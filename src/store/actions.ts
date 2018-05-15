@@ -27,7 +27,7 @@ export const actions: ActionTree<State, State> = {
         commit("setRulesetLoadingState", {inProggress: true, error: "", message: "Checking if accounts exist..."});
         const voterUsername = state.voterUsername;
         const delegatorUsername = state.delegatorUsername;
-        Api.validateAccountsExistence([ voterUsername, delegatorUsername ])
+        Api.validateAccountsExistence(delegatorUsername, voterUsername)
         .then(() => {
             commit("setRulesetLoadingState", {
                 inProggress: true, error: "", message: "Accounts exist. Loading rulesets..."
