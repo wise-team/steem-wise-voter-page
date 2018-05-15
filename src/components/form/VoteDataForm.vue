@@ -5,31 +5,44 @@
                 <font-awesome-icon :icon="arrowRightIcon" />
                 &nbsp; Step 3: Specify vote details
             </h4>
-            <p>Form goes here</p>
-            <br />
-            <br />
+            <b-form @submit.prevent="onSubmit"><b-container fluid>
+                <b-row><b-col>
+                    <steem-post-input-component v-model="postSlug" />
+                </b-col></b-row>
+                <b-row><b-col>
+                    <weight-input-component v-model="weight" />
+                </b-col></b-row>
+            </b-container></b-form>
         </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-import faArrowCircleRight from '@fortawesome/fontawesome-free-solid/faArrowCircleRight'
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
+import faArrowCircleRight from '@fortawesome/fontawesome-free-solid/faArrowCircleRight';
+
+import SteemPostInputComponent from './inputs/SteemPostInput.vue';
+import WeightInputComponent from "./inputs/WeightInput.vue";
 
 export default Vue.extend({
     props: [],
     data() {
         return {
+            postSlug: '',
+            weight: 10000
         }
     },
     methods: {
 
     },
     computed: {
-        arrowRightIcon () { return faArrowCircleRight; }
+        arrowRightIcon () { return faArrowCircleRight; },
+        
     },
     components: {
-        FontAwesomeIcon
+        FontAwesomeIcon,
+        SteemPostInputComponent,
+        WeightInputComponent,
     }
 });
 </script>

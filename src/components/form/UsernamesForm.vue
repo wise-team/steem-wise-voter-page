@@ -15,8 +15,6 @@
                     </b-col></b-row>
                 </b-container>
             </b-form>
-            <br />
-            <br />
         </div>
 </template>
 

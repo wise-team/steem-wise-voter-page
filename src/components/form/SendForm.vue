@@ -6,8 +6,6 @@
                 &nbsp; Step 4: Paste your posting WIF and send
             </h4>
             <p>Form goes here</p>
-            <br />
-            <br />
         </div>
 </template>
 

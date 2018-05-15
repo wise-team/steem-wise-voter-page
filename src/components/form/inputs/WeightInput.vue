@@ -1,20 +1,20 @@
-<!-- src/components/form/inputs/SteemUsernameInput.vue -->
+<!-- src/components/form/inputs/WeightInput.vue -->
 <template>
     <b-form-group
-        id="username-group"
-        :label="label"
-        label-for="username-input"
+        id="weight-group"
+        label="Weight of the vote and type (upvote or flag)"
+        label-for="weight-input"
         :invalid-feedback="invalidFeedback"
         :valid-feedback="validFeedback"
         :state="state"
     >
         <b-input-group>
             <b-input-group-text slot="prepend">
-                <font-awesome-icon :icon="prependIcon" />
+                <b-form-radio-group id="vote-mode-radio-group" v-model="voteMode" :options="voteModeOptions" name="vote-mode"></b-form-radio-group>
             </b-input-group-text>
             <input
                 type="text" class="form-control"
-                id="username-input"
+                id="weight-input"
                 :state="state"
                 v-bind:value="value"
                 v-on:input="$emit('input', $event.target.value)"
@@ -25,39 +25,36 @@
 
 <script lang="ts">
 import Vue from "vue";
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 
 export default Vue.extend({
-    props: ['label', 'icon', 'value'],
+    props: ['value'],
     data() {
         return {
+            voteMode: 'upvote',
+            voteModeOptions: ['upvote', 'flag']
         }
     },
     methods: {
     },
     computed: {
-        prependIcon (): any { return this.icon; },
         state (): boolean {
+            // TODO validate weight
             return this.value.length > 0 ? true : false;
         },
         invalidFeedback (): string {
             if (this.value.length > 0) {
                 return '';
             } else {
-                return 'Please enter steem username';
+                return 'Please enter valid weight';
             }
         },
         validFeedback (): string {
-            return this.state === true ? 'This is correct. Please click below to check if it exists.' : '';
+            return this.state === true ? 'This is correct' : '';
         }
     },
     components: {
-        FontAwesomeIcon
     }
 });
-
-// TODO check if username exists
-// TODO pass to parent
 </script>
 
 <style>

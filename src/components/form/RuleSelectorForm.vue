@@ -6,8 +6,6 @@
                 &nbsp; Step 2: Select a ruleset
             </h4>
             <p>Form goes here</p>
-            <br />
-            <br />
         </div>
 </template>
 

@@ -2,9 +2,16 @@
 <template>
         <div>
             <usernames-form />
+            <br /><br />
+
             <rule-selector-form />
+            <br /><br />
+
             <vote-data-form />
+            <br /><br />
+
             <send-form />
+            <br /><br />
         </div>
 </template>
 
