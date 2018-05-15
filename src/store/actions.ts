@@ -1,5 +1,7 @@
 import { ActionTree } from "vuex";
 import { State } from "./State";
+import { Api } from "../api/Api";
+import { smartvotes_ruleset } from "steem-smartvotes";
 
 export const actions: ActionTree<State, State> = {
     setVoterUsername: ({ commit, dispatch, state }, voterUsername: string): void => {
@@ -20,5 +22,25 @@ export const actions: ActionTree<State, State> = {
             commit("setRulesetsLoadedFor", { voter: "", delegator: "" });
             commit("setRulesets", { rulesets: [] });
         }
+    },
+    loadRulesets: ({ commit, dispatch, state }): void => {
+        commit("setRulesetLoadingState", {inProggress: true, error: "", message: "Checking if accounts exist..."});
+        const voterUsername = state.voterUsername;
+        const delegatorUsername = state.delegatorUsername;
+        Api.validateAccountsExistence([ voterUsername, delegatorUsername ])
+        .then(() => {
+            commit("setRulesetLoadingState", {
+                inProggress: true, error: "", message: "Accounts exist. Loading rulesets..."
+            });
+        })
+        .then(Api.loadRulesets(delegatorUsername, voterUsername))
+        .then((rulesets: smartvotes_ruleset []) => {
+            commit("setRulesets", rulesets);
+            commit("setRulesetLoadingState", { inProggress: false, error: "", message: ""});
+            commit("setRulesetsLoadedFor", { voter: voterUsername, delegator: delegatorUsername });
+        })
+        .catch(error => {
+            commit("setRulesetLoadingState", { inProggress: false, error: error.message, message: ""});
+        });
     }
 };

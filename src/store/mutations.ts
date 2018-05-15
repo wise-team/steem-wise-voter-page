@@ -14,4 +14,9 @@ export const mutations = {
     setRulesets(state: State, payload: { rulesets: smartvotes_ruleset [] }) {
         state.rulesets = payload.rulesets;
     },
+    setRulesetLoadingState(state: State, payload: { inProggress: boolean, error: string, message: string }) {
+        state.rulesetLoadingState = {
+            inProggress: payload.inProggress, error: payload.error, message: payload.message
+        };
+    }
 };
