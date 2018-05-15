@@ -1,27 +1,24 @@
-<!-- src/components/form/inputs/WeightInput.vue -->
+<!-- src/components/form/inputs/PostingWifInput.vue -->
 <template>
     <b-form-group
-        id="weight-group"
-        label="Weight of the vote and type (upvote or flag)"
-        label-for="weight-input"
+        id="posting-wif-group"
+        label="Your posting key WIF"
+        label-for="posting-wif"
         :invalid-feedback="invalidFeedback"
         :valid-feedback="validFeedback"
         :state="state"
     >
         <b-input-group>
             <b-input-group-text slot="prepend">
-                <b-form-radio-group id="vote-mode-radio-group" v-model="voteMode" :options="voteModeOptions" name="vote-mode"></b-form-radio-group>
+                <font-awesome-icon :icon="prependIcon" />
             </b-input-group-text>
             <input
-                type="text" class="form-control"
-                id="weight-input"
+                type="password" class="form-control"
+                id="posting-wif"
                 :state="state"
                 v-bind:value="value"
                 v-on:input="$emit('input', $event.target.value)"
             />
-            <b-input-group-text slot="append">
-                <font-awesome-icon :icon="appendIcon" />
-            </b-input-group-text>
         </b-input-group>
     </b-form-group>
 </template>
@@ -29,29 +26,26 @@
 <script lang="ts">
 import Vue from "vue";
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
-import faWeight from '@fortawesome/fontawesome-free-solid/faWeight';
+import faShieldAlt from '@fortawesome/fontawesome-free-solid/faShieldAlt';
 
 export default Vue.extend({
     props: ['value'],
     data() {
         return {
-            voteMode: 'upvote',
-            voteModeOptions: ['upvote', 'flag']
         }
     },
     methods: {
     },
     computed: {
-        appendIcon(): any { return faWeight; },
+        prependIcon (): any { return faShieldAlt; },
         state (): boolean {
-            // TODO validate weight
             return this.value.length > 0 ? true : false;
         },
         invalidFeedback (): string {
             if (this.value.length > 0) {
                 return '';
             } else {
-                return 'Please enter valid weight';
+                return 'Please enter valid posting key WIF';
             }
         },
         validFeedback (): string {

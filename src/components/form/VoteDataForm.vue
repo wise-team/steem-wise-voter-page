@@ -21,8 +21,8 @@ import Vue from "vue";
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
 import faArrowCircleRight from '@fortawesome/fontawesome-free-solid/faArrowCircleRight';
 
-import SteemPostInputComponent from './inputs/SteemPostInput.vue';
-import WeightInputComponent from "./inputs/WeightInput.vue";
+import SteemPostInputComponent from './inputs/SteemPostInput';
+import WeightInputComponent from "./inputs/WeightInput";
 
 export default Vue.extend({
     props: [],
