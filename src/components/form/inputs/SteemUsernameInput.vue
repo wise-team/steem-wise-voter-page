@@ -3,7 +3,7 @@
     <b-form-group
         id="username-group"
         :label="label"
-        label-for="username-input"
+        :label-for="'username-input-' + id"
         :invalid-feedback="invalidFeedback"
         :valid-feedback="validFeedback"
         :state="state"
@@ -14,7 +14,7 @@
             </b-input-group-text>
             <input
                 type="text" class="form-control"
-                id="username-input"
+                :id="'username-input-' + id"
                 :state="state"
                 v-bind:value="value"
                 v-on:input="$emit('input', $event.target.value)"
@@ -29,10 +29,10 @@ import Vue from "vue";
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
 
 export default Vue.extend({
-    props: ['label', 'icon', 'value'],
+    props: ['label', 'icon', 'value', 'id'],
     data() {
         return {
-            inputStarted: false
+            inputStarted: false,
         }
     },
     methods: {

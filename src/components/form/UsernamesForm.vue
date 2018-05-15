@@ -8,10 +8,10 @@
             <b-form @submit.prevent="onSubmit">
                 <b-container fluid>
                     <b-row><b-col cols="12" sm="6">
-                        <steem-username-input-component label="Your (voter) username" :icon="voterIcon" v-model="voterUsername" />
+                        <steem-username-input-component label="Your (voter) username" id="voter-username" :icon="voterIcon" v-model="voterUsername" />
                     </b-col>
                     <b-col cols="12" sm="6">
-                        <steem-username-input-component label="Delegator username" :icon="delegatorIcon" v-model="delegatorUsername" />
+                        <steem-username-input-component label="Delegator username" id="delegator-username" :icon="delegatorIcon" v-model="delegatorUsername" />
                     </b-col></b-row>
                 </b-container>
             </b-form>
