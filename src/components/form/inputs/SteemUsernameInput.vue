@@ -18,6 +18,7 @@
                 :state="state"
                 v-bind:value="value"
                 v-on:input="$emit('input', $event.target.value)"
+                v-on:keyup="startInput"
             />
         </b-input-group>
     </b-form-group>
@@ -31,14 +32,18 @@ export default Vue.extend({
     props: ['label', 'icon', 'value'],
     data() {
         return {
+            inputStarted: false
         }
     },
     methods: {
+        startInput (): void {
+            this.inputStarted = true;
+        }
     },
     computed: {
         prependIcon (): any { return this.icon; },
         state (): boolean {
-            return this.value.length > 0 ? true : false;
+            return (!this.inputStarted) || this.value.length > 0 ? true : false;
         },
         invalidFeedback (): string {
             if (this.value.length > 0) {
@@ -48,7 +53,7 @@ export default Vue.extend({
             }
         },
         validFeedback (): string {
-            return this.state === true ? 'This is correct. Please click below to check if it exists.' : '';
+            return (this.inputStarted) && this.state === true ? 'This is correct. Please click below to check if it exists.' : '';
         }
     },
     components: {

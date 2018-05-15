@@ -18,6 +18,7 @@
                 :state="state"
                 v-bind:value="value"
                 v-on:input="$emit('input', $event.target.value)"
+                v-on:keyup="startInput"
             />
             <b-input-group-text slot="append">
                 <font-awesome-icon :icon="appendIcon" />
@@ -36,16 +37,20 @@ export default Vue.extend({
     data() {
         return {
             voteMode: 'upvote',
-            voteModeOptions: ['upvote', 'flag']
+            voteModeOptions: ['upvote', 'flag'],
+            inputStarted: false
         }
     },
     methods: {
+        startInput (): void {
+            this.inputStarted = true;
+        }
     },
     computed: {
         appendIcon(): any { return faWeight; },
         state (): boolean {
             // TODO validate weight
-            return this.value.length > 0 ? true : false;
+            return (!this.inputStarted) || this.value.length > 0 ? true : false;
         },
         invalidFeedback (): string {
             if (this.value.length > 0) {
@@ -55,7 +60,7 @@ export default Vue.extend({
             }
         },
         validFeedback (): string {
-            return this.state === true ? 'This is correct' : '';
+            return (this.inputStarted) && this.state === true ? 'This is correct' : '';
         }
     },
     components: {
