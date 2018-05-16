@@ -30,18 +30,17 @@ export const actions: ActionTree<State, State> = {
         Api.validateAccountsExistence(delegatorUsername, voterUsername)
         .then(() => {
             commit("setRulesetLoadingState", {
-                inProggress: true, error: "", message: "Accounts exist. Loading rulesets..."
+                inProggress: true, error: "", message: "Accounts exist. Loading rulesets...",
             });
         })
         .then(Api.loadRulesets(delegatorUsername, voterUsername))
         .then((rulesets: smartvotes_ruleset []) => {
             commit("setRulesets", { rulesets: rulesets });
-            commit("setRulesetLoadingState", { inProggress: false, error: "",
-                                message: "Loaded " + rulesets.length + " rulesets" });
+            commit("setRulesetLoadingState", { inProggress: false, error: "", message: "" });
             commit("setRulesetsLoadedFor", { voter: voterUsername, delegator: delegatorUsername });
         })
         .catch(error => {
             commit("setRulesetLoadingState", { inProggress: false, error: error.message, message: ""});
         });
-    }
+    },
 };

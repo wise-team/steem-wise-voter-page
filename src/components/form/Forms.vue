@@ -2,16 +2,16 @@
 <template>
         <div>
             <usernames-form />
-            <br /><br /><br />
+            <br /><br /><br /><br />
 
             <rule-selector-form />
-            <br /><br /><br />
+            <br /><br /><br /><br />
 
             <vote-data-form />
-            <br /><br /><br />
+            <br /><br /><br /><br />
 
             <send-form />
-            <br /><br /><br />
+            <br /><br /><br /><br />
         </div>
 </template>
 
@@ -27,10 +27,9 @@ export default Vue.extend({
     props: [],
     data() {
         return {
-        }
+        };
     },
     methods: {
-        
     },
     computed: {
     },
@@ -38,8 +37,8 @@ export default Vue.extend({
         UsernamesForm,
         RuleSelectorForm,
         VoteDataForm,
-        SendForm
-    }
+        SendForm,
+    },
 });
 </script>
 
