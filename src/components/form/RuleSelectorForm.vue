@@ -116,7 +116,7 @@ export default Vue.extend({
                 return this.$store.state.selectedRulesetIndex;
             },
             set(value: number): void {
-                this.$store.commit("setSelectedRulesetIndex", value);
+                this.$store.dispatch("setSelectedRulesetIndex", value);
             },
         },
     },

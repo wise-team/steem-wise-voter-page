@@ -7,6 +7,8 @@ export interface State {
     rulesetLoadingState: { inProggress: boolean, error: string, message: string };
     rulesets: smartvotes_ruleset [];
     selectedRulesetIndex: number;
+    voteData: { author: string, permlink: string, weight: number, action: "upvote" | "flag" };
+    validated: boolean;
     voteorderValidationState: { inProggress: boolean, error: string, message: string };
 }
 
@@ -17,5 +19,7 @@ export const state: State = {
     rulesetLoadingState: { inProggress: false, error: "", message: "" },
     rulesets: [],
     selectedRulesetIndex: -1,
+    voteData: { author: "", permlink: "", weight: 10000, action: "upvote" },
+    validated: false,
     voteorderValidationState: { inProggress: false, error: "", message: "" },
 };

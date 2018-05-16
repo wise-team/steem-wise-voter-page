@@ -22,4 +22,13 @@ export const mutations = {
     setSelectedRulesetIndex(state: State, index: number) {
         state.selectedRulesetIndex = index;
     },
+    setVoteData(state: State,
+                payload: { author: string, permlink: string, weight: number, action: "upvote" | "flag" }) {
+        state.voteData = {
+            author: payload.author, permlink: payload.permlink, weight: payload.weight, action: payload.action,
+        };
+    },
+    setValidated(state: State, payload: boolean) {
+        state.validated = payload;
+    },
 };

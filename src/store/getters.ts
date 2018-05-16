@@ -4,6 +4,13 @@ export const getters = {
     rulesSelectorFormEnabled: (state: State) => {
         return state.delegatorUsername.length > 0 && state.voterUsername.length > 0;
     },
-    voteDataFormEnabled: (state: State) => state.rulesets.length > 0 && state.selectedRulesetIndex > -1,
-    sendFormEnabled: (state: State) => false, // TODO
+    voteDataFormEnabled: (state: State) => getters.rulesSelectorFormEnabled(state)
+                     && state.rulesets.length > 0 && state.selectedRulesetIndex > -1,
+    validationButtonEnabled: (state: State) => getters.voteDataFormEnabled(state)
+                    && state.voteData.author.length > 0
+                    && state.voteData.permlink.length > 0
+                    && state.voteData.action.length > 0
+                    && state.voteData.weight > 0 && state.voteData.weight <= 10000
+                    && ! state.voteorderValidationState.inProggress,
+    sendFormEnabled: (state: State) => state.validated,
 };

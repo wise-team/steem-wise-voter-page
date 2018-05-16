@@ -7,10 +7,10 @@
             </h4>
             <b-form @submit.prevent="onSubmit"><b-container fluid>
                 <b-row><b-col>
-                    <steem-post-input-component v-model="postSlug" :enabled="isEnabled" />
+                    <steem-post-input-component :enabled="isEnabled" />
                 </b-col></b-row>
                 <b-row><b-col>
-                    <weight-input-component v-model="weight" :enabled="isEnabled" />
+                    <weight-input-component :enabled="isEnabled" />
                 </b-col></b-row>
                 <b-row>
                     <b-col cols="12" sm="4" md="3">
@@ -48,8 +48,6 @@ export default Vue.extend({
     props: [],
     data() {
         return {
-            postSlug: "",
-            weight: 10000,
         };
     },
     methods: {
@@ -68,7 +66,7 @@ export default Vue.extend({
         loadingError(): string { return this.$store.state.voteorderValidationState.error; },
         isButtonDisabled(): boolean {
             return !(
-                this.$store.getters.voteDataFormEnabled && !this.$store.state.voteorderValidationState.inProggress
+                this.$store.getters.validationButtonEnabled
             );
         },
     },

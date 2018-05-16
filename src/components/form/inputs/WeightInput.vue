@@ -34,12 +34,13 @@ import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
 import faWeight from "@fortawesome/fontawesome-free-solid/faWeight";
 
 export default Vue.extend({
-    props: ["value", "enabled"],
+    props: ["enabled"],
     data() {
         return {
             voteMode: "upvote",
             voteModeOptions: ["upvote", "flag"],
             inputStarted: false,
+            value: "10000",
         };
     },
     methods: {

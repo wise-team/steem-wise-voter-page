@@ -17,8 +17,7 @@
                 placeholder="https://steemit.com/category/@user/permlink"
                 id="post-input"
                 :state="state"
-                v-bind:value="value"
-                v-on:input="$emit('input', $event.target.value)"
+                v-model="postSlug"
                 v-on:keyup="startInput"
                 :disabled="!enabled"
             />
@@ -32,10 +31,11 @@ import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
 import faBookmark from "@fortawesome/fontawesome-free-solid/faBookmark";
 
 export default Vue.extend({
-    props: ["value", "enabled"],
+    props: ["enabled"],
     data() {
         return {
             inputStarted: false,
+            slugText : "",
         };
     },
     methods: {
@@ -46,17 +46,40 @@ export default Vue.extend({
     computed: {
         prependIcon(): any { return faBookmark; },
         state(): boolean {
-            return (!this.inputStarted) || this.value.length > 0 ? true : false;
+            if (!this.inputStarted) return true;
+            else return this.$store.state.voteData.author.length > 0 && this.$store.state.voteData.permlink.length > 0;
         },
         invalidFeedback(): string {
-            if (this.value.length > 0) {
-                return "";
-            } else {
-                return "Please enter post slug (category/@username/permlink) or paste steemit.com link";
-            }
+            return "Please enter post slug (category/@username/permlink) or paste steemit.com link";
         },
         validFeedback(): string {
             return (this.inputStarted) && this.state === true ? "This is correct" : "";
+        },
+        postSlug: {
+            get(): string {
+                if (this.$store.state.voteData.author.length > 0 && this.$store.state.voteData.permlink.length > 0) {
+                    return this.$store.state.voteData.author + "/" + this.$store.state.voteData.permlink;
+                } else return this.slugText;
+            },
+            set(value: string): void {
+                let author = "";
+                let permlink = "";
+                if (value.length > 0) {
+                    const regex = /^(?:(?:https?:\/\/steemit\.com)?\/(?:[^/]*)\/@)?([^\/]+)\/([^\/]+)$/giu;
+                    const match = regex.exec(value);
+                    if (match && match.length > 2) {
+                        author = match[1];
+                        permlink = match[2];
+                    }
+                }
+                const voteData = {
+                        author: author, permlink: permlink,
+                        weight: this.$store.state.voteData.weight,
+                        action: this.$store.state.voteData.action,
+                    };
+                this.$store.commit("setVoteData", voteData);
+                this.slugText = value;
+            },
         },
     },
     components: {
