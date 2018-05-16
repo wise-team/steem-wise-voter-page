@@ -60,6 +60,21 @@ export class Api {
         });
     }
 
+    public static sendVoteorder(voter: string, postingWif: string, voteorder: smartvotes_voteorder,
+                                proggressCallback: (msg: string, proggress: number) => void):
+                                    Promise<void> {
+        return new Promise((resolve, reject) => {
+            const smartvotes = new SteemSmartvotes(voter, postingWif);
+            smartvotes.sendVoteOrder(voteorder,
+                (error: Error | undefined, result: boolean): void => {
+                if (error) reject(error);
+                else if (result) {
+                    resolve();
+                } else reject(new Error("Inconsistent state: invalid, but no error thrown"));
+            }, proggressCallback);
+        });
+    }
+
     public static isWif(key: string): boolean {
         return steem.auth.isWif(key);
     }

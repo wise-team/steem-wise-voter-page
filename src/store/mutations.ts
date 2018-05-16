@@ -36,4 +36,15 @@ export const mutations = {
     setValidated(state: State, payload: boolean) {
         state.validated = payload;
     },
+    setPostingWif(state: State, payload: string) {
+        state.postingWif = payload;
+    },
+    setSendingState(state: State, payload: { inProggress: boolean, error: string, message: string }) {
+        state.sendingState = {
+            inProggress: payload.inProggress, error: payload.error, message: payload.message,
+        };
+    },
+    setSent(state: State, payload: boolean) {
+        state.sent = payload;
+    },
 };

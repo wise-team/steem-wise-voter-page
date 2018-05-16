@@ -30,6 +30,7 @@ export const actions: ActionTree<State, State> = {
         commit("setRulesetLoadingState", {inProggress: true, error: "", message: "Checking if accounts exist..."});
         const voterUsername = state.voterUsername;
         const delegatorUsername = state.delegatorUsername;
+        commit("setSent", false);
         Api.validateAccountsExistence(delegatorUsername, voterUsername)
         .then(() => {
             commit("setRulesetLoadingState", {
@@ -54,10 +55,12 @@ export const actions: ActionTree<State, State> = {
     setVoteData: ({ commit, dispatch, state },
                   payload: { author: string, permlink: string, weight: number, action: "upvote" | "flag" }): void => {
         commit("setVoteData", payload);
+        commit("setSent", false);
         dispatch("setValidated", false);
     },
     validateVoteorder: ({ commit, dispatch, state }, payload: boolean): void => {
         commit("setVoteorderValidationState", {inProggress: true, error: "", message: "Validating voteorder..."});
+        commit("setSent", false);
         const voteorder: smartvotes_voteorder = {
             ruleset_name: state.rulesets[state.selectedRulesetIndex].name,
             delegator: state.delegatorUsername,
@@ -80,5 +83,28 @@ export const actions: ActionTree<State, State> = {
     },
     setValidated: ({ commit, dispatch, state }, payload: boolean): void => {
         commit("setValidated", payload);
+    },
+    sendSmartvote: ({ commit, dispatch, state }, payload: boolean): void => {
+        commit("setSendingState", {inProggress: true, error: "", message: "Sending voteorder..."});
+        commit("setSent", false);
+        const voteorder: smartvotes_voteorder = {
+            ruleset_name: state.rulesets[state.selectedRulesetIndex].name,
+            delegator: state.delegatorUsername,
+            author: state.voteData.author,
+            permlink: state.voteData.permlink,
+            type: state.voteData.action,
+            weight: parseInt(state.voteData.weight + "", 10),
+        };
+        Api.sendVoteorder(state.voterUsername, state.postingWif, voteorder, (msg: string, proggress: number): void => {
+            commit("setSendingState", { inProggress: true, error: "", message: msg });
+        })
+        .then(() => {
+            commit("setSendingState", { inProggress: false, error: "", message: "" });
+            commit("setSent", true);
+        })
+        .catch(error => {
+            commit("setSendingState", { inProggress: false, error: error.message, message: ""});
+            commit("setSent", false);
+        });
     },
 };

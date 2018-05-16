@@ -16,8 +16,7 @@
                 type="password" class="form-control"
                 id="posting-wif"
                 :state="state"
-                v-bind:value="value"
-                v-on:input="$emit('input', $event.target.value)"
+                v-model="postingWif"
                 v-on:keyup="startInput"
                 :disabled="!enabled"
             />
@@ -33,10 +32,11 @@ import faShieldAlt from "@fortawesome/fontawesome-free-solid/faShieldAlt";
 import { Api } from "../../../api/Api";
 
 export default Vue.extend({
-    props: ["value", "enabled"],
+    props: ["enabled"],
     data() {
         return {
             inputStarted: false,
+            valueText: "",
         };
     },
     methods: {
@@ -49,19 +49,33 @@ export default Vue.extend({
         state(): boolean {
             if (!this.inputStarted) return true;
             else {
-                return this.value.length > 0
-                    && Api.isWif(this.value);
+                return this.valueText.length > 0
+                    && Api.isWif(this.valueText);
             }
         },
         invalidFeedback(): string {
-            if (this.value.length <= 0) {
+            if (this.valueText.length <= 0) {
                 return "Please enter valid posting key WIF";
-            } else if (!Api.isWif(this.value)) {
+            } else if (!Api.isWif(this.valueText)) {
                 return "This is not a key WIF";
             } else return "";
         },
         validFeedback(): string {
             return (this.inputStarted) && this.state === true ? "This is correct" : "";
+        },
+
+        postingWif: {
+            get(): string {
+                if (this.$store.state.postingWif > 0) {
+                    return this.$store.state.postingWif;
+                } else return this.valueText;
+            },
+            set(value: string): void {
+                if (value.length > 0 && Api.isWif(value)) {
+                    this.$store.commit("setPostingWif", value);
+                }
+                this.valueText = value;
+            },
         },
     },
     components: {

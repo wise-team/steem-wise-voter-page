@@ -10,6 +10,9 @@ export interface State {
     voteData: { author: string, permlink: string, weight: number, action: "upvote" | "flag" };
     validated: boolean;
     voteorderValidationState: { inProggress: boolean, error: string, message: string };
+    postingWif: string;
+    sendingState: { inProggress: boolean, error: string, message: string };
+    sent: boolean;
 }
 
 export const state: State = {
@@ -22,4 +25,7 @@ export const state: State = {
     voteData: { author: "", permlink: "", weight: 1000, action: "upvote" },
     validated: false,
     voteorderValidationState: { inProggress: false, error: "", message: "" },
+    postingWif: "",
+    sendingState: { inProggress: false, error: "", message: "" },
+    sent: false,
 };
