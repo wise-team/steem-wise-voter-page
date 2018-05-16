@@ -20,46 +20,46 @@
 
 <script lang="ts">
 import Vue from "vue";
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-import faArrowCircleRight from '@fortawesome/fontawesome-free-solid/faArrowCircleRight'
-import faUser from '@fortawesome/fontawesome-free-solid/faUser'
-import faUserTie from '@fortawesome/fontawesome-free-solid/faUserTie'
+import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
+import faArrowCircleRight from "@fortawesome/fontawesome-free-solid/faArrowCircleRight";
+import faUser from "@fortawesome/fontawesome-free-solid/faUser";
+import faUserTie from "@fortawesome/fontawesome-free-solid/faUserTie";
 
-import SteemUsernameInputComponent from './inputs/SteemUsernameInput.vue';
+import SteemUsernameInputComponent from "./inputs/SteemUsernameInput.vue";
 
 export default Vue.extend({
     props: [],
     data() {
         return {
-        }
+        };
     },
     methods: {
     },
     computed: {
-        arrowRightIcon () { return faArrowCircleRight; },
-        voterIcon () {return faUser; },
-        delegatorIcon () { return faUserTie; },
+        arrowRightIcon() { return faArrowCircleRight; },
+        voterIcon() {return faUser; },
+        delegatorIcon() { return faUserTie; },
         voterUsername: {
-            get (): string {
-                return this.$store.state.voterUsername
+            get(): string {
+                return this.$store.state.voterUsername;
             },
-            set (value: string): void {
-                this.$store.dispatch('setVoterUsername', value);
-            }
+            set(value: string): void {
+                this.$store.dispatch("setVoterUsername", value);
+            },
         },
         delegatorUsername: {
-            get (): string {
-                return this.$store.state.delegatorUsername
+            get(): string {
+                return this.$store.state.delegatorUsername;
             },
-            set (value: string): void {
-                this.$store.dispatch('setDelegatorUsername', value);
-            }
-        }
+            set(value: string): void {
+                this.$store.dispatch("setDelegatorUsername", value);
+            },
+        },
     },
     components: {
         FontAwesomeIcon,
-        SteemUsernameInputComponent
-    }
+        SteemUsernameInputComponent,
+    },
 });
 </script>
 

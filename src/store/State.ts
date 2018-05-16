@@ -6,6 +6,7 @@ export interface State {
     rulesetsLoadedFor: { voter: string, delegator: string };
     rulesetLoadingState: { inProggress: boolean, error: string, message: string };
     rulesets: smartvotes_ruleset [];
+    selectedRulesetIndex: number;
 }
 
 export const state: State = {
@@ -13,5 +14,6 @@ export const state: State = {
     delegatorUsername: "",
     rulesetsLoadedFor: { voter: "", delegator: "" },
     rulesetLoadingState: { inProggress: false, error: "", message: "" },
-    rulesets: []
+    rulesets: [],
+    selectedRulesetIndex: -1,
 };

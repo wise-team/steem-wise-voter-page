@@ -1,6 +1,6 @@
 <!-- src/components/VoteDataForm.vue -->
 <template>
-        <div v-bind:class="[ isEnabled? 'component-enabled' : 'component-disabled' ]">
+        <div v-bind:class="[ isEnabled? "component-enabled" : "component-disabled" ]">
             <h4 class="text-muted">
                 <span class="icon-span"><font-awesome-icon :icon="arrowRightIcon" /></span>
                 &nbsp; Step 3: Specify vote details
@@ -18,18 +18,18 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { mapGetters } from 'vuex';
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
-import faArrowCircleRight from '@fortawesome/fontawesome-free-solid/faArrowCircleRight';
+import { mapGetters } from "vuex";
+import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
+import faArrowCircleRight from "@fortawesome/fontawesome-free-solid/faArrowCircleRight";
 
-import SteemPostInputComponent from './inputs/SteemPostInput';
-import WeightInputComponent from "./inputs/WeightInput";
+import SteemPostInputComponent from "./inputs/SteemPostInput.vue";
+import WeightInputComponent from "./inputs/WeightInput.vue";
 
 export default Vue.extend({
     props: [],
     data() {
         return {
-            postSlug: '',
+            postSlug: "",
             weight: 10000
         }
     },
@@ -39,7 +39,7 @@ export default Vue.extend({
     computed: {
         arrowRightIcon () { return faArrowCircleRight; },
         ...mapGetters({
-            isEnabled: 'voteDataFormEnabled'
+            isEnabled: "voteDataFormEnabled"
         })
     },
     components: {

@@ -16,7 +16,10 @@ export const mutations = {
     },
     setRulesetLoadingState(state: State, payload: { inProggress: boolean, error: string, message: string }) {
         state.rulesetLoadingState = {
-            inProggress: payload.inProggress, error: payload.error, message: payload.message
+            inProggress: payload.inProggress, error: payload.error, message: payload.message,
         };
-    }
+    },
+    setSelectedRulesetIndex(state: State, index: number) {
+        state.selectedRulesetIndex = index;
+    },
 };

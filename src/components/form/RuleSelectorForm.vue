@@ -79,7 +79,6 @@ export default Vue.extend({
     props: [],
     data() {
         return {
-            selectedRulesetIndex: 0,
         };
     },
     methods: {
@@ -111,6 +110,14 @@ export default Vue.extend({
             for (let i = 0; i < this.$store.state.rulesets.length; i++)
                 options.push({ text: this.$store.state.rulesets[i].name, value: i });
             return options;
+        },
+        selectedRulesetIndex: {
+            get(): number {
+                return this.$store.state.selectedRulesetIndex;
+            },
+            set(value: number): void {
+                this.$store.commit("setSelectedRulesetIndex", value);
+            },
         },
     },
     filters: {
