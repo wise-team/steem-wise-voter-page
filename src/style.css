@@ -1,7 +1,8 @@
 .component-enabled .icon-span {
-    color: #28a745;
+    color: #007bff;
 }
 
 .component-enabled h4 {
     font-weight: bold;
+    color: #007bff !important;
 }

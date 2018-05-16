@@ -3,7 +3,7 @@
         <div class="component-enabled">
             <h4 class="text-muted">
                 <span class="icon-span"><font-awesome-icon :icon="arrowRightIcon" /></span>
-                &nbsp; Step 1: Type your &amp; your delegator username
+                &nbsp; Step 1: Type your &amp; delegator username
             </h4>
             <b-form @submit.prevent="onSubmit">
                 <b-container fluid>
