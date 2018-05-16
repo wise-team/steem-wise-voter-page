@@ -19,7 +19,7 @@
     height: 4rem;
 }
 
-header h1 {
+.header h1 {
     font-size: 4.5rem;
     font-weight: 300;
     line-height: 1.2;
@@ -34,7 +34,7 @@ header h1 {
         height: 3rem;
     }
 
-    header h1 {
+    .header h1 {
         font-size: 3.5rem;
         font-weight: 300;
         line-height: 1.2;
