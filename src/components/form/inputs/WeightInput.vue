@@ -16,9 +16,7 @@
                 type="text" class="form-control"
                 id="weight-input"
                 :state="state"
-                v-bind:value="value"
-                v-on:input="$emit('input', $event.target.value)"
-                v-on:keyup="startInput"
+                v-model="weight"
                 :disabled="!enabled"
             />
             <b-input-group-text slot="append">
@@ -37,32 +35,73 @@ export default Vue.extend({
     props: ["enabled"],
     data() {
         return {
-            voteMode: "upvote",
             voteModeOptions: ["upvote", "flag"],
-            inputStarted: false,
-            value: "10000",
+            valueText: "10000",
         };
     },
     methods: {
-        startInput(): void {
-            this.inputStarted = true;
-        },
     },
     computed: {
         appendIcon(): any { return faWeight; },
         state(): boolean {
-            // TODO validate weight
-            return (!this.inputStarted) || this.value.length > 0 ? true : false;
+            if (this.$store.state.voteData.weight > 0 && this.$store.state.voteData.weight <= 10000) {
+                return true;
+            } else return false;
         },
         invalidFeedback(): string {
-            if (this.value.length > 0) {
-                return "";
-            } else {
+            if (this.valueText.length <= 0) {
                 return "Please enter valid weight";
+            } else if (isNaN(Number(this.valueText))) {
+                return "Weight mut be integer number";
+            } else if (parseInt(this.valueText, 10) <= 0 || parseInt(this.valueText, 10) > 10000) {
+                return "Weight mut be > 0 and <= 10000";
+            } else {
+                return "Invalid";
             }
         },
         validFeedback(): string {
-            return (this.inputStarted) && this.state === true ? "This is correct" : "";
+            return this.enabled ? "This is correct" : "";
+        },
+        weight: {
+            get(): string {
+                if (this.$store.state.voteData.weight > 0) {
+                    return this.$store.state.voteData.weight;
+                } else return this.valueText;
+            },
+            set(value: string): void {
+                if (!isNaN(Number(value))) {
+                    const voteData = {
+                        author: this.$store.state.voteData.author,
+                        permlink: this.$store.state.voteData.permlink,
+                        weight: value,
+                        action: this.$store.state.voteData.action,
+                    };
+                    this.$store.commit("setVoteData", voteData);
+                } else {
+                    const voteData = {
+                        author: this.$store.state.voteData.author,
+                        permlink: this.$store.state.voteData.permlink,
+                        weight: -1,
+                        action: this.$store.state.voteData.action,
+                    };
+                    this.$store.commit("setVoteData", voteData);
+                }
+                this.valueText = value;
+            },
+        },
+        voteMode: {
+            get(): string {
+                return this.$store.state.voteData.action;
+            },
+            set(value: string): void {
+                const voteData = {
+                    author: this.$store.state.voteData.author,
+                    permlink: this.$store.state.voteData.permlink,
+                    weight: this.$store.state.voteData.weight,
+                    action: value,
+                };
+                this.$store.commit("setVoteData", voteData);
+            },
         },
     },
     components: {
