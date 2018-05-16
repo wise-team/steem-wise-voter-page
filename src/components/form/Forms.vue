@@ -1,17 +1,19 @@
 <!-- src/components/Forms.vue -->
 <template>
         <div>
+            <div class="form-spacer">&nbsp;</div>
+
             <usernames-form />
-            <br /><br /><br /><br />
+            <div class="form-spacer">&nbsp;</div>
 
             <rule-selector-form />
-            <br /><br /><br /><br />
+            <div class="form-spacer">&nbsp;</div>
 
             <vote-data-form />
-            <br /><br /><br /><br />
+            <div class="form-spacer">&nbsp;</div>
 
             <send-form />
-            <br /><br /><br /><br />
+            <div class="form-spacer">&nbsp;</div>
         </div>
 </template>
 

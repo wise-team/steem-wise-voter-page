@@ -25,7 +25,7 @@
                 </b-col></b-row>
                 <span v-if="rulesets.length > 0">
                     <b-row>
-                        <b-col cols="12" sm="3" md="4">
+                        <b-col cols="12" sm="12" md="4">
                             <b-card bg-variant="light"
                                 header="Select a ruleset"
                             >
@@ -40,7 +40,7 @@
                             </b-card>
                             <br />
                         </b-col>
-                        <b-col cols="12" sm="9" md="8">
+                        <b-col cols="12" sm="12" md="8">
                             <b-list-group>
                                 <b-list-group-item variant="primary"><strong>Name:</strong> {{ rulesets[selectedRulesetIndex].name }}  </b-list-group-item>
                                 <b-list-group-item><strong>Voter:</strong> {{ rulesets[selectedRulesetIndex].voter }}  </b-list-group-item>

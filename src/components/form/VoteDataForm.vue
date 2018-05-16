@@ -13,7 +13,7 @@
                     <weight-input-component :enabled="isEnabled" />
                 </b-col></b-row>
                 <b-row>
-                    <b-col cols="12" sm="5" md="4">
+                    <b-col cols="12" sm="5" md="4"><p>
                         <button 
                             :class="[isButtonDisabled? 'btn btn-lg btn-secondary validate-voteorder-btn' : 'btn btn-lg btn-primary validate-voteorder-btn']"
                             :disabled="isButtonDisabled" @click="validateButtonClick"
@@ -21,7 +21,7 @@
                             Validate voteorder &nbsp;
                             <font-awesome-icon v-if="loadingInProggress" :icon="loadingIcon" spin />
                         </button>
-                    </b-col>
+                    </p></b-col>
                     <b-col cols="12" sm="7" md="8">
                     <p>
                         <b-alert variant="info" dismissible :show="loadingMessage.length > 0">{{ loadingMessage }}</b-alert>

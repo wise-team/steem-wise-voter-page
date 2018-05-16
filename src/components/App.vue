@@ -1,11 +1,6 @@
 <!-- src/components/App.vue -->
 <template>
-    <b-container>
-        <b-row>
-            <b-col>
-                <br /><br />
-            </b-col>
-        </b-row>
+    <b-container class="main-container">
         <b-row>
             <b-col>
                 <header-component />
@@ -35,7 +30,7 @@ export default Vue.extend({
     props: [],
     data() {
         return {
-        }
+        };
     },
     methods: {
     },
@@ -44,8 +39,8 @@ export default Vue.extend({
     components: {
         HeaderComponent,
         FormsComponent,
-        FooterComponent
-    }
+        FooterComponent,
+    },
 });
 </script>
 
