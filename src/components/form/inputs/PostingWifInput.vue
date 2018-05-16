@@ -19,6 +19,7 @@
                 v-bind:value="value"
                 v-on:input="$emit('input', $event.target.value)"
                 v-on:keyup="startInput"
+                :disabled="!enabled"
             />
         </b-input-group>
     </b-form-group>
@@ -26,40 +27,40 @@
 
 <script lang="ts">
 import Vue from "vue";
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
-import faShieldAlt from '@fortawesome/fontawesome-free-solid/faShieldAlt';
+import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
+import faShieldAlt from "@fortawesome/fontawesome-free-solid/faShieldAlt";
 
 export default Vue.extend({
-    props: ['value'],
+    props: ["value", "enabled"],
     data() {
         return {
-            inputStarted: false
-        }
+            inputStarted: false,
+        };
     },
     methods: {
-        startInput (): void {
+        startInput(): void {
             this.inputStarted = true;
-        }
+        },
     },
     computed: {
-        prependIcon (): any { return faShieldAlt; },
-        state (): boolean {
+        prependIcon(): any { return faShieldAlt; },
+        state(): boolean {
             return (!this.inputStarted) || this.value.length > 0 ? true : false;
         },
-        invalidFeedback (): string {
+        invalidFeedback(): string {
             if (this.value.length > 0) {
-                return '';
+                return "";
             } else {
-                return 'Please enter valid posting key WIF';
+                return "Please enter valid posting key WIF";
             }
         },
-        validFeedback (): string {
-            return (this.inputStarted) && this.state === true ? 'This is correct' : '';
-        }
+        validFeedback(): string {
+            return (this.inputStarted) && this.state === true ? "This is correct" : "";
+        },
     },
     components: {
-        FontAwesomeIcon
-    }
+        FontAwesomeIcon,
+    },
 });
 </script>
 
