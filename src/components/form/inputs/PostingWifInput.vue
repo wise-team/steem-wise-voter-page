@@ -30,6 +30,8 @@ import Vue from "vue";
 import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
 import faShieldAlt from "@fortawesome/fontawesome-free-solid/faShieldAlt";
 
+import { Api } from "../../../api/Api";
+
 export default Vue.extend({
     props: ["value", "enabled"],
     data() {
@@ -45,14 +47,18 @@ export default Vue.extend({
     computed: {
         prependIcon(): any { return faShieldAlt; },
         state(): boolean {
-            return (!this.inputStarted) || this.value.length > 0 ? true : false;
+            if (!this.inputStarted) return true;
+            else {
+                return this.value.length > 0
+                    && Api.isWif(this.value);
+            }
         },
         invalidFeedback(): string {
-            if (this.value.length > 0) {
-                return "";
-            } else {
+            if (this.value.length <= 0) {
                 return "Please enter valid posting key WIF";
-            }
+            } else if (!Api.isWif(this.value)) {
+                return "This is not a key WIF";
+            } else return "";
         },
         validFeedback(): string {
             return (this.inputStarted) && this.state === true ? "This is correct" : "";

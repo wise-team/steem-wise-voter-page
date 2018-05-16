@@ -59,4 +59,8 @@ export class Api {
             }, proggressCallback);
         });
     }
+
+    public static isWif(key: string): boolean {
+        return steem.auth.isWif(key);
+    }
 }
