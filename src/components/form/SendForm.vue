@@ -1,6 +1,6 @@
 <!-- src/components/SendForm.vue -->
 <template>
-        <div v-bind:class="[ isEnabled? 'component-enabled' : 'component-disabled' ]">
+        <div v-bind:class="[ isEnabled? 'component-enabled' : 'component-disabled text-muted' ]">
             <h4 class="text-muted">
                 <span class="icon-span"><font-awesome-icon :icon="arrowRightIcon" /></span>
                 &nbsp; Step 4: Paste your posting WIF and send

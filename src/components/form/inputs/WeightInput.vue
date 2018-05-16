@@ -10,7 +10,7 @@
     >
         <b-input-group>
             <b-input-group-text slot="prepend">
-                <b-form-radio-group id="vote-mode-radio-group" v-model="voteMode" :options="voteModeOptions" name="vote-mode"></b-form-radio-group>
+                <b-form-radio-group id="vote-mode-radio-group" v-model="voteMode" :options="voteModeOptions" name="vote-mode" :disabled="!enabled"></b-form-radio-group>
             </b-input-group-text>
             <input
                 type="text" class="form-control"
@@ -19,6 +19,7 @@
                 v-bind:value="value"
                 v-on:input="$emit('input', $event.target.value)"
                 v-on:keyup="startInput"
+                :disabled="!enabled"
             />
             <b-input-group-text slot="append">
                 <font-awesome-icon :icon="appendIcon" />
@@ -29,43 +30,43 @@
 
 <script lang="ts">
 import Vue from "vue";
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
-import faWeight from '@fortawesome/fontawesome-free-solid/faWeight';
+import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
+import faWeight from "@fortawesome/fontawesome-free-solid/faWeight";
 
 export default Vue.extend({
-    props: ['value'],
+    props: ["value", "enabled"],
     data() {
         return {
-            voteMode: 'upvote',
-            voteModeOptions: ['upvote', 'flag'],
-            inputStarted: false
-        }
+            voteMode: "upvote",
+            voteModeOptions: ["upvote", "flag"],
+            inputStarted: false,
+        };
     },
     methods: {
-        startInput (): void {
+        startInput(): void {
             this.inputStarted = true;
-        }
+        },
     },
     computed: {
         appendIcon(): any { return faWeight; },
-        state (): boolean {
+        state(): boolean {
             // TODO validate weight
             return (!this.inputStarted) || this.value.length > 0 ? true : false;
         },
-        invalidFeedback (): string {
+        invalidFeedback(): string {
             if (this.value.length > 0) {
-                return '';
+                return "";
             } else {
-                return 'Please enter valid weight';
+                return "Please enter valid weight";
             }
         },
-        validFeedback (): string {
-            return (this.inputStarted) && this.state === true ? 'This is correct' : '';
-        }
+        validFeedback(): string {
+            return (this.inputStarted) && this.state === true ? "This is correct" : "";
+        },
     },
     components: {
-        FontAwesomeIcon
-    }
+        FontAwesomeIcon,
+    },
 });
 </script>
 
