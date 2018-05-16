@@ -12,5 +12,5 @@ export const getters = {
                     && state.voteData.action.length > 0
                     && state.voteData.weight > 0 && state.voteData.weight <= 10000
                     && ! state.voteorderValidationState.inProggress,
-    sendFormEnabled: (state: State) => state.validated,
+    sendFormEnabled: (state: State) => getters.validationButtonEnabled(state) && state.validated,
 };

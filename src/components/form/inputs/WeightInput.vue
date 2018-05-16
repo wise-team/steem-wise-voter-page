@@ -56,7 +56,7 @@ export default Vue.extend({
             } else if (parseInt(this.valueText, 10) <= 0 || parseInt(this.valueText, 10) > 10000) {
                 return "Weight mut be > 0 and <= 10000";
             } else {
-                return "Invalid";
+                return "";
             }
         },
         validFeedback(): string {

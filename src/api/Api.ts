@@ -1,4 +1,4 @@
-import { SteemSmartvotes, smartvotes_ruleset } from "steem-smartvotes";
+import { SteemSmartvotes, smartvotes_ruleset, smartvotes_voteorder, SteemOperationNumber } from "steem-smartvotes";
 import { Promise } from "bluebird";
 import * as steem from "steem";
 
@@ -43,5 +43,20 @@ export class Api {
                 });
             });
         };
+    }
+
+    public static validateVoteorder(voter: string, voteorder: smartvotes_voteorder,
+                                    proggressCallback: (msg: string, proggress: number) => void):
+                                    Promise<void> {
+        return new Promise((resolve, reject) => {
+            const smartvotes = new SteemSmartvotes("username-not-required", "wif-not-requiored");
+            smartvotes.validateVoteOrder(voter, voteorder, SteemOperationNumber.FUTURE,
+                (error: Error | undefined, result: boolean): void => {
+                    if (error) reject(error);
+                    else if (result) {
+                        resolve();
+                    } else reject(new Error("Inconsistent state: invalid, but no error thrown"));
+            }, proggressCallback);
+        });
     }
 }

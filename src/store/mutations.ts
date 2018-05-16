@@ -28,6 +28,11 @@ export const mutations = {
             author: payload.author, permlink: payload.permlink, weight: payload.weight, action: payload.action,
         };
     },
+    setVoteorderValidationState(state: State, payload: { inProggress: boolean, error: string, message: string }) {
+        state.voteorderValidationState = {
+            inProggress: payload.inProggress, error: payload.error, message: payload.message,
+        };
+    },
     setValidated(state: State, payload: boolean) {
         state.validated = payload;
     },

@@ -19,7 +19,7 @@ export const state: State = {
     rulesetLoadingState: { inProggress: false, error: "", message: "" },
     rulesets: [],
     selectedRulesetIndex: -1,
-    voteData: { author: "", permlink: "", weight: -1, action: "upvote" },
+    voteData: { author: "", permlink: "", weight: 1000, action: "upvote" },
     validated: false,
     voteorderValidationState: { inProggress: false, error: "", message: "" },
 };

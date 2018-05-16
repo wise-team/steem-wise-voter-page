@@ -1,7 +1,7 @@
 import { ActionTree } from "vuex";
 import { State } from "./State";
 import { Api } from "../api/Api";
-import { smartvotes_ruleset } from "steem-smartvotes";
+import { smartvotes_ruleset, smartvotes_voteorder } from "steem-smartvotes";
 
 export const actions: ActionTree<State, State> = {
     setVoterUsername: ({ commit, dispatch, state }, voterUsername: string): void => {
@@ -55,6 +55,28 @@ export const actions: ActionTree<State, State> = {
                   payload: { author: string, permlink: string, weight: number, action: "upvote" | "flag" }): void => {
         commit("setVoteData", payload);
         dispatch("setValidated", false);
+    },
+    validateVoteorder: ({ commit, dispatch, state }, payload: boolean): void => {
+        commit("setVoteorderValidationState", {inProggress: true, error: "", message: "Validating voteorder..."});
+        const voteorder: smartvotes_voteorder = {
+            ruleset_name: state.rulesets[state.selectedRulesetIndex].name,
+            delegator: state.delegatorUsername,
+            author: state.voteData.author,
+            permlink: state.voteData.permlink,
+            type: state.voteData.action,
+            weight: state.voteData.weight,
+        };
+        Api.validateVoteorder(state.voterUsername, voteorder, (msg: string, proggress: number): void => {
+            commit("setVoteorderValidationState", { inProggress: true, error: "", message: msg });
+        })
+        .then(() => {
+            commit("setVoteorderValidationState", { inProggress: false, error: "", message: "" });
+            commit("setValidated", true);
+        })
+        .catch(error => {
+            commit("setVoteorderValidationState", { inProggress: false, error: error.message, message: ""});
+            commit("setValidated", false);
+        });
     },
     setValidated: ({ commit, dispatch, state }, payload: boolean): void => {
         commit("setValidated", payload);

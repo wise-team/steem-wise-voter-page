@@ -26,6 +26,7 @@
                     <p>
                         <b-alert variant="info" dismissible :show="loadingMessage.length > 0">{{ loadingMessage }}</b-alert>
                         <b-alert variant="danger" dismissible :show="loadingError.length > 0">{{ loadingError }}</b-alert>
+                        <b-alert variant="success" :show="isVoteorderValid">Voteorder is valid</b-alert>
                     </p>
                     
                     </b-col>
@@ -52,8 +53,9 @@ export default Vue.extend({
     },
     methods: {
         validateButtonClick() {
-            return;
+            this.$store.dispatch("validateVoteorder");
         },
+        onSubmit() { return; },
     },
     computed: {
         arrowRightIcon() { return faArrowCircleRight; },
@@ -69,6 +71,7 @@ export default Vue.extend({
                 this.$store.getters.validationButtonEnabled
             );
         },
+        isVoteorderValid(): boolean { return this.$store.state.validated; },
     },
     components: {
         FontAwesomeIcon,
