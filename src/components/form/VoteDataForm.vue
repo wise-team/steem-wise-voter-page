@@ -12,6 +12,24 @@
                 <b-row><b-col>
                     <weight-input-component v-model="weight" :enabled="isEnabled" />
                 </b-col></b-row>
+                <b-row>
+                    <b-col cols="12" sm="4" md="3">
+                        <button 
+                            :class="[isButtonDisabled? 'btn btn-secondary validate-voteorder-btn' : 'btn btn-primary validate-voteorder-btn']"
+                            :disabled="isButtonDisabled" @click="validateButtonClick"
+                        >
+                            Validate voteorder &nbsp;
+                            <font-awesome-icon v-if="loadingInProggress" :icon="loadingIcon" spin />
+                        </button>
+                    </b-col>
+                    <b-col cols="12" sm="8" md="9">
+                    <p>
+                        <b-alert variant="info" dismissible :show="loadingMessage.length > 0">{{ loadingMessage }}</b-alert>
+                        <b-alert variant="danger" dismissible :show="loadingError.length > 0">{{ loadingError }}</b-alert>
+                    </p>
+                    
+                    </b-col>
+                </b-row>
             </b-container></b-form>
         </div>
 </template>
@@ -21,6 +39,7 @@ import Vue from "vue";
 import { mapGetters } from "vuex";
 import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
 import faArrowCircleRight from "@fortawesome/fontawesome-free-solid/faArrowCircleRight";
+import faCog from "@fortawesome/fontawesome-free-solid/faCog";
 
 import SteemPostInputComponent from "./inputs/SteemPostInput.vue";
 import WeightInputComponent from "./inputs/WeightInput.vue";
@@ -34,13 +53,24 @@ export default Vue.extend({
         };
     },
     methods: {
-
+        validateButtonClick() {
+            return;
+        },
     },
     computed: {
         arrowRightIcon() { return faArrowCircleRight; },
+        loadingIcon() { return faCog; },
         ...mapGetters({
             isEnabled: "voteDataFormEnabled",
         }),
+        loadingInProggress(): boolean { return this.$store.state.voteorderValidationState.inProggress; },
+        loadingMessage(): string { return this.$store.state.voteorderValidationState.message; },
+        loadingError(): string { return this.$store.state.voteorderValidationState.error; },
+        isButtonDisabled(): boolean {
+            return !(
+                this.$store.getters.voteDataFormEnabled && !this.$store.state.voteorderValidationState.inProggress
+            );
+        },
     },
     components: {
         FontAwesomeIcon,
