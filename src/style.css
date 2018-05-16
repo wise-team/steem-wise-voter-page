@@ -1,0 +1,42 @@
+.main-container {
+    margin-top: 4rem;
+}
+
+.component-enabled .icon-span {
+    color: #007bff;
+}
+
+.component-enabled h4 {
+    font-weight: bold;
+    color: #007bff !important;
+}
+
+.alert {
+    overflow-wrap: break-word;
+}
+
+.form-spacer {
+    height: 4rem;
+}
+
+header h1 {
+    font-size: 4.5rem;
+    font-weight: 300;
+    line-height: 1.2;
+}
+
+@media (max-width: 576px) {
+    .main-container {
+        margin-top: 2rem;
+    }
+
+    .form-spacer {
+        height: 3rem;
+    }
+
+    header h1 {
+        font-size: 3.5rem;
+        font-weight: 300;
+        line-height: 1.2;
+    }
+}
