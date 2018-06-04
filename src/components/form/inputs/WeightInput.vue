@@ -70,7 +70,6 @@ export default Vue.extend({
                         author: this.$store.state.voteData.author,
                         permlink: this.$store.state.voteData.permlink,
                         weight: value,
-                        action: this.$store.state.voteData.action,
                     };
                     this.$store.commit("setVoteData", voteData);
                 } else {
@@ -78,25 +77,10 @@ export default Vue.extend({
                         author: this.$store.state.voteData.author,
                         permlink: this.$store.state.voteData.permlink,
                         weight: -1,
-                        action: this.$store.state.voteData.action,
                     };
                     this.$store.commit("setVoteData", voteData);
                 }
                 this.valueText = value;
-            },
-        },
-        voteMode: {
-            get(): string {
-                return this.$store.state.voteData.action;
-            },
-            set(value: string): void {
-                const voteData = {
-                    author: this.$store.state.voteData.author,
-                    permlink: this.$store.state.voteData.permlink,
-                    weight: this.$store.state.voteData.weight,
-                    action: value,
-                };
-                this.$store.commit("setVoteData", voteData);
             },
         },
     },
