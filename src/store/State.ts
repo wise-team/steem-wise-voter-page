@@ -1,10 +1,11 @@
+import { SetRules } from "steem-wise-core";
 
 export interface State {
     voterUsername: string;
     delegatorUsername: string;
     rulesetsLoadedFor: { voter: string, delegator: string };
     rulesetLoadingState: { inProggress: boolean, error: string, message: string };
-    rulesets: smartvotes_ruleset [];
+    rules: SetRules;
     selectedRulesetIndex: number;
     voteData: { author: string, permlink: string, weight: number, action: "upvote" | "flag" };
     validated: boolean;
@@ -19,7 +20,7 @@ export const state: State = {
     delegatorUsername: "",
     rulesetsLoadedFor: { voter: "", delegator: "" },
     rulesetLoadingState: { inProggress: false, error: "", message: "" },
-    rulesets: [],
+    rules: { rulesets: [] },
     selectedRulesetIndex: -1,
     voteData: { author: "", permlink: "", weight: 1000, action: "upvote" },
     validated: false,
