@@ -38,7 +38,7 @@ export const actions: ActionTree<State, State> = {
         })
         .then(Api.loadRulesets(delegatorUsername, voterUsername))
         .then((rules: SetRules) => {
-            commit("setRules", { rulesets: rules.rulesets });
+            commit("setRules", { rules: { rulesets: rules.rulesets }});
             dispatch("setSelectedRulesetIndex", (rules.rulesets.length > 0 ? 0 : -1));
             commit("setRulesetLoadingState", { inProggress: false, error: "", message: "" });
             commit("setRulesetsLoadedFor", { voter: voterUsername, delegator: delegatorUsername });

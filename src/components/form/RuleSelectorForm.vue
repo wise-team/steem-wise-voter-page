@@ -104,7 +104,7 @@ export default Vue.extend({
         loadingInProggress(): boolean { return this.$store.state.rulesetLoadingState.inProggress; },
         loadingMessage(): string { return this.$store.state.rulesetLoadingState.message; },
         loadingError(): string { return this.$store.state.rulesetLoadingState.error; },
-        rulesets(): SetRules { return { rulesets: this.$store.state.rules.rulesets }; },
+        rulesets(): SetRules { return this.$store.state.rules; },
         rulesetOptions(): Array<{ text: string, value: number }> {
             const options = [];
             for (let i = 0; i < this.$store.state.rules.rulesets.length; i++)
