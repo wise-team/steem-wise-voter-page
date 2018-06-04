@@ -1,4 +1,3 @@
-import { smartvotes_ruleset } from "steem-smartvotes";
 
 export interface State {
     voterUsername: string;

@@ -1,5 +1,4 @@
 import { State } from "./State";
-import { smartvotes_ruleset } from "steem-smartvotes";
 
 export const mutations = {
     setVoterUsername(state: State, voterUsername: string) {

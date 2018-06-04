@@ -1,4 +1,3 @@
-import { SteemSmartvotes, smartvotes_ruleset, smartvotes_voteorder, SteemOperationNumber } from "steem-smartvotes";
 import { Promise } from "bluebird";
 import * as steem from "steem";
 

@@ -31,5 +31,5 @@ Vue.use(BootstrapVue);
 const v = new Vue({
     el: "#app",
     store: store,
-    render: h => h(App)
+    render: h => h(App),
 });

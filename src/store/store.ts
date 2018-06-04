@@ -1,12 +1,11 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import { ActionTree } from 'vuex';
-import { smartvotes_ruleset } from "steem-smartvotes";
+import Vue from "vue";
+import Vuex from "vuex";
+import { ActionTree } from "vuex";
 
 import { State, state } from "./State";
 import { mutations } from "./mutations";
 import { actions } from "./actions";
-import { getters } from "./getters"
+import { getters } from "./getters";
 
 
 Vue.use(Vuex);
@@ -15,5 +14,5 @@ export default new Vuex.Store<State>({
   state,
   getters,
   actions,
-  mutations
+  mutations,
 });

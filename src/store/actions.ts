@@ -1,7 +1,6 @@
 import { ActionTree } from "vuex";
 import { State } from "./State";
 import { Api } from "../api/Api";
-import { smartvotes_ruleset, smartvotes_voteorder } from "steem-smartvotes";
 
 export const actions: ActionTree<State, State> = {
     setVoterUsername: ({ commit, dispatch, state }, voterUsername: string): void => {

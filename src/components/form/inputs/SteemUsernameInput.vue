@@ -26,7 +26,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import FontAwesomeIcon from "@fortawesome/vue-fontawesome"
+import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
 
 export default Vue.extend({
     props: ["label", "icon", "value", "id"],
