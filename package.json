@@ -1,5 +1,5 @@
 {
-  "name": "steem-smartvoter-voter-page",
+  "name": "steem-wise-voter-page",
   "version": "0.1.0",
   "description": "Vote delegation system for STEEM blockchain: a voting page",
   "main": "index.js",
@@ -11,19 +11,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/noisy-witness/steem-smartvotes-voter-page.git"
+    "url": "git+https://github.com/noisy-witness/steem-wise-voter-page.git"
   },
   "keywords": [
     "steem",
     "blockchain",
-    "smartvotes"
+    "wise"
   ],
   "author": "Jędrzej Lewandowski <jedrzejblew@gmail.com> (https://jedrzej.lewandowski.doctor/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/noisy-witness/steem-smartvotes-voter-page/issues"
+    "url": "https://github.com/noisy-witness/steem-wise-voter-page/issues"
   },
-  "homepage": "https://github.com/noisy-witness/steem-smartvotes-voter-page#readme",
+  "homepage": "https://github.com/noisy-witness/steem-wise-voter-page#readme",
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.8",
     "@fortawesome/fontawesome-free-brands": "^5.0.13",
@@ -31,7 +31,7 @@
     "@fortawesome/vue-fontawesome": "0.0.22",
     "bootstrap-vue": "^2.0.0-rc.9",
     "steem": "^0.7.1",
-    "steem-smartvotes": "^0.13.2",
+    "steem-wise-core": "^0.17.2",
     "vue": "^2.5.2",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^6.0.0",
