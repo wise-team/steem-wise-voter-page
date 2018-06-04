@@ -44,8 +44,6 @@
                             <b-list-group>
                                 <b-list-group-item variant="primary"><strong>Name:</strong> {{ rulesets[selectedRulesetIndex].name }}  </b-list-group-item>
                                 <b-list-group-item><strong>Voter:</strong> {{ rulesets[selectedRulesetIndex].voter }}  </b-list-group-item>
-                                <b-list-group-item><strong>Total daily weight:</strong> {{ rulesets[selectedRulesetIndex].total_weight }}  </b-list-group-item>
-                                <b-list-group-item><strong>Action:</strong> {{ rulesets[selectedRulesetIndex].action }}  </b-list-group-item>
                                 <b-list-group-item 
                                     v-for="(rule, index) in rulesets[selectedRulesetIndex].rules"
                                     :key="index"
@@ -73,7 +71,9 @@ import { mapGetters } from "vuex";
 import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
 import faArrowCircleRight from "@fortawesome/fontawesome-free-solid/faArrowCircleRight";
 import faCog from "@fortawesome/fontawesome-free-solid/faCog";
-import { smartvotes_ruleset, smartvotes_rule } from "steem-smartvotes";
+import { SetRules } from "steem-wise-core";
+import { Rule } from "../../../../steem-wise-core/src/rules/Rule";
+import { TagsRule, AuthorsRule, CustomRPCRule, WeightRule } from "../../../../steem-wise-core/src/wise";
 
 export default Vue.extend({
     props: [],
@@ -104,11 +104,11 @@ export default Vue.extend({
         loadingInProggress(): boolean { return this.$store.state.rulesetLoadingState.inProggress; },
         loadingMessage(): string { return this.$store.state.rulesetLoadingState.message; },
         loadingError(): string { return this.$store.state.rulesetLoadingState.error; },
-        rulesets(): smartvotes_ruleset [] { return this.$store.state.rulesets; },
+        rulesets(): SetRules { return { rulesets: this.$store.state.rules.rulesets }; },
         rulesetOptions(): Array<{ text: string, value: number }> {
             const options = [];
-            for (let i = 0; i < this.$store.state.rulesets.length; i++)
-                options.push({ text: this.$store.state.rulesets[i].name, value: i });
+            for (let i = 0; i < this.$store.state.rules.rulesets.length; i++)
+                options.push({ text: this.$store.state.rules.rulesets[i].name, value: i });
             return options;
         },
         selectedRulesetIndex: {
@@ -121,40 +121,48 @@ export default Vue.extend({
         },
     },
     filters: {
-        ruleText(rule: smartvotes_rule): string {
-            if (rule.type === "tags") {
-                if (rule.mode === "allow") {
-                    return "Allow only tags: " + rule.tags.join(", ");
-                } else if (rule.mode === "deny") {
-                    return "Deny tags: " + rule.tags.join(", ");
-                } else if (rule.mode === "require") {
-                    return "Require all of tags: " + rule.tags.join(", ");
-                } else if (rule.mode === "any") {
-                    return "Require at least one of tags: " + rule.tags.join(", ");
+        ruleText(rule: Rule): string {
+            if (rule.rule === Rule.Type.Tags) {
+                const tagsRule: TagsRule = rule as TagsRule;
+                if (tagsRule.mode === TagsRule.Mode.ALLOW) {
+                    return "Allow only tags: " + tagsRule.tags.join(", ");
+                } else if (tagsRule.mode === TagsRule.Mode.DENY) {
+                    return "Deny tags: " + tagsRule.tags.join(", ");
+                } else if (tagsRule.mode === TagsRule.Mode.REQUIRE) {
+                    return "Require all of tags: " + tagsRule.tags.join(", ");
+                } else if (tagsRule.mode === TagsRule.Mode.ANY) {
+                    return "Require at least one of tags: " + tagsRule.tags.join(", ");
                 } else {
-                    return "[Unknown mode " + rule.mode + "] tags: " + rule.tags.join(", ");
+                    return "[Unknown mode " + tagsRule.mode + "] tags: " + tagsRule.tags.join(", ");
                 }
-            } else if (rule.type === "authors") {
-                if (rule.mode === "allow") {
-                    return "Allow authors: " + rule.authors.join(", ");
-                } else if (rule.mode === "deny") {
-                    return "Deny authors: " + rule.authors.join(", ");
+            } else if (rule.rule === Rule.Type.Authors) {
+                const authorsRule: AuthorsRule = rule as AuthorsRule;
+                if (authorsRule.mode === AuthorsRule.Mode.ALLOW) {
+                    return "Allow authors: " + authorsRule.authors.join(", ");
+                } else if (authorsRule.mode === AuthorsRule.Mode.DENY) {
+                    return "Deny authors: " + authorsRule.authors.join(", ");
                 } else {
-                    return "[Unknown mode " + rule.mode + "] authors: " + rule.authors.join(", ");
+                    return "[Unknown mode " + authorsRule.mode + "] authors: " + authorsRule.authors.join(", ");
                 }
-            } else if (rule.type === "custom_rpc") {
-                return "Custom RPC: " + rule.rpc_host + ":" + rule.rpc_port
-                        + "/" + rule.rpc_path + "@" + rule.rpc_method;
+            } else if (rule.rule === Rule.Type.Weight) {
+                const weightRule: WeightRule = rule as WeightRule;
+                return weightRule.min + " <= Weight (" + weightRule.mode + ") <= " + weightRule.max;
+            } else if (rule.rule === Rule.Type.CustomRPC) {
+                const customRpcRule: CustomRPCRule = rule as CustomRPCRule;
+                return "Custom RPC: " + customRpcRule.host + ":" + customRpcRule.port
+                        + "/" + customRpcRule.path + "@" + customRpcRule.method;
             } else {
                 return "Unknown rule: " + JSON.stringify(rule);
             }
         },
-        ruleListVariant(rule: smartvotes_rule): string {
-            if (rule.type === "tags") {
+        ruleListVariant(rule: Rule): string {
+            if (rule.rule === Rule.Type.Tags) {
                 return "success";
-            } else if (rule.type === "authors") {
-                return "warning";
-            } else if (rule.type === "custom_rpc") {
+            } else if (rule.rule === Rule.Type.Authors) {
+                return "success";
+            } else if (rule.rule === Rule.Type.Weight) {
+                return "primary";
+            } else if (rule.rule === Rule.Type.CustomRPC) {
                 return "dark";
             } else {
                 return "light";
