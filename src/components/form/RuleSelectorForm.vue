@@ -43,7 +43,6 @@
                         <b-col cols="12" sm="12" md="8">
                             <b-list-group>
                                 <b-list-group-item variant="primary"><strong>Name:</strong> {{ rulesets[selectedRulesetIndex].name }}  </b-list-group-item>
-                                <b-list-group-item><strong>Voter:</strong> {{ rulesets[selectedRulesetIndex].voter }}  </b-list-group-item>
                                 <b-list-group-item 
                                     v-for="(rule, index) in rulesets[selectedRulesetIndex].rules"
                                     :key="index"
@@ -71,9 +70,7 @@ import { mapGetters } from "vuex";
 import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
 import faArrowCircleRight from "@fortawesome/fontawesome-free-solid/faArrowCircleRight";
 import faCog from "@fortawesome/fontawesome-free-solid/faCog";
-import { SetRules } from "steem-wise-core";
-import { Rule } from "../../../../steem-wise-core/src/rules/Rule";
-import { TagsRule, AuthorsRule, CustomRPCRule, WeightRule } from "../../../../steem-wise-core/src/wise";
+import { SetRules, Rule, TagsRule, AuthorsRule, CustomRPCRule, WeightRule } from "steem-wise-core";
 
 export default Vue.extend({
     props: [],
@@ -104,7 +101,7 @@ export default Vue.extend({
         loadingInProggress(): boolean { return this.$store.state.rulesetLoadingState.inProggress; },
         loadingMessage(): string { return this.$store.state.rulesetLoadingState.message; },
         loadingError(): string { return this.$store.state.rulesetLoadingState.error; },
-        rulesets(): SetRules { return this.$store.state.rules; },
+        rulesets(): { name: string; rules: Rule [] } { return this.$store.state.rules.rulesets; },
         rulesetOptions(): Array<{ text: string, value: number }> {
             const options = [];
             for (let i = 0; i < this.$store.state.rules.rulesets.length; i++)

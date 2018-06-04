@@ -21,7 +21,12 @@ export class Api {
 
     public static loadRulesets(delegator: string, voter: string): (() => Promise<SetRules>) {
         const voterWise = new Wise(voter, new DirectBlockchainApi(voter, "wif-not-necessary"));
-        return () => voterWise.getRulesetsAsync(delegator);
+        return () => voterWise.getRulesetsAsync(delegator)
+        .then((rules: SetRules) => {
+            if (rules.rulesets.length === 0)
+                throw new Error("Delegator @" + delegator + " has no rulesets for voter @" + voter + ".");
+            return rules;
+        });
 
     }
 
