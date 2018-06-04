@@ -22,7 +22,7 @@ export const actions: ActionTree<State, State> = {
         if (state.voterUsername !== state.rulesetsLoadedFor.voter
                 || state.delegatorUsername !== state.rulesetsLoadedFor.delegator) {
             commit("setRulesetsLoadedFor", { voter: "", delegator: "" });
-            commit("setRulesets", { rulesets: [] });
+            commit("setRules", { rules: { rulesets: [] } });
             commit("setSelectedRulesetIndex", -1);
         }
     },
@@ -86,20 +86,21 @@ export const actions: ActionTree<State, State> = {
         commit("setSendingState", {inProggress: true, error: "", message: "Sending voteorder..."});
         commit("setSent", false);
         const voteorder: SendVoteorder = {
-            rulesetName: state.rulesets[state.selectedRulesetIndex].name,
+            rulesetName: state.rules.rulesets[state.selectedRulesetIndex].name,
             author: state.voteData.author,
             permlink: state.voteData.permlink,
             weight: parseInt(state.voteData.weight + "", 10),
         };
         const delegator = state.delegatorUsername;
-        Api.sendVoteorder(state.voterUsername, state.postingWif, voteorder, (msg: string, proggress: number): void => {
+        Api.sendVoteorder(state.voterUsername, state.postingWif, delegator, voteorder,
+                (msg: string, proggress: number): void => {
             commit("setSendingState", { inProggress: true, error: "", message: msg });
         })
         .then(() => {
             commit("setSendingState", { inProggress: false, error: "", message: "" });
             commit("setSent", true);
         })
-        .catch(error => {
+        .catch((error: Error) => {
             commit("setSendingState", { inProggress: false, error: error.message, message: ""});
             commit("setSent", false);
         });
