@@ -32,7 +32,7 @@
     "bluebird": "^3.5.1",
     "bootstrap-vue": "^2.0.0-rc.11",
     "steem": "^0.7.1",
-    "steem-wise-core": "^0.17.2",
+    "steem-wise-core": "^0.17.3",
     "vue": "^2.5.2",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^6.1.0",
