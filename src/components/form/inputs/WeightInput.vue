@@ -9,9 +9,6 @@
         :state="state"
     >
         <b-input-group>
-            <b-input-group-text slot="prepend">
-                <b-form-radio-group id="vote-mode-radio-group" v-model="voteMode" :options="voteModeOptions" name="vote-mode" :disabled="!enabled"></b-form-radio-group>
-            </b-input-group-text>
             <input
                 type="text" class="form-control"
                 id="weight-input"
@@ -35,7 +32,6 @@ export default Vue.extend({
     props: ["enabled"],
     data() {
         return {
-            voteModeOptions: ["upvote", "flag"],
             valueText: "10000",
         };
     },
@@ -44,7 +40,7 @@ export default Vue.extend({
     computed: {
         appendIcon(): any { return faWeight; },
         state(): boolean {
-            if (this.$store.state.voteData.weight > 0 && this.$store.state.voteData.weight <= 10000) {
+            if (this.$store.state.voteData.weight >= -10000 && this.$store.state.voteData.weight <= 10000) {
                 return true;
             } else return false;
         },
@@ -53,8 +49,8 @@ export default Vue.extend({
                 return "Please enter valid weight";
             } else if (isNaN(Number(this.valueText))) {
                 return "Weight mut be integer number";
-            } else if (parseInt(this.valueText, 10) <= 0 || parseInt(this.valueText, 10) > 10000) {
-                return "Weight mut be > 0 and <= 10000";
+            } else if (parseInt(this.valueText, 10) < -10000 || parseInt(this.valueText, 10) > 10000) {
+                return "Weight mut be >= -10000 and <= 10000";
             } else {
                 return "";
             }
