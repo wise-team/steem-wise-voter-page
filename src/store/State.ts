@@ -7,7 +7,7 @@ export interface State {
     rulesetLoadingState: { inProggress: boolean, error: string, message: string };
     rules: SetRules;
     selectedRulesetIndex: number;
-    voteData: { author: string, permlink: string, weight: number, action: "upvote" | "flag" };
+    voteData: { author: string, permlink: string, weight: number };
     validated: boolean;
     voteorderValidationState: { inProggress: boolean, error: string, message: string };
     postingWif: string;
@@ -22,7 +22,7 @@ export const state: State = {
     rulesetLoadingState: { inProggress: false, error: "", message: "" },
     rules: { rulesets: [] },
     selectedRulesetIndex: -1,
-    voteData: { author: "", permlink: "", weight: 1000, action: "upvote" },
+    voteData: { author: "", permlink: "", weight: 1000 },
     validated: false,
     voteorderValidationState: { inProggress: false, error: "", message: "" },
     postingWif: "",
