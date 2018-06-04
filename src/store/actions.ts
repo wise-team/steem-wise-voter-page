@@ -1,6 +1,7 @@
 import { ActionTree } from "vuex";
 import { State } from "./State";
 import { Api } from "../api/Api";
+import { SetRules, SendVoteorder } from "steem-wise-core";
 
 export const actions: ActionTree<State, State> = {
     setVoterUsername: ({ commit, dispatch, state }, voterUsername: string): void => {
@@ -36,9 +37,9 @@ export const actions: ActionTree<State, State> = {
             });
         })
         .then(Api.loadRulesets(delegatorUsername, voterUsername))
-        .then((rulesets: smartvotes_ruleset []) => {
-            commit("setRulesets", { rulesets: rulesets });
-            dispatch("setSelectedRulesetIndex", (rulesets.length > 0 ? 0 : -1));
+        .then((rules: SetRules) => {
+            commit("setRules", { rulesets: rules.rulesets });
+            dispatch("setSelectedRulesetIndex", (rules.rulesets.length > 0 ? 0 : -1));
             commit("setRulesetLoadingState", { inProggress: false, error: "", message: "" });
             commit("setRulesetsLoadedFor", { voter: voterUsername, delegator: delegatorUsername });
         })
@@ -59,15 +60,14 @@ export const actions: ActionTree<State, State> = {
     validateVoteorder: ({ commit, dispatch, state }, payload: boolean): void => {
         commit("setVoteorderValidationState", {inProggress: true, error: "", message: "Validating voteorder..."});
         commit("setSent", false);
-        const voteorder: smartvotes_voteorder = {
-            ruleset_name: state.rulesets[state.selectedRulesetIndex].name,
-            delegator: state.delegatorUsername,
+        const voteorder: SendVoteorder = {
+            rulesetName: state.rules.rulesets[state.selectedRulesetIndex].name,
             author: state.voteData.author,
             permlink: state.voteData.permlink,
-            type: state.voteData.action,
             weight: state.voteData.weight,
         };
-        Api.validateVoteorder(state.voterUsername, voteorder, (msg: string, proggress: number): void => {
+        const delegator = state.delegatorUsername;
+        Api.validateVoteorder(delegator, state.voterUsername, voteorder, (msg: string, proggress: number): void => {
             commit("setVoteorderValidationState", { inProggress: true, error: "", message: msg });
         })
         .then(() => {
@@ -85,14 +85,13 @@ export const actions: ActionTree<State, State> = {
     sendSmartvote: ({ commit, dispatch, state }, payload: boolean): void => {
         commit("setSendingState", {inProggress: true, error: "", message: "Sending voteorder..."});
         commit("setSent", false);
-        const voteorder: smartvotes_voteorder = {
-            ruleset_name: state.rulesets[state.selectedRulesetIndex].name,
-            delegator: state.delegatorUsername,
+        const voteorder: SendVoteorder = {
+            rulesetName: state.rulesets[state.selectedRulesetIndex].name,
             author: state.voteData.author,
             permlink: state.voteData.permlink,
-            type: state.voteData.action,
             weight: parseInt(state.voteData.weight + "", 10),
         };
+        const delegator = state.delegatorUsername;
         Api.sendVoteorder(state.voterUsername, state.postingWif, voteorder, (msg: string, proggress: number): void => {
             commit("setSendingState", { inProggress: true, error: "", message: msg });
         })

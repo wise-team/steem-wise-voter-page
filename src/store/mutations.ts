@@ -1,4 +1,5 @@
 import { State } from "./State";
+import { SetRules } from "steem-wise-core";
 
 export const mutations = {
     setVoterUsername(state: State, voterUsername: string) {
@@ -10,8 +11,8 @@ export const mutations = {
     setRulesetsLoadedFor(state: State, payload: {voter: string, delegator: string}) {
         state.rulesetsLoadedFor = { voter: payload.voter, delegator: payload.delegator };
     },
-    setRulesets(state: State, payload: { rulesets: smartvotes_ruleset [] }) {
-        state.rulesets = payload.rulesets;
+    setRules(state: State, payload: { rules: SetRules }) {
+        state.rules = payload.rules;
     },
     setRulesetLoadingState(state: State, payload: { inProggress: boolean, error: string, message: string }) {
         state.rulesetLoadingState = {
@@ -22,9 +23,9 @@ export const mutations = {
         state.selectedRulesetIndex = index;
     },
     setVoteData(state: State,
-                payload: { author: string, permlink: string, weight: number, action: "upvote" | "flag" }) {
+                payload: { author: string, permlink: string, weight: number }) {
         state.voteData = {
-            author: payload.author, permlink: payload.permlink, weight: payload.weight, action: payload.action,
+            author: payload.author, permlink: payload.permlink, weight: payload.weight,
         };
     },
     setVoteorderValidationState(state: State, payload: { inProggress: boolean, error: string, message: string }) {
