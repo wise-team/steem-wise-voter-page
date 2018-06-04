@@ -5,7 +5,7 @@ export const getters = {
         return state.delegatorUsername.length > 0 && state.voterUsername.length > 0;
     },
     voteDataFormEnabled: (state: State) => getters.rulesSelectorFormEnabled(state)
-                     && state.rulesets.length > 0 && state.selectedRulesetIndex > -1,
+                     && state.rules.rulesets.length > 0 && state.selectedRulesetIndex > -1,
     validationButtonEnabled: (state: State) => getters.voteDataFormEnabled(state)
                     && state.voteData.author.length > 0
                     && state.voteData.permlink.length > 0
