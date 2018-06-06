@@ -15,7 +15,7 @@
                             :class="[!sendButtonEnabled? 'btn btn-lg btn-secondary send-btn' : 'btn btn-lg btn-primary send-btn']"
                             :disabled="!sendButtonEnabled" type="submit"
                         >
-                            Send a smart vote! &nbsp;
+                            Send a wise vote! &nbsp;
                             <font-awesome-icon v-if="loadingInProggress" :icon="loadingIcon" spin />
                         </button>
                     </p></b-col>

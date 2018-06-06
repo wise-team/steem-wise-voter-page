@@ -9,7 +9,7 @@ export const getters = {
     validationButtonEnabled: (state: State) => getters.voteDataFormEnabled(state)
                     && state.voteData.author.length > 0
                     && state.voteData.permlink.length > 0
-                    && state.voteData.weight > 0 && state.voteData.weight <= 10000
+                    && state.voteData.weight >= -10000 && state.voteData.weight <= 10000
                     && ! state.voteorderValidationState.inProggress,
     sendFormEnabled: (state: State) => getters.validationButtonEnabled(state) && state.validated,
     sendButtonEnabled: (state: State) => getters.sendFormEnabled(state) && state.postingWif.length > 0
