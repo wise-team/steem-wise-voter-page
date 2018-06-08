@@ -47,7 +47,10 @@ export default Vue.extend({
         prependIcon(): any { return faBookmark; },
         state(): boolean {
             if (!this.inputStarted) return true;
-            else return this.$store.state.voteData.author.length > 0 && this.$store.state.voteData.permlink.length > 0;
+            else return (
+                this.$store.state.voteData.category.length > 0 &&
+                this.$store.state.voteData.author.length > 0 &&
+                this.$store.state.voteData.permlink.length > 0);
         },
         invalidFeedback(): string {
             return "Please enter post slug (category/@username/permlink) or paste steemit.com link";
@@ -57,23 +60,33 @@ export default Vue.extend({
         },
         postSlug: {
             get(): string {
-                if (this.$store.state.voteData.author.length > 0 && this.$store.state.voteData.permlink.length > 0) {
-                    return this.$store.state.voteData.author + "/" + this.$store.state.voteData.permlink;
+                if (
+                    this.$store.state.voteData.category.length > 0 &&
+                    this.$store.state.voteData.author.length > 0 &&
+                    this.$store.state.voteData.permlink.length > 0
+                ) {
+                    return this.$store.state.voteData.category + "/@" +
+                        this.$store.state.voteData.author + "/" +
+                        this.$store.state.voteData.permlink;
                 } else return this.slugText;
             },
             set(value: string): void {
+                let category = "";
                 let author = "";
                 let permlink = "";
                 if (value.length > 0) {
-                    const regex = /^(?:(?:https?:\/\/steemit\.com)?\/(?:[^/]*)\/@)?([^\/]+)\/([^\/]+)$/giu;
+                    const regex = /^(?:(?:https?:\/\/steemit\.com)?\/([^/]*)\/@)?([^\/]+)\/([^\/]+)$/giu;
                     const match = regex.exec(value);
                     if (match && match.length > 2) {
-                        author = match[1];
-                        permlink = match[2];
+                        category = match[1];
+                        author = match[2];
+                        permlink = match[3];
                     }
                 }
                 const voteData = {
-                        author: author, permlink: permlink,
+                        category: category,
+                        author: author,
+                        permlink: permlink,
                         weight: this.$store.state.voteData.weight,
                         action: this.$store.state.voteData.action,
                     };

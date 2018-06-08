@@ -52,7 +52,7 @@ export const actions: ActionTree<State, State> = {
         dispatch("setVoteData", state.voteData);
     },
     setVoteData: ({ commit, dispatch, state },
-                  payload: { author: string, permlink: string, weight: number, action: "upvote" | "flag" }): void => {
+                  payload: { category: string, author: string, permlink: string, weight: number, action: "upvote" | "flag" }): void => {
         commit("setVoteData", payload);
         commit("setSent", false);
         dispatch("setValidated", false);
