@@ -65,21 +65,14 @@ export default Vue.extend({
                 } else return this.valueText;
             },
             set(value: string): void {
-                if (!isNaN(Number(value))) {
-                    const voteData = {
-                        author: this.$store.state.voteData.author,
-                        permlink: this.$store.state.voteData.permlink,
-                        weight: value,
-                    };
-                    this.$store.commit("setVoteData", voteData);
-                } else {
-                    const voteData = {
-                        author: this.$store.state.voteData.author,
-                        permlink: this.$store.state.voteData.permlink,
-                        weight: -1,
-                    };
-                    this.$store.commit("setVoteData", voteData);
-                }
+                const voteData = {
+                    category: this.$store.state.voteData.category,
+                    author: this.$store.state.voteData.author,
+                    permlink: this.$store.state.voteData.permlink,
+                    weight: !isNaN(Number(value)) ? value : -1,
+                };
+                this.$store.commit("setVoteData", voteData);
+
                 this.valueText = value;
             },
         },

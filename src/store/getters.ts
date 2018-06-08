@@ -7,6 +7,7 @@ export const getters = {
     voteDataFormEnabled: (state: State) => getters.rulesSelectorFormEnabled(state)
                      && state.rules.rulesets.length > 0 && state.selectedRulesetIndex > -1,
     validationButtonEnabled: (state: State) => getters.voteDataFormEnabled(state)
+                    && state.voteData.category.length > 0
                     && state.voteData.author.length > 0
                     && state.voteData.permlink.length > 0
                     && state.voteData.weight >= -10000 && state.voteData.weight <= 10000
