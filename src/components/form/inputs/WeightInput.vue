@@ -66,7 +66,6 @@ export default Vue.extend({
             },
             set(value: string): void {
                 const voteData = {
-                    category: this.$store.state.voteData.category,
                     author: this.$store.state.voteData.author,
                     permlink: this.$store.state.voteData.permlink,
                     weight: !isNaN(Number(value)) ? value : -1,
