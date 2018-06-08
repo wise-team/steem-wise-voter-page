@@ -23,9 +23,9 @@ export const mutations = {
         state.selectedRulesetIndex = index;
     },
     setVoteData(state: State,
-                payload: { author: string, permlink: string, weight: number }) {
+                payload: { category: string, author: string, permlink: string, weight: number }) {
         state.voteData = {
-            author: payload.author, permlink: payload.permlink, weight: payload.weight,
+            category: payload.category, author: payload.author, permlink: payload.permlink, weight: payload.weight,
         };
     },
     setVoteorderValidationState(state: State, payload: { inProggress: boolean, error: string, message: string }) {

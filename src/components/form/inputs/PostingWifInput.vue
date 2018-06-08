@@ -2,7 +2,7 @@
 <template>
     <b-form-group
         id="posting-wif-group"
-        label="Your posting key WIF"
+        label="Your private posting key"
         label-for="posting-wif"
         :invalid-feedback="invalidFeedback"
         :valid-feedback="validFeedback"
