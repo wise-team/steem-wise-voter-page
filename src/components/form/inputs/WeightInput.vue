@@ -9,16 +9,34 @@
         :state="state"
     >
         <b-input-group>
-            <input
-                type="text" class="form-control"
-                id="weight-input"
-                :state="state"
-                v-model="weight"
-                :disabled="!enabled"
-            />
-            <b-input-group-text slot="append">
+            <b-input-group-text slot="prepend">
                 <font-awesome-icon :icon="appendIcon" />
             </b-input-group-text>
+            <div class="range-input-container form-control">
+                <div class="level">
+                    <input
+                        type="range" class="form-control-range"
+                        id="weight-input"
+                        :state="state"
+                        v-model="weight"
+                        :disabled="!enabled"
+                        min="-10000"
+                        max="10000"
+                        step="1"
+                        list="tickmarks"
+                    />
+                    <datalist id="tickmarks">
+                        <option value="-10000">-100%</option>
+                        <option value="-5000">-50%</option>
+                        <option value="0">0%</option>
+                        <option value="5000">50%</option>
+                        <option value="10000">100%</option>
+                    </datalist>
+                </div>
+                <div class="level label">
+                    {{ weight | weightDisplayFilter }}
+                </div>
+            </div>
         </b-input-group>
     </b-form-group>
 </template>
@@ -76,6 +94,13 @@ export default Vue.extend({
             },
         },
     },
+    filters: {
+        weightDisplayFilter(input: string): string {
+            const v = parseInt(input, 10);
+            const action = v === 0 ? "remove vote" : ( v > 0 ? "upvote" : "flag" );
+            return Math.round(v / 100) + "% (" + action + ")";
+        },
+    },
     components: {
         FontAwesomeIcon,
     },
@@ -83,4 +108,18 @@ export default Vue.extend({
 </script>
 
 <style>
+.range-input-container input {
+    width: 100%;
+    height: 2rem;
+}
+
+.range-input-container .level {
+    width: 100%;
+}
+
+.range-input-container .label {
+    text-align: center;
+    color: #999;
+    font-weight: bold;
+}
 </style>
