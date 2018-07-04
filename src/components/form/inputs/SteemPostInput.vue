@@ -2,7 +2,7 @@
 <template>
     <b-form-group
         id="post-slug-group"
-        label="Post slug ([category/]@user/permlink) or steemit.com link"
+        label="Post slug ([category/]@user/permlink) or [steemit.com, busy.org] link"
         label-for="post-input"
         :invalid-feedback="invalidFeedback"
         :valid-feedback="validFeedback"
@@ -72,7 +72,9 @@ export default Vue.extend({
                 let author = "";
                 let permlink = "";
                 if (value.length > 0) {
-                    const regex = /^\/?(?:https?:\/\/steemit\.com)?(?:\/?[^\/\n]*\/)?@?([^\/\n]+)\/([^\/\n]+)$/giu;
+                    /* tslint:disable max-line-length */
+                    const regex = /^\/?(?:https?:\/\/(?:steemit\.com|busy\.org))?(?:\/?[^\/\n]*\/)?@?([^\/\n]+)\/([^\/\n]+)$/giu;
+                    /* tslint:disable max-line-length */
                     const match = regex.exec(value);
                     if (match && match.length > 1) {
                         author = match[1];

@@ -1,6 +1,6 @@
 {
   "name": "steem-wise-voter-page",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Vote delegation system for STEEM blockchain: a voting page",
   "main": "index.js",
   "scripts": {
