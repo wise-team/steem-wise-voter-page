@@ -48,7 +48,7 @@
                                     :key="index"
                                     :variant="rule | ruleListVariant"
                                 >
-                                    {{ rule | ruleText }}
+                                    <span v-html="$options.filters.ruleText(rule)"></span>
                                 </b-list-group-item>
                             </b-list-group>
                         </b-col>
@@ -143,7 +143,15 @@ export default Vue.extend({
                 }
             } else if (rule.rule === Rule.Type.Weight) {
                 const weightRule: WeightRule = rule as WeightRule;
-                return weightRule.min + " <= Weight (" + weightRule.mode + ") <= " + weightRule.max;
+                return (weightRule.min < 0 ? "Flag: "
+                    + Math.abs(Math.min(0, weightRule.max)) / 100 + " - " + Math.abs(weightRule.min) / 100 + " %"
+                    : "(no flag)")
+
+                    + "<br />" + // separator
+
+                    (weightRule.max > 0 ? "Upvote: "
+                    + Math.max(0, weightRule.min) / 100 + " - " +  weightRule.max / 100 + " %"
+                     : "(no upvote)");
             } else if (rule.rule === Rule.Type.CustomRPC) {
                 const customRpcRule: CustomRPCRule = rule as CustomRPCRule;
                 return "Custom RPC: " + customRpcRule.host + ":" + customRpcRule.port
