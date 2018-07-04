@@ -22,7 +22,7 @@
                         :disabled="!enabled"
                         min="-10000"
                         max="10000"
-                        step="1"
+                        step="100"
                         list="tickmarks"
                     />
                     <datalist id="tickmarks">
