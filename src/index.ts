@@ -26,10 +26,21 @@ Vue.use(BootstrapVue);
 
 
 /**
+ * Initialize SteemConnect
+ */
+import { SteemConnectApi } from "./api/SteemConnectApi";
+const scApi = new SteemConnectApi();
+scApi.initialize();
+
+
+/**
  * Start app
  */
 const v = new Vue({
     el: "#app",
+    data: {
+        steemConnectApi: scApi,
+    },
     store: store,
     render: h => h(App),
 });
