@@ -57,4 +57,25 @@ export class Api {
     public static isWif(key: string): boolean {
         return steem.auth.isWif(key);
     }
+
+    public static checkIfDelegatorAlreadyVoted(
+        delegator: string,
+        voteorder: SendVoteorder,
+      ): Promise<boolean> {
+        return steem.api
+          .getContentAsync(voteorder.author, voteorder.permlink)
+          .then(
+            (post: {
+              active_votes: Array<{
+                voter: string;
+                [K: string]: any;
+              }>;
+              [K: string]: any;
+            }) => post.active_votes,
+          )
+          .then((votes: Array<{ voter: string; [K: string]: any }>) =>
+            votes.map(vote => vote.voter),
+          )
+          .then((voters: string[]) => voters.indexOf(delegator) !== -1);
+      }
 }
