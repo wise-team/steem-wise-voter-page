@@ -1,4 +1,4 @@
-/* tslint:disable member-ordering */
+/* tslint:disable member-ordering no-console */
 import * as sc2 from "sc2-sdk";
 import { SteemConnectData } from "./SteemConnectData";
 
@@ -70,6 +70,7 @@ export class SteemConnectApiHelper {
                         loggedIn: false,
                         error: error.message,
                     };
+                    console.error(error);
                     callback(errorResult);
                 }
             });
@@ -97,6 +98,7 @@ export class SteemConnectApiHelper {
                         loggedIn: false,
                         error: error.message,
                     };
+                    console.error(error);
                     callback(errorResult);
                 } else {
                     localStorage.removeItem(SteemConnectApiHelper.LS_ACCESS_TOKEN_KEY);
@@ -107,6 +109,7 @@ export class SteemConnectApiHelper {
                         error: "",
                     };
                     callback(loggedOutResult);
+                    window.location.href = SteemConnectApiHelper.SC2_CALLBACK_URL;
                 }
             });
         }
@@ -124,7 +127,4 @@ export class SteemConnectApiHelper {
         return parseQueryString(window.location.search.substring(1)).access_token
         || localStorage.getItem(SteemConnectApiHelper.LS_ACCESS_TOKEN_KEY);
     }
-
-    // TODO public getProfileImageUrl()
-    // steemconnect.profile_image = JSON.parse(vm.$data.steemconnect.user.json_metadata)['profile']['profile_image'];
 }

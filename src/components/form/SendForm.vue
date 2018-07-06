@@ -3,47 +3,37 @@
         <div v-bind:class="[ isEnabled? 'component-enabled' : 'component-disabled text-muted' ]">
             <h4 class="text-muted">
                 <span class="icon-span"><font-awesome-icon :icon="arrowRightIcon" /></span>
-                &nbsp; Step 4: Paste your posting WIF and send
+                &nbsp; Step 4: Authenticate and send
             </h4>
-            <b-form @submit.prevent="onSubmit"><b-container fluid>
-                <b-row><b-col>
-                    <posting-wif-input-component :enabled="isEnabled" />
-                </b-col></b-row>
-                <b-row>
-                    <b-col cols="12" sm="5" md="4"><p>
-                        <button 
-                            :class="[!sendButtonEnabled? 'btn btn-lg btn-secondary send-btn' : 'btn btn-lg btn-primary send-btn']"
-                            :disabled="!sendButtonEnabled" type="submit"
-                        >
-                            Send a wise vote! &nbsp;
-                            <font-awesome-icon v-if="loadingInProggress" :icon="loadingIcon" spin />
-                        </button>
-                    </p></b-col>
-                    <b-col cols="12" sm="7" md="8">
-                    <p>
-                        <b-alert variant="info" dismissible :show="loadingMessage.length > 0">{{ loadingMessage }}</b-alert>
-                        <b-alert variant="danger" dismissible :show="loadingError.length > 0">{{ loadingError }}</b-alert>
-                        <b-alert variant="success" :show="isVoteorderSent">
-                            Voteorder and your vote was sent successfully! After 1-2 minutes,
-                            you will be able to see them on 
-                            <a :href="'https://steemd.com/@' + voterUsername">https://steemd.com/@{{ voterUsername }}</a>
-                        </b-alert>
-                    </p>
-                    
-                    </b-col>
-                </b-row>
-            </b-container></b-form>
+            <div v-if="isLoggedInToSteemConnect">
+                <steem-connect-send-form :enabled="isEnabled" />
+            </div>
+            <div v-else>
+                <b-container fluid>
+                    <b-row class="align-items-center">
+                        <b-col class="steemconnect-login-button-container text-center" cols="12" sm="4" md="4">
+                            <steem-connect-login-button />
+                            <br />
+                            <small class="text-muted" style="width: 67%;">(will redirect you to steemconnect.com and loose your form input data)</small>
+                        </b-col>
+                        <b-col class="horizontal-or text-center d-block d-sm-none"> ~~~ &nbsp; or &nbsp; ~~~ </b-col>
+                        <b-col class="simple-send-form-container" cols="12" sm="8" md="8">
+                            <simple-send-form :enabled="isEnabled" />
+                        </b-col>
+                    </b-row>
+                </b-container>
+            </div>
         </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
+import SteemConnectSendForm from "./SteemConnectSendForm.vue";
+import SimpleSendForm from "./SimpleSendForm.vue";
+import SteemConnectLoginButton from "../SteemConnectLoginButton.vue";
 import { mapGetters } from "vuex";
 import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
 import faArrowCircleRight from "@fortawesome/fontawesome-free-solid/faArrowCircleRight";
-import faCog from "@fortawesome/fontawesome-free-solid/faCog";
-
-import PostingWifInputComponent from "./inputs/PostingWifInput.vue";
 
 export default Vue.extend({
     props: [],
@@ -60,23 +50,37 @@ export default Vue.extend({
     },
     computed: {
         arrowRightIcon() { return faArrowCircleRight; },
-        loadingIcon() { return faCog; },
         ...mapGetters({
             isEnabled: "sendFormEnabled",
-            sendButtonEnabled: "sendButtonEnabled",
         }),
-        loadingMessage(): string { return this.$store.state.sendingState.message; },
-        loadingError(): string { return this.$store.state.sendingState.error; },
-        isVoteorderSent(): boolean { return this.$store.state.sent; },
-        loadingInProggress(): boolean { return this.$store.state.sendingState.inProggress; },
-        voterUsername(): string { return this.$store.state.voterUsername; },
+        isLoggedInToSteemConnect(): boolean { return this.$store.state.steemConnectData.loggedIn; },
     },
     components: {
         FontAwesomeIcon,
-        PostingWifInputComponent,
+        SteemConnectLoginButton,
+        SteemConnectSendForm,
+        SimpleSendForm,
     },
 });
 </script>
 
 <style>
+.steemconnect-login-button-container {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.horizontal-or {
+    font-style: italic;
+    font-weight: bold;
+    color: #bbb;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 576px) {
+    .simple-send-form-container {
+        border-left: 1px solid #aaa;
+    }
+}
 </style>

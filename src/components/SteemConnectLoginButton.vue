@@ -55,6 +55,11 @@ export default Vue.extend({
     color: #999;
 }
 
+.steemconnect-login-button {
+    white-space: normal !important;
+    word-wrap: break-word;
+}
+
 .steemconnect-login-button img {
     height: 1em;
     margin-bottom: 0.2em;
