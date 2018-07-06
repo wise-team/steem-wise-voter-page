@@ -25,7 +25,8 @@ export class SteemConnectApi {
                 }
                 /*else {
                 }*/
-        });
+            });
+        }
     }
 
     // TODO public getProfileImageUrl()
