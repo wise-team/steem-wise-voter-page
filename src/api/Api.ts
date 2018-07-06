@@ -47,6 +47,12 @@ export class Api {
         return voterWise.sendVoteorderAsync(delegator, voteorder, proggressCallback)
         .then(() => { /**/ });
     }
+    /*tslint:disable align */
+    public static generateVoteorderCustomJSON(voter: string, delegator: string, voteorder: SendVoteorder,
+                          proggressCallback: (msg: string, proggress: number) => void): Promise<object []> {
+        const voterWise = new Wise(voter, new DirectBlockchainApi(voter, ""));
+        return voterWise.generateVoteorderCustomJSONAsync(delegator, voteorder, proggressCallback);
+    }
 
     public static isWif(key: string): boolean {
         return steem.auth.isWif(key);

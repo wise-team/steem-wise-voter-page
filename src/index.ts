@@ -24,7 +24,6 @@ import "./style.css";
  */
 Vue.use(BootstrapVue);
 
-
 /**
  * Start app
  */
@@ -33,3 +32,5 @@ const v = new Vue({
     store: store,
     render: h => h(App),
 });
+
+v.$store.dispatch("initializeSteemConnect");

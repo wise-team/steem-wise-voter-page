@@ -1,4 +1,6 @@
 import { SetRules } from "steem-wise-core";
+import { SteemConnectApiHelper } from "../api/SteemConnectApiHelper";
+import { SteemConnectData } from "../api/SteemConnectData";
 
 export interface State {
     voterUsername: string;
@@ -13,6 +15,7 @@ export interface State {
     postingWif: string;
     sendingState: { inProggress: boolean, error: string, message: string };
     sent: boolean;
+    steemConnectData: SteemConnectData;
 }
 
 export const state: State = {
@@ -28,4 +31,5 @@ export const state: State = {
     postingWif: "",
     sendingState: { inProggress: false, error: "", message: "" },
     sent: false,
+    steemConnectData: SteemConnectApiHelper.getInitialState(),
 };
