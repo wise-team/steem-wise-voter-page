@@ -2,6 +2,8 @@ import { ActionTree } from "vuex";
 import { State } from "./State";
 import { Api } from "../api/Api";
 import { SetRules, SendVoteorder } from "steem-wise-core";
+import { SteemConnectApiHelper } from "../api/SteemConnectApiHelper";
+import { SteemConnectData } from "../api/SteemConnectData";
 
 export const actions: ActionTree<State, State> = {
     setVoterUsername: ({ commit, dispatch, state }, voterUsername: string): void => {
@@ -103,6 +105,22 @@ export const actions: ActionTree<State, State> = {
         .catch((error: Error) => {
             commit("setSendingState", { inProggress: false, error: error.message, message: ""});
             commit("setSent", false);
+        });
+    },
+    setSteemConnectData: ({ commit, dispatch, state }, payload: SteemConnectData): void => {
+        commit("setSteemConnectData", payload);
+        if (payload.account) {
+            dispatch("setVoterUsername", payload.account.name);
+        }
+    },
+    initializeSteemConnect: ({ commit, dispatch, state }, payload: boolean): void => {
+        SteemConnectApiHelper.initialize((result: SteemConnectData): void => {
+            dispatch("setSteemConnectData", result);
+        });
+    },
+    logoutFromSteemConnect: ({ commit, dispatch, state }, payload: boolean): void => {
+        SteemConnectApiHelper.logout((result: SteemConnectData): void => {
+            dispatch("setSteemConnectData", result);
         });
     },
 };

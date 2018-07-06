@@ -1,5 +1,6 @@
 import { State } from "./State";
 import { SetRules } from "steem-wise-core";
+import { SteemConnectData } from "../api/SteemConnectData";
 
 export const mutations = {
     setVoterUsername(state: State, voterUsername: string) {
@@ -46,5 +47,8 @@ export const mutations = {
     },
     setSent(state: State, payload: boolean) {
         state.sent = payload;
+    },
+    setSteemConnectData(state: State, payload: SteemConnectData) {
+        state.steemConnectData = payload;
     },
 };

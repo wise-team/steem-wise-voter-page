@@ -1,13 +1,17 @@
 <!-- src/components/SteemConnectLoginButton.vue -->
 <template>
-        <div>
+        <div class="steemconnect-container">
             <span class="steemconnect-error-msg">{{ errorMessage }}</span>
             <span v-if="isLoggedIn">
-                Logout
+                <span class="steemconnect-account-details">Hello, {{ username }}! &nbsp;&nbsp;&nbsp;&nbsp; </span>
+
+                <b-button class="steemconnect-logout-button" size="sm" variant="outline-secondary" @click="logout">
+                    Logout from SteemConnect
+                </b-button>
             </span>
             <span v-else>
-                <b-button class="steemconnect-login-button" size="md" variant="outline-primary" :href="loginUrl">
-                    <img src="/assets/steem-logo.svg" alt="Steem logo">  Login with SteemConnect
+                <b-button class="steemconnect-login-button" variant="outline-primary" :href="loginUrl">
+                    <img src="/assets/steem-logo.svg" alt="Steem logo">Login with SteemConnect
                 </b-button>
             </span>
         </div>
@@ -15,6 +19,7 @@
 
 <script lang="ts">
 import Vue from "vue";
+import { SteemConnectApiHelper } from "../api/SteemConnectApiHelper";
 
 export default Vue.extend({
     props: [],
@@ -23,29 +28,33 @@ export default Vue.extend({
         };
     },
     methods: {
-        loginBtnAction() {
-            if (this.$root.$data.steemConnectApi.loggedIn) {
-                this.$root.$data.steemConnectApi.logout();
-            } else {
-                this.$root.$data.steemConnectApi.login();
-            }
+        logout() {
+            this.$store.dispatch("logoutFromSteemConnect");
         },
     },
     computed: {
         isLoggedIn(): boolean {
-            return this.$root.$data.steemConnectApi.loggedIn;
+            return this.$store.state.steemConnectData.loggedIn;
         },
         loginUrl(): string {
-            return this.$root.$data.steemConnectApi.loginUrl;
+            return SteemConnectApiHelper.getLoginUrl();
         },
         errorMessage(): string {
-            return this.$root.$data.steemConnectApi.error;
-        }
+            return this.$store.state.steemConnectData.error;
+        },
+        username(): string {
+            return this.$store.state.steemConnectData.account ?
+                this.$store.state.steemConnectData.account.name : "(loading account...)";
+        },
     },
 });
 </script>
 
 <style>
+.steemconnect-container {
+    color: #999;
+}
+
 .steemconnect-login-button img {
     height: 1em;
     margin-bottom: 0.2em;
