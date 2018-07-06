@@ -115,6 +115,20 @@ export class SteemConnectApiHelper {
         }
     }
 
+    public static broadcast(operations: object [], callback: (error: Error | undefined, result: any) => void) {
+        const accessToken = this.getAccessToken();
+        if (accessToken) {
+            const steemConnectV2 = SteemConnectApiHelper.getSteemConnectObject();
+            steemConnectV2.setAccessToken(accessToken);
+            steemConnectV2.broadcast(operations, (error: Error | undefined, result: any) => {
+                if (error) callback(error, undefined);
+                else callback(undefined, result);
+            });
+        } else {
+            callback(new Error("Not logged in to SteemConnect."), undefined);
+        }
+    }
+
     private static getSteemConnectObject(): sc2.SteemConnectV2 {
         return sc2.Initialize({
             app: SteemConnectApiHelper.SC2_APP_ACCOUNT,

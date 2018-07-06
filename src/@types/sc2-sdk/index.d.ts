@@ -17,7 +17,7 @@ declare module 'sc2-sdk' {
         public me(callback: (error: Error, result: { account: object, user_metadata: object }) => void): void;
         public revokeToken(callback: (error: Error, result: any) => void): void;
         public sign(name: string, params: string [], redirectUri: string): string;
-        public broadcast(operations: object, callback: (error: Error, result: any) => void): void;
+        public broadcast(operations: object, callback: (error: Error | undefined, result: any) => void): void;
         public getLoginURL(state?: any): string;
     }
 }

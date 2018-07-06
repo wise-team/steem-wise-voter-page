@@ -48,9 +48,7 @@ export default Vue.extend({
     },
     methods: {
         onSubmit() {
-            if (this.$store.getters.sendButtonEnabled) {
-                this.$store.dispatch("sendWISEVoteUsingSteemconnect");
-            }
+            this.$store.dispatch("sendWISEVoteUsingSteemconnect");
         },
     },
     computed: {
