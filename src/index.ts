@@ -30,7 +30,6 @@ Vue.use(BootstrapVue);
  */
 import { SteemConnectApi } from "./api/SteemConnectApi";
 const scApi = new SteemConnectApi();
-scApi.initialize();
 
 
 /**

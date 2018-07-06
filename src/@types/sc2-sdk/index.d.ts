@@ -18,6 +18,7 @@ declare module 'sc2-sdk' {
         public revokeToken(callback: (error: Error, result: any) => void): void;
         public sign(name: string, params: string [], redirectUri: string): string;
         public broadcast(operations: object, callback: (error: Error, result: any) => void): void;
+        public getLoginURL(state?: any): string;
     }
 }
 
