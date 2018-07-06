@@ -68,10 +68,13 @@ export const mutations = {
     },
 
     [Mutations.setVoteorderValidationState](
-        state: State, payload: { inProggress: boolean, error: string, message: string },
+        state: State, payload: { inProggress: boolean, error: string, message: string, warning: string },
     ) {
         state.voteorderValidationState = {
-            inProggress: payload.inProggress, error: payload.error, message: payload.message,
+          inProggress: payload.inProggress,
+          error: payload.error,
+          message: payload.message,
+          warning: payload.warning,
         };
     },
 
