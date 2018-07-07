@@ -17,6 +17,20 @@ export const actions: ActionTree<State, State> = {
         dispatch("checkRulesetsLoadedFor");
         dispatch("setVoteData", state.voteData); // reset
     },
+    setDelegatorVotingPower: ({ commit, dispatch, state }, delegatorVotingPower: number): void => {
+        commit("setDelegatorVotingPower", delegatorVotingPower);
+    },
+    getDelegatorVotingPower: ({ commit, dispatch, state}): void => {
+        commit("setDelegatorVotingPowerLoadingState", {inProggress: true, loaded: false, error: ""});
+        Api.getVotingPower(state.delegatorUsername)
+        .then(vp => {
+            commit("setDelegatorVotingPower", vp);
+            commit("setDelegatorVotingPowerLoadingState", {inProggress: false, loaded: true, error: ""});
+        })
+        .catch(err => {
+            commit("setDelegatorVotingPowerLoadingState", {inProggress: false, loaded: true, error: err.message});
+        });
+    },
     setRulesetsLoadedFor: ({ commit, dispatch, state }, payload: {voter: string, delegator: string}): void => {
         commit("setRulesetsLoadedFor", payload);
         dispatch("checkRulesetsLoadedFor");

@@ -5,6 +5,8 @@ import { SteemConnectData } from "../api/SteemConnectData";
 export interface State {
     voterUsername: string;
     delegatorUsername: string;
+    delegatorVotingPower: number;
+    delegatorVotingPowerLoadingState: { inProggress: boolean, loaded: boolean, error: string };
     rulesetsLoadedFor: { voter: string, delegator: string };
     rulesetLoadingState: { inProggress: boolean, error: string, message: string };
     rules: SetRules;
@@ -21,6 +23,8 @@ export interface State {
 export const state: State = {
     voterUsername: "",
     delegatorUsername: "",
+    delegatorVotingPower: 0,
+    delegatorVotingPowerLoadingState: { inProggress: false, loaded: false, error: "" },
     rulesetsLoadedFor: { voter: "", delegator: "" },
     rulesetLoadingState: { inProggress: false, error: "", message: "" },
     rules: { rulesets: [] },

@@ -9,6 +9,16 @@ export const mutations = {
     setDelegatorUsername(state: State, delegatorUsername: string) {
         state.delegatorUsername = delegatorUsername;
     },
+    setDelegatorVotingPower(state: State, delegatorVotingPower: number) {
+        state.delegatorVotingPower = delegatorVotingPower;
+    },
+    setDelegatorVotingPowerLoadingState(
+        state: State, payload: { inProggress: boolean, loaded: boolean, error: string },
+    ) {
+        state.delegatorVotingPowerLoadingState = {
+            inProggress: payload.inProggress, loaded: payload.loaded, error: payload.error,
+        };
+    },
     setRulesetsLoadedFor(state: State, payload: {voter: string, delegator: string}) {
         state.rulesetsLoadedFor = { voter: payload.voter, delegator: payload.delegator };
     },

@@ -12,6 +12,12 @@
                     </b-col>
                     <b-col cols="12" sm="6">
                         <steem-username-input-component label="Delegator username" id="delegator-username" :icon="delegatorIcon" v-model="delegatorUsername" />
+                        <b-button size="sm" variant="primary" @click="getVotingPower" class="mb-3">Get Voting Power</b-button>
+                        <b-alert variant="info" :show="delegatorVotingPowerLoading">Loading...</b-alert>
+                        <b-progress variant="info" :striped="true" v-show="delegatorVotingPowerLoaded && !(delegatorVotingPowerError.length > 0)">
+                            <b-progress-bar :value="delegatorVotingPower" :label="delegatorVotingPower.toFixed(2)+'%'"></b-progress-bar>
+                        </b-progress>
+                        <b-alert variant="danger" :show="delegatorVotingPowerError.length > 0">{{ delegatorVotingPowerError }}</b-alert>
                     </b-col></b-row>
                 </b-container>
             </b-form>
@@ -34,6 +40,9 @@ export default Vue.extend({
         };
     },
     methods: {
+        getVotingPower() {
+            this.$store.dispatch('getDelegatorVotingPower');
+        }
     },
     computed: {
         arrowRightIcon() { return faArrowCircleRight; },
@@ -55,6 +64,18 @@ export default Vue.extend({
                 this.$store.dispatch("setDelegatorUsername", value);
             },
         },
+        delegatorVotingPower() {
+            return this.$store.state.delegatorVotingPower;
+        },
+        delegatorVotingPowerLoading() {
+            return this.$store.state.delegatorVotingPowerLoadingState.inProggress;
+        },
+        delegatorVotingPowerLoaded() {
+            return this.$store.state.delegatorVotingPowerLoadingState.loaded;
+        },
+        delegatorVotingPowerError() {
+            return this.$store.state.delegatorVotingPowerLoadingState.error;
+        }
     },
     components: {
         FontAwesomeIcon,

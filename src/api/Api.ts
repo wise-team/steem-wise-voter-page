@@ -54,6 +54,26 @@ export class Api {
         return voterWise.generateVoteorderCustomJSONAsync(delegator, voteorder, proggressCallback);
     }
 
+    /**
+     * Gets current voting power of a given user.
+     * @example
+     *          Api.getVotingPower("noisy").then(console.log) // 94.32 [%]
+     *
+     *          Api.getVotingPower("noisyyydysyd")
+     *              .catch(err => console.error(err.message)) // Account noisyyydysyd does not exist!
+     */
+    public static getVotingPower(user: string): Promise<number> {
+        return steem.api.getAccountsAsync([user])
+        .then((accounts: Array<{last_vote_time: string; voting_power: number, [K: string]: any}>) => {
+            if (accounts[0]) return accounts[0];
+            else throw new Error(`Account ${user} does not exist!`);
+        })
+        .then((account: {last_vote_time: string; voting_power: number, [K: string]: any}) => {
+            const lastVoteSecondsAgo = (new Date().getTime() - new Date(account.last_vote_time + "Z").getTime()) / 1000;
+            return Math.min(10000, account.voting_power + 10000 * lastVoteSecondsAgo / 432000) / 100;
+        });
+      }
+
     public static isWif(key: string): boolean {
         return steem.auth.isWif(key);
     }
