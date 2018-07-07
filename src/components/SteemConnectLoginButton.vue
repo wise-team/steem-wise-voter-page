@@ -5,13 +5,14 @@
             <span v-if="isLoggedIn">
                 <span class="steemconnect-account-details">Hello, {{ username }}! &nbsp;&nbsp;&nbsp;&nbsp; </span>
 
-                <b-button class="steemconnect-logout-button" size="sm" variant="outline-secondary" @click="logout">
-                    Logout from SteemConnect
+                <b-button class="steemconnect-logout-button" size="sm" variant="outline-secondary"
+                     @click="logout" title="Logout from SteemConnect">
+                    <img class="steemconnect-icon" src="/assets/steemconnect-icon.svg" alt="Steem logo"> Logout
                 </b-button>
             </span>
             <span v-else>
                 <b-button class="steemconnect-login-button" variant="outline-primary" :href="loginUrl">
-                    <img src="/assets/steem-logo.svg" alt="Steem logo">Login with SteemConnect
+                    <img class="steemconnect-icon" src="/assets/steemconnect-icon.svg" alt="Steem logo"> Login with SteemConnect
                 </b-button>
             </span>
         </div>
@@ -60,10 +61,9 @@ export default Vue.extend({
     word-wrap: break-word;
 }
 
-.steemconnect-login-button img {
+.steemconnect-icon {
     height: 1em;
     margin-bottom: 0.2em;
-    margin-right: 1em;
 }
 
 .steemconnect-error-msg {

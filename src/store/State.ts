@@ -16,6 +16,7 @@ export interface State {
     sendingState: { inProggress: boolean, error: string, message: string };
     sent: boolean;
     steemConnectData: SteemConnectData;
+    blockchainOps: object []; // for purpose of link generation
 }
 
 export const state: State = {
@@ -32,4 +33,5 @@ export const state: State = {
     sendingState: { inProggress: false, error: "", message: "" },
     sent: false,
     steemConnectData: SteemConnectApiHelper.getInitialState(),
+    blockchainOps: [],
 };

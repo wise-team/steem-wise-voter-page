@@ -1,3 +1,4 @@
+/* tslint:disable no-empty no-console*/
 import { ActionTree } from "vuex";
 import { State } from "./State";
 import { Api } from "../api/Api";
@@ -76,6 +77,7 @@ export const actions: ActionTree<State, State> = {
         .then(() => {
             commit("setVoteorderValidationState", { inProggress: false, error: "", message: "" });
             commit("setValidated", true);
+            dispatch("updateBlockchainOps");
         })
         .catch(error => {
             commit("setVoteorderValidationState", { inProggress: false, error: error.message, message: ""});
@@ -84,6 +86,23 @@ export const actions: ActionTree<State, State> = {
     },
     setValidated: ({ commit, dispatch, state }, payload: boolean): void => {
         commit("setValidated", payload);
+    },
+    updateBlockchainOps: ({ commit, dispatch, state }): void => {
+        const voteorder: SendVoteorder = {
+            rulesetName: state.rules.rulesets[state.selectedRulesetIndex].name,
+            author: state.voteData.author,
+            permlink: state.voteData.permlink,
+            weight: state.voteData.weight,
+        };
+        Api.generateVoteorderCustomJSON(state.voterUsername, state.delegatorUsername,
+            voteorder, () => {}, true /* skip validation */)
+            .then((ops: object []) => {
+                console.log("changedBlockchainOps");
+                commit("setBlockchainOps", ops);
+            })
+            .catch((error: Error) => {
+                console.error(error);
+            });
     },
     setSteemConnectData: ({ commit, dispatch, state }, payload: SteemConnectData): void => {
         commit("setSteemConnectData", payload);
@@ -137,7 +156,7 @@ export const actions: ActionTree<State, State> = {
         Api.generateVoteorderCustomJSON(state.voterUsername, delegator, voteorder,
                 (msg: string, proggress: number): void => {
             commit("setSendingState", { inProggress: true, error: "", message: msg });
-        })
+        }, false)
         .then((operations: object []) => {
             return new Promise((resolve, reject) => {
                 SteemConnectApiHelper.broadcast(operations, (error: Error | undefined, result: any) => {

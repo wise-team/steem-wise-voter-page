@@ -3,7 +3,7 @@
         <div v-bind:class="[ isEnabled? 'component-enabled' : 'component-disabled text-muted' ]">
             <h4 class="text-muted">
                 <span class="icon-span"><font-awesome-icon :icon="arrowRightIcon" /></span>
-                &nbsp; Step 4: Authenticate and send
+                &nbsp; Step 4: Authorize and send
             </h4>
             <div v-if="isLoggedInToSteemConnect">
                 <steem-connect-send-form :enabled="isEnabled" />
@@ -11,18 +11,20 @@
             <div v-else>
                 <b-container fluid>
                     <b-row class="align-items-center">
-                        <b-col class="steemconnect-login-button-container text-center" cols="12" sm="4" md="4">
+                        <b-col class="steemconnect-login-button-container text-center" cols="12" sm="5" md="5">
                             <steem-connect-login-button />
                             <br />
                             <small class="text-muted" style="width: 67%;">(will redirect you to steemconnect.com and loose your form input data)</small>
                         </b-col>
                         <b-col class="horizontal-or text-center d-block d-sm-none"> ~~~ &nbsp; or &nbsp; ~~~ </b-col>
-                        <b-col class="simple-send-form-container" cols="12" sm="8" md="8">
+                        <b-col class="simple-send-form-container" cols="12" sm="7" md="7">
                             <simple-send-form :enabled="isEnabled" />
                         </b-col>
                     </b-row>
                 </b-container>
             </div>
+            
+            <signing-links />
         </div>
 </template>
 
@@ -30,7 +32,9 @@
 import Vue from "vue";
 import SteemConnectSendForm from "./SteemConnectSendForm.vue";
 import SimpleSendForm from "./SimpleSendForm.vue";
+import SigningLinks from "./SigningLinks.vue";
 import SteemConnectLoginButton from "../SteemConnectLoginButton.vue";
+
 import { mapGetters } from "vuex";
 import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
 import faArrowCircleRight from "@fortawesome/fontawesome-free-solid/faArrowCircleRight";
@@ -60,6 +64,7 @@ export default Vue.extend({
         SteemConnectLoginButton,
         SteemConnectSendForm,
         SimpleSendForm,
+        SigningLinks,
     },
 });
 </script>

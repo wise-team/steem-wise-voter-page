@@ -51,4 +51,7 @@ export const mutations = {
     setSteemConnectData(state: State, payload: SteemConnectData) {
         state.steemConnectData = payload;
     },
+    setBlockchainOps(state: State, payload: object []) {
+        state.blockchainOps = payload;
+    },
 };
