@@ -9,7 +9,7 @@
         :state="state"
     >
         <b-input-group>
-            <b-input-group-text slot="prepend">
+            <b-input-group-text class="steemusernameinput-prepender" slot="prepend">
                 <font-awesome-icon :icon="prependIcon" />
             </b-input-group-text>
             <input
@@ -61,10 +61,10 @@ export default Vue.extend({
         FontAwesomeIcon,
     },
 });
-
-// TODO check if username exists
-// TODO pass to parent
 </script>
 
 <style>
+.steemusernameinput-prepender svg {
+    height: 2rem;
+}
 </style>

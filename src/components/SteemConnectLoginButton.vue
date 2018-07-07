@@ -3,17 +3,15 @@
         <div class="steemconnect-container">
             <span class="steemconnect-error-msg">{{ errorMessage }}</span>
             <span v-if="isLoggedIn">
-                <span class="steemconnect-account-details">Hello, {{ username }}! &nbsp;&nbsp;&nbsp;&nbsp; </span>
-
-                <b-button class="steemconnect-logout-button" size="sm" variant="outline-secondary"
+                <b-button class="steemconnect-logout-button" size="sm" variant="link"
                      @click="logout" title="Logout from SteemConnect">
-                    <img class="steemconnect-icon" src="/assets/steemconnect-icon.svg" alt="Steem logo"> Logout
+                    Logout from SteemConnect
                 </b-button>
             </span>
             <span v-else>
-                <b-button class="steemconnect-login-button" variant="outline-primary" :href="loginUrl">
-                    <img class="steemconnect-icon" src="/assets/steemconnect-icon.svg" alt="Steem logo"> Login with SteemConnect
-                </b-button>
+                <a :href="loginUrl">
+                    Login with SteemConnect
+                </a>
             </span>
         </div>
 </template>
@@ -54,16 +52,6 @@ export default Vue.extend({
 <style>
 .steemconnect-container {
     color: #999;
-}
-
-.steemconnect-login-button {
-    white-space: normal !important;
-    word-wrap: break-word;
-}
-
-.steemconnect-icon {
-    height: 1em;
-    margin-bottom: 0.2em;
 }
 
 .steemconnect-error-msg {
