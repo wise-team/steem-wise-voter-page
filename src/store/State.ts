@@ -33,3 +33,9 @@ export const state: State = {
     steemConnectData: SteemConnectApiHelper.getInitialState(),
     blockchainOps: [],
 };
+
+export const persistentPaths: string [] = [
+    "voterUsername",
+    "delegatorUsername",
+    "voteData",
+];
