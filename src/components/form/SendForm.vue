@@ -17,7 +17,6 @@
                 <posting-key-send-component :enabled="isEnabled" />
             </p>
 
-            <p>&nbsp;</p>
             <p v-if="sendingInProggress" class="sending-cog-container"><font-awesome-icon :icon="sendingIcon" spin /></p>
             <sending-progress-component />
         </div>
