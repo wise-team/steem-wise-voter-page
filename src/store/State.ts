@@ -12,7 +12,6 @@ export interface State {
     voteData: { author: string, permlink: string, weight: number };
     validated: boolean;
     voteorderValidationState: { inProggress: boolean, error: string, message: string };
-    postingWif: string;
     sendingState: { inProggress: boolean, error: string, message: string };
     sent: boolean;
     steemConnectData: SteemConnectData;
@@ -29,7 +28,6 @@ export const state: State = {
     voteData: { author: "", permlink: "", weight: 10000 },
     validated: false,
     voteorderValidationState: { inProggress: false, error: "", message: "" },
-    postingWif: "",
     sendingState: { inProggress: false, error: "", message: "" },
     sent: false,
     steemConnectData: SteemConnectApiHelper.getInitialState(),

@@ -13,7 +13,7 @@
                 <vessel-send-component :enabled="isEnabled" />
             </p>
             <p class="sendform-button-container text-center">
-                <b-button size="lg" variant="outline-primary" disabled>Private posting key</b-button>
+                <posting-key-send-component :enabled="isEnabled" />
             </p>
             
                     
@@ -41,9 +41,9 @@
 <script lang="ts">
 import Vue from "vue";
 import VesselSendComponent from "./send-components/VesselSend.vue";
+import PostingKeySendComponent from "./send-components/PostingKeySend.vue";
 
 import SteemConnectSendForm from "./SteemConnectSendForm.vue";
-import SimpleSendForm from "./SimpleSendForm.vue";
 import SteemConnectLoginButton from "../SteemConnectLoginButton.vue";
 
 import { mapGetters } from "vuex";
@@ -74,19 +74,19 @@ export default Vue.extend({
         FontAwesomeIcon,
         SteemConnectLoginButton,
         SteemConnectSendForm,
-        SimpleSendForm,
         VesselSendComponent,
+        PostingKeySendComponent,
     },
 });
 </script>
 
 <style>
-.sendform-button-container a, .sendform-button-container button {
-    width: 40%;
+.sendform-button-container > div > a, .sendform-button-container > div > button {
+    width: 50%;
 }
 
 @media (max-width: 576px) {
-    .sendform-button-container a, .sendform-button-container button {
+    .sendform-button-container > div > a, .sendform-button-container > div > button {
         width: 85%;
     }
 }

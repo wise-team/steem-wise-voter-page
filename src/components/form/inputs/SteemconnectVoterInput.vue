@@ -16,6 +16,7 @@
                 type="text" class="form-control"
                 id="steemconnect-voter-input-field"
                 v-bind:value="value"
+                :placeholder="value.length > 0 ? '' : '(loading from steemconnect...)'"
                 disabled
             />
         </b-input-group>

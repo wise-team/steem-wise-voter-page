@@ -120,7 +120,7 @@ export const actions: ActionTree<State, State> = {
             dispatch("setSteemConnectData", result);
         });
     },
-    sendSmartvote: ({ commit, dispatch, state }, payload: boolean): void => {
+    sendWISEVoteUsingPostingKey: ({ commit, dispatch, state }, payload: { postingWif: string }): void => {
         commit("setSendingState", {inProggress: true, error: "", message: "Sending voteorder..."});
         commit("setSent", false);
         const voteorder: SendVoteorder = {
@@ -130,7 +130,7 @@ export const actions: ActionTree<State, State> = {
             weight: parseInt(state.voteData.weight + "", 10),
         };
         const delegator = state.delegatorUsername;
-        Api.sendVoteorder(state.voterUsername, state.postingWif, delegator, voteorder,
+        Api.sendVoteorder(state.voterUsername, payload.postingWif, delegator, voteorder,
                 (msg: string, proggress: number): void => {
             commit("setSendingState", { inProggress: true, error: "", message: msg });
         })
