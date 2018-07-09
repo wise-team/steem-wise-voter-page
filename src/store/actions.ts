@@ -1,4 +1,4 @@
-/* tslint:disable no-empty no-console*/
+/* tslint:disable no-empty no-console */
 import { ActionTree } from "vuex";
 import { State } from "./State";
 import { Api } from "../api/Api";
@@ -97,10 +97,10 @@ export const actions: ActionTree<State, State> = {
         Api.generateVoteorderCustomJSON(state.voterUsername, state.delegatorUsername,
             voteorder, () => {}, true /* skip validation */)
             .then((ops: object []) => {
-                console.log("changedBlockchainOps");
                 commit("setBlockchainOps", ops);
             })
             .catch((error: Error) => {
+                commit("setSendingState", {inProggress: false, error: error.message, message: ""});
                 console.error(error);
             });
     },
