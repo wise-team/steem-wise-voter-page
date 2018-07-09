@@ -3,9 +3,21 @@
         <div v-bind:class="[ isEnabled? 'component-enabled' : 'component-disabled text-muted' ]">
             <h4 class="text-muted">
                 <span class="icon-span"><font-awesome-icon :icon="arrowRightIcon" /></span>
-                &nbsp; Step 4: Authorize and send
+                &nbsp; Step 4: Choose your authorization method and vote
             </h4>
-            <div v-if="isLoggedInToSteemConnect">
+            <p>&nbsp;</p>
+            <p class="sendform-button-container text-center">
+                <b-button size="lg" variant="outline-primary" disabled>SteemConnect</b-button>
+            </p>
+            <p class="sendform-button-container text-center">
+                <vessel-send-component :enabled="isEnabled" />
+            </p>
+            <p class="sendform-button-container text-center">
+                <b-button size="lg" variant="outline-primary" disabled>Private posting key</b-button>
+            </p>
+            
+                    
+            <!--<div v-if="isLoggedInToSteemConnect">
                 <steem-connect-send-form :enabled="isEnabled" />
             </div>
             <div v-else>
@@ -22,17 +34,16 @@
                         </b-col>
                     </b-row>
                 </b-container>
-            </div>
-            
-            <signing-links />
+            </div>-->
         </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
+import VesselSendComponent from "./send-components/VesselSend.vue";
+
 import SteemConnectSendForm from "./SteemConnectSendForm.vue";
 import SimpleSendForm from "./SimpleSendForm.vue";
-import SigningLinks from "./SigningLinks.vue";
 import SteemConnectLoginButton from "../SteemConnectLoginButton.vue";
 
 import { mapGetters } from "vuex";
@@ -64,12 +75,22 @@ export default Vue.extend({
         SteemConnectLoginButton,
         SteemConnectSendForm,
         SimpleSendForm,
-        SigningLinks,
+        VesselSendComponent,
     },
 });
 </script>
 
 <style>
+.sendform-button-container a, .sendform-button-container button {
+    width: 40%;
+}
+
+@media (max-width: 576px) {
+    .sendform-button-container a, .sendform-button-container button {
+        width: 85%;
+    }
+}
+
 .steemconnect-login-button-container {
     margin-bottom: 1rem;
     margin-top: 1rem;
