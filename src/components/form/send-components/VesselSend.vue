@@ -54,6 +54,6 @@ export default Vue.extend({
 
 <style>
 .vessel-send-btn img {
-    height: 1rem;
+    height: 1.5rem;
 }
 </style>
