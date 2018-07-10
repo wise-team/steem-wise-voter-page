@@ -2,53 +2,105 @@ import { State } from "./State";
 import { SetRules } from "steem-wise-core";
 import { SteemConnectData } from "../api/SteemConnectData";
 
+export class Mutations {
+    public static setVoterUsername = "setVoterUsername";
+    public static setDelegatorUsername = "setDelegatorUsername";
+    public static setRulesetsLoadedFor = "setRulesetsLoadedFor";
+    public static setRules = "setRules";
+    public static setRulesetLoadingState = "setRulesetLoadingState";
+    public static setSelectedRulesetName = "setSelectedRulesetName";
+    public static setVoteData = "setVoteData";
+    public static setVoteorderValidationState = "setVoteorderValidationState";
+    public static setValidated = "setValidated";
+    public static setSendingState = "setSendingState";
+    public static setSent = "setSent";
+    public static setSteemConnectData = "setSteemConnectData";
+    public static setBlockchainOps = "setBlockchainOps";
+}
+
 export const mutations = {
-    setVoterUsername(state: State, voterUsername: string) {
+    [Mutations.setVoterUsername](
+        state: State, voterUsername: string,
+    ) {
         state.voterUsername = voterUsername;
     },
-    setDelegatorUsername(state: State, delegatorUsername: string) {
+
+    [Mutations.setDelegatorUsername](
+        state: State, delegatorUsername: string,
+    ) {
         state.delegatorUsername = delegatorUsername;
     },
-    setRulesetsLoadedFor(state: State, payload: {voter: string, delegator: string}) {
+
+    [Mutations.setRulesetsLoadedFor](
+        state: State, payload: {voter: string, delegator: string},
+    ) {
         state.rulesetsLoadedFor = { voter: payload.voter, delegator: payload.delegator };
     },
-    setRules(state: State, payload: { rules: SetRules }) {
+
+    [Mutations.setRules](
+        state: State, payload: { rules: SetRules },
+    ) {
         state.rules = payload.rules;
     },
-    setRulesetLoadingState(state: State, payload: { inProggress: boolean, error: string, message: string }) {
+
+    [Mutations.setRulesetLoadingState](
+        state: State, payload: { inProggress: boolean, error: string, message: string },
+    ) {
         state.rulesetLoadingState = {
             inProggress: payload.inProggress, error: payload.error, message: payload.message,
         };
     },
-    setSelectedRulesetName(state: State, name: string) {
+
+    [Mutations.setSelectedRulesetName](state: State, name: string) {
         state.selectedRulesetName = name;
     },
-    setVoteData(state: State,
-                payload: { author: string, permlink: string, weight: number }) {
+
+    [Mutations.setVoteData](
+        state: State, payload: { author: string, permlink: string, weight: number },
+    ) {
         state.voteData = {
             author: payload.author, permlink: payload.permlink, weight: payload.weight,
         };
     },
-    setVoteorderValidationState(state: State, payload: { inProggress: boolean, error: string, message: string }) {
+
+    [Mutations.setVoteorderValidationState](
+        state: State, payload: { inProggress: boolean, error: string, message: string },
+    ) {
         state.voteorderValidationState = {
             inProggress: payload.inProggress, error: payload.error, message: payload.message,
         };
     },
-    setValidated(state: State, payload: boolean) {
+
+    [Mutations.setValidated](
+        state: State, payload: boolean,
+    ) {
         state.validated = payload;
     },
-    setSendingState(state: State, payload: { inProggress: boolean, error: string, message: string }) {
+
+    [Mutations.setSendingState](
+        state: State, payload: { inProggress: boolean, error: string, message: string },
+    ) {
         state.sendingState = {
             inProggress: payload.inProggress, error: payload.error, message: payload.message,
         };
     },
-    setSent(state: State, payload: boolean) {
+
+    [Mutations.setSent](
+        state: State, payload: boolean,
+    ) {
         state.sent = payload;
     },
-    setSteemConnectData(state: State, payload: SteemConnectData) {
+
+    [Mutations.setSteemConnectData](
+        state: State, payload: SteemConnectData,
+    ) {
         state.steemConnectData = payload;
     },
-    setBlockchainOps(state: State, payload: object []) {
+
+    [Mutations.setBlockchainOps](
+        state: State, payload: object [],
+    ) {
         state.blockchainOps = payload;
     },
+
 };
