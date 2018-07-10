@@ -78,7 +78,7 @@ export const actions: ActionTree<State, State> = {
         .then(Api.loadRulesets(delegatorUsername, voterUsername))
         .then((rules: SetRules) => {
             commit(Mutations.setRules, { rules: { rulesets: rules.rulesets }});
-            dispatch(Actions.setSelectedRulesetName, (rules.rulesets.length > 0 ? rules.rulesets[0] : ""));
+            dispatch(Actions.setSelectedRulesetName, (rules.rulesets.length > 0 ? rules.rulesets[0].name : ""));
             commit(Mutations.setRulesetLoadingState, { inProggress: false, error: "", message: "" });
             commit(Mutations.setRulesetsLoadedFor, { voter: voterUsername, delegator: delegatorUsername });
         })
