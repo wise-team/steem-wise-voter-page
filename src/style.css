@@ -25,6 +25,10 @@
     line-height: 1.2;
 }
 
+.steem-avatar {
+    border-radius: 50%;
+}
+
 @media (max-width: 576px) {
     .main-container {
         margin-top: 2rem;

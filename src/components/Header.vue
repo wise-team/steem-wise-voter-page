@@ -3,8 +3,10 @@
         <div>
             <div class="text-center header">
                 <img class="d-block mx-auto mb-4" src="assets/wise-logo.png" alt="Wise Vote">
-                <p class="lead">A wise tool that allows you to easily vote on behalf of your delegator. Put your posting key,
-                    type a delegator's username and paste steemit link. Voila! </p>
+                <p class="lead">
+                    A wise tool that allows you to easily vote on behalf of your delegator.
+                    Type a delegator's username, paste steemit link and vote. Voila!
+                </p>
             </div>
             <p class="text-right">
                 <b-button size="sm" variant="link" @click="resetForm">

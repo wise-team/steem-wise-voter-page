@@ -9,7 +9,7 @@
             <b-input-group-text class="steemconnect-voter-input-prepender" slot="prepend">
                 <!--<img src="/assets/steemconnect-icon.svg">
                 &nbsp;+&nbsp;-->
-                <img v-if="value.length > 0" :src="'https://steemitimages.com/u/' + value + '/avatar'" alt="Voter avatar" />
+                <img class="steem-avatar" v-if="value.length > 0" :src="'https://steemitimages.com/u/' + value + '/avatar'" alt="Voter avatar" />
                 <font-awesome-icon v-else :icon="loadingIcon" spin />
             </b-input-group-text>
             <input
