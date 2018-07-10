@@ -63,7 +63,7 @@ export const mutations = {
         state: State, payload: { author: string, permlink: string, weight: number },
     ) {
         state.voteData = {
-            author: payload.author, permlink: payload.permlink, weight: payload.weight,
+            author: payload.author, permlink: payload.permlink, weight: parseInt(payload.weight + "", 10),
         };
     },
 
