@@ -6,11 +6,17 @@
                 <p class="lead">A wise tool that allows you to easily vote on behalf of your delegator. Put your posting key,
                     type a delegator's username and paste steemit link. Voila! </p>
             </div>
+            <p class="text-right">
+                <b-button size="sm" variant="link" @click="resetForm">
+                    Reset form
+                </b-button>
+            </p>
         </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
+import { Actions } from "../store/actions";
 
 export default Vue.extend({
     props: [],
@@ -19,6 +25,9 @@ export default Vue.extend({
         };
     },
     methods: {
+        resetForm() {
+            this.$store.dispatch(Actions.resetFormData);
+        },
     },
     computed: {
     },

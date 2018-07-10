@@ -41,7 +41,5 @@ const v = new Vue({
     render: h => h(App),
 });
 
-v.$store.dispatch(Actions.initializeSteemConnect);
-if (queryParams.access_token && queryParams.send_immediately) {
-    // getter check => dispatch send
-}
+// initialize steemconnect & eventually login automatically
+v.$store.dispatch(Actions.initialize);

@@ -7,6 +7,8 @@ import { SteemConnectApiHelper } from "../api/SteemConnectApiHelper";
 import { SteemConnectData } from "../api/SteemConnectData";
 import { Promise } from "bluebird";
 import { Mutations } from "./mutations";
+import { PERSISTENCE_LOCALSTORAGE_KEY } from "./store";
+import { queryParams } from "../util/url-util";
 
 export class Actions {
     public static setVoterUsername = "setVoterUsername";
@@ -20,13 +22,41 @@ export class Actions {
     public static setValidated = "setValidated";
     public static updateBlockchainOps = "updateBlockchainOps";
     public static setSteemConnectData = "setSteemConnectData";
-    public static initializeSteemConnect = "initializeSteemConnect";
     public static logoutFromSteemConnect = "logoutFromSteemConnect";
+    public static initialize = "initialize";
     public static sendWISEVoteUsingPostingKey = "sendWISEVoteUsingPostingKey";
     public static sendWISEVoteUsingSteemconnect = "sendWISEVoteUsingSteemconnect";
+    public static clearPersistence = "clearPersistence";
+    public static resetFormData = "resetData";
+    public static immediatelySendAfterSteemConnectLogin = "immediatelySendAfterSteemConnectLogin";
 }
 
 export const actions: ActionTree<State, State> = {
+    [Actions.initialize]: (
+        { commit, dispatch, state, getters },
+    ): void => {
+        SteemConnectApiHelper.initialize((result: SteemConnectData): void => {
+            // callback is called also if voter is not logged in to steemconnect
+            dispatch(Actions.setSteemConnectData, result);
+
+            if (Date.now() < state.automaticSendUntilTime // -1 if automatic send was not enabled
+                && queryParams.access_token
+                && state.steemConnectData.loggedIn
+                && getters.canSendAutomatically) {
+                // send voteorder automatically
+                console.log("Performing automatic send");
+                dispatch(Actions.sendWISEVoteUsingSteemconnect);
+                commit(Mutations.setAutomaticSendUntilTime, -1); // disable on next refresh
+                window.location.hash = "#sendingProgress";
+            } else if (state.selectedRulesetName.length > 0
+                    && state.rules.rulesets.length === 0
+                    && getters.rulesSelectorFormEnabled) {
+                // automatically load rulesets if selected ruleset was saved
+                dispatch(Actions.loadRulesets);
+            }
+        });
+    },
+
     [Actions.setVoterUsername]: (
         { commit, dispatch, state }, voterUsername: string,
     ): void => {
@@ -166,20 +196,13 @@ export const actions: ActionTree<State, State> = {
         }
     },
 
-    [Actions.initializeSteemConnect]: (
-        { commit, dispatch, state },
-    ): void => {
-        SteemConnectApiHelper.initialize((result: SteemConnectData): void => {
-            dispatch(Actions.setSteemConnectData, result);
-        });
-    },
-
     [Actions.logoutFromSteemConnect]: (
         { commit, dispatch, state },
     ): void => {
         SteemConnectApiHelper.logout((result: SteemConnectData): void => {
             dispatch(Actions.setSteemConnectData, result);
         });
+        dispatch(Actions.clearPersistence);
     },
 
     [Actions.sendWISEVoteUsingPostingKey]: (
@@ -201,6 +224,7 @@ export const actions: ActionTree<State, State> = {
         .then(() => {
             commit(Mutations.setSendingState, { inProggress: false, error: "", message: "" });
             commit(Mutations.setSent, true);
+            dispatch(Actions.clearPersistence);
         })
         .catch((error: Error) => {
             commit(Mutations.setSendingState, { inProggress: false, error: error.message, message: ""});
@@ -235,10 +259,30 @@ export const actions: ActionTree<State, State> = {
         .then(() => {
             commit(Mutations.setSendingState, { inProggress: false, error: "", message: "" });
             commit(Mutations.setSent, true);
+            dispatch(Actions.clearPersistence);
         })
         .catch((error: Error) => {
             commit(Mutations.setSendingState, { inProggress: false, error: error.message, message: ""});
             commit(Mutations.setSent, false);
         });
     },
+
+    [Actions.clearPersistence]: (
+        { commit, dispatch, state },
+    ): void => {
+        localStorage.removeItem(PERSISTENCE_LOCALSTORAGE_KEY);
+    },
+
+    [Actions.resetFormData]: (
+        { commit, dispatch, state },
+    ): void => {
+        commit(Mutations.resetFormData);
+    },
+
+    [Actions.immediatelySendAfterSteemConnectLogin]: (
+        { commit, dispatch, state },
+    ): void => {
+        commit(Mutations.setAutomaticSendUntilTime, Date.now() + 5 * 60 * 1000); // 2 minutes
+    },
+
 };

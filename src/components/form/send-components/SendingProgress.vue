@@ -2,6 +2,7 @@
 <template>
     <div>
         <p>
+            <a name="sendingProgress">&nbsp;</a>
             <b-alert variant="info" dismissible :show="loadingMessage.length > 0">{{ loadingMessage }}</b-alert>
             <b-alert variant="danger" dismissible :show="loadingError.length > 0">{{ loadingError }}</b-alert>
             <b-alert variant="success" :show="isVoteorderSent">

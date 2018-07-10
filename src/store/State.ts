@@ -16,9 +16,19 @@ export interface State {
     sent: boolean;
     steemConnectData: SteemConnectData;
     blockchainOps: object []; // for purpose of link generation
+    automaticSendUntilTime: number; // if -1 => do not send automatically
 }
 
-export const state: State = {
+export const persistentPaths: string [] = [
+    "voterUsername",
+    "delegatorUsername",
+    "voteData",
+    "selectedRulesetName",
+    "rulesetsLoadedFor",
+    "automaticSendUntilTime",
+];
+
+export const initialState: State = { // this is used for "form reset" button
     voterUsername: "",
     delegatorUsername: "",
     rulesetsLoadedFor: { voter: "", delegator: "" },
@@ -32,13 +42,7 @@ export const state: State = {
     sent: false,
     steemConnectData: SteemConnectApiHelper.getInitialState(),
     blockchainOps: [],
+    automaticSendUntilTime: -1,
 };
 
-export const persistentPaths: string [] = [
-    "voterUsername",
-    "delegatorUsername",
-    "voteData",
-    "selectedRulesetName",
-];
-
-// TODO automatically load rulesets when selectedRulesetName.length > 0
+export const state: State = initialState;

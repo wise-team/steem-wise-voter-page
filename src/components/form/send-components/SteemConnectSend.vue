@@ -19,7 +19,7 @@
             :variant="enabled? 'outline-primary' : 'outline-secondary'"
             class="steemconnect-send-btn"
             :disabled="!sendButtonEnabled" 
-            
+            @click="loginWithAutomaticSend"
         >
             <img src="/assets/steemconnect-icon.svg" alt="Steemconnect icon" />
             SteemConnect (Login &amp; send)
@@ -30,6 +30,7 @@
 <script lang="ts">
 import Vue from "vue";
 import { Actions } from "../../../store/actions";
+import { SteemConnectApiHelper } from "../../../api/SteemConnectApiHelper";
 
 export default Vue.extend({
     props: [ "enabled" ],
@@ -40,6 +41,12 @@ export default Vue.extend({
     methods: {
         sendVoteorder(): void {
             this.$store.dispatch(Actions.sendWISEVoteUsingSteemconnect);
+        },
+        loginWithAutomaticSend(): void {
+            this.$store.dispatch(Actions.immediatelySendAfterSteemConnectLogin);
+            setTimeout(() => {
+                window.location.href = SteemConnectApiHelper.getLoginUrl();
+            }, 100);
         },
     },
     computed: {

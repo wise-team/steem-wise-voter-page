@@ -14,7 +14,9 @@
                         <div v-else>
                             <steem-username-input-component label="Your (voter) username" id="voter-username" :icon="voterIcon" v-model="voterUsername" />
                         </div>
+
                         <small class="steemconnect-link">
+                            or 
                             <steem-connect-login-button />
                         </small>
                     </b-col>
@@ -84,12 +86,14 @@ export default Vue.extend({
     width: 100%;
     text-align: right;
     display: block;
-    font-size: 0.6rem;
-    height: 1rem;
+    font-size: 0.8rem;
 }
 
-.steemconnect-link a {
+.steemconnect-link a, .steemconnect-link button {
     font-size: 0.8rem;
     text-align: right;
+    display: inline;
+    padding: 0;
+    border: 0;
 }
 </style>

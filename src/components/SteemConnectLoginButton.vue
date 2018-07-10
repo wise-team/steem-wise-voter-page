@@ -1,19 +1,19 @@
 <!-- src/components/SteemConnectLoginButton.vue -->
 <template>
-        <div class="steemconnect-container">
-            <span class="steemconnect-error-msg">{{ errorMessage }}</span>
+        <span class="steemconnect-container">
             <span v-if="isLoggedIn">
                 <b-button class="steemconnect-logout-button" size="sm" variant="link"
-                     @click="logout" title="Logout from SteemConnect">
-                    Logout from SteemConnect
+                     @click="logout" title="Log out from SteemConnect">
+                    log out from SteemConnect
                 </b-button>
             </span>
             <span v-else>
                 <a :href="loginUrl">
-                    Login with SteemConnect
+                    login with SteemConnect
                 </a>
             </span>
-        </div>
+            <span class="steemconnect-error-msg">{{ errorMessage }}</span>
+        </span>
 </template>
 
 <script lang="ts">

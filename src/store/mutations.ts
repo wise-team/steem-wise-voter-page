@@ -1,4 +1,6 @@
-import { State } from "./State";
+import * as _ from "lodash";
+
+import { State, initialState } from "./State";
 import { SetRules } from "steem-wise-core";
 import { SteemConnectData } from "../api/SteemConnectData";
 
@@ -16,6 +18,8 @@ export class Mutations {
     public static setSent = "setSent";
     public static setSteemConnectData = "setSteemConnectData";
     public static setBlockchainOps = "setBlockchainOps";
+    public static setAutomaticSendUntilTime = "setAutomaticSendUntilTime";
+    public static resetFormData = "resetFormData";
 }
 
 export const mutations = {
@@ -103,4 +107,22 @@ export const mutations = {
         state.blockchainOps = payload;
     },
 
+    [Mutations.setAutomaticSendUntilTime](
+        state: State, payload: number,
+    ) {
+        state.automaticSendUntilTime = payload;
+    },
+
+    [Mutations.resetFormData](
+        state: State,
+    ) {
+        const newState = _.cloneDeep(initialState);
+        if (state.steemConnectData.loggedIn) { // do not reset steeemconnect data
+            newState.steemConnectData = state.steemConnectData;
+            newState.voterUsername = state.voterUsername;
+        }
+        _.assign(state, newState);
+                    /* tslint:disable no-console */
+        console.log("Reset form data done");
+    },
 };
