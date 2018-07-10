@@ -8,7 +8,7 @@ export interface State {
     rulesetsLoadedFor: { voter: string, delegator: string };
     rulesetLoadingState: { inProggress: boolean, error: string, message: string };
     rules: SetRules;
-    selectedRulesetIndex: number;
+    selectedRulesetName: string;
     voteData: { author: string, permlink: string, weight: number };
     validated: boolean;
     voteorderValidationState: { inProggress: boolean, error: string, message: string };
@@ -24,7 +24,7 @@ export const state: State = {
     rulesetsLoadedFor: { voter: "", delegator: "" },
     rulesetLoadingState: { inProggress: false, error: "", message: "" },
     rules: { rulesets: [] },
-    selectedRulesetIndex: -1,
+    selectedRulesetName: "",
     voteData: { author: "", permlink: "", weight: 10000 },
     validated: false,
     voteorderValidationState: { inProggress: false, error: "", message: "" },
@@ -38,4 +38,7 @@ export const persistentPaths: string [] = [
     "voterUsername",
     "delegatorUsername",
     "voteData",
+    "selectedRulesetName",
 ];
+
+// TODO automatically load rulesets when selectedRulesetName.length > 0

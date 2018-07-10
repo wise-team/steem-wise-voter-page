@@ -27,7 +27,7 @@ export const actions: ActionTree<State, State> = {
                 || state.delegatorUsername !== state.rulesetsLoadedFor.delegator) {
             commit("setRulesetsLoadedFor", { voter: "", delegator: "" });
             commit("setRules", { rules: { rulesets: [] } });
-            commit("setSelectedRulesetIndex", -1);
+            commit("setSelectedRulesetName", "");
         }
     },
     loadRulesets: ({ commit, dispatch, state }): void => {
@@ -43,7 +43,7 @@ export const actions: ActionTree<State, State> = {
         .then(Api.loadRulesets(delegatorUsername, voterUsername))
         .then((rules: SetRules) => {
             commit("setRules", { rules: { rulesets: rules.rulesets }});
-            dispatch("setSelectedRulesetIndex", (rules.rulesets.length > 0 ? 0 : -1));
+            dispatch("setSelectedRulesetName", (rules.rulesets.length > 0 ? rules.rulesets[0] : ""));
             commit("setRulesetLoadingState", { inProggress: false, error: "", message: "" });
             commit("setRulesetsLoadedFor", { voter: voterUsername, delegator: delegatorUsername });
         })
@@ -51,8 +51,8 @@ export const actions: ActionTree<State, State> = {
             commit("setRulesetLoadingState", { inProggress: false, error: error.message, message: ""});
         });
     },
-    setSelectedRulesetIndex: ({ commit, dispatch, state }, payload: number): void => {
-        commit("setSelectedRulesetIndex", payload);
+    setSelectedRulesetName: ({ commit, dispatch, state }, payload: string): void => {
+        commit("setSelectedRulesetName", payload);
         dispatch("setVoteData", state.voteData);
     },
     setVoteData: ({ commit, dispatch, state },
@@ -65,7 +65,7 @@ export const actions: ActionTree<State, State> = {
         commit("setVoteorderValidationState", {inProggress: true, error: "", message: "Validating voteorder..."});
         commit("setSent", false);
         const voteorder: SendVoteorder = {
-            rulesetName: state.rules.rulesets[state.selectedRulesetIndex].name,
+            rulesetName: state.selectedRulesetName,
             author: state.voteData.author,
             permlink: state.voteData.permlink,
             weight: state.voteData.weight,
@@ -89,7 +89,7 @@ export const actions: ActionTree<State, State> = {
     },
     updateBlockchainOps: ({ commit, dispatch, state }): void => {
         const voteorder: SendVoteorder = {
-            rulesetName: state.rules.rulesets[state.selectedRulesetIndex].name,
+            rulesetName: state.selectedRulesetName,
             author: state.voteData.author,
             permlink: state.voteData.permlink,
             weight: state.voteData.weight,
@@ -124,7 +124,7 @@ export const actions: ActionTree<State, State> = {
         commit("setSendingState", {inProggress: true, error: "", message: "Sending voteorder..."});
         commit("setSent", false);
         const voteorder: SendVoteorder = {
-            rulesetName: state.rules.rulesets[state.selectedRulesetIndex].name,
+            rulesetName: state.selectedRulesetName,
             author: state.voteData.author,
             permlink: state.voteData.permlink,
             weight: parseInt(state.voteData.weight + "", 10),
@@ -147,7 +147,7 @@ export const actions: ActionTree<State, State> = {
         commit("setSendingState", {inProggress: true, error: "", message: "Sending voteorder..."});
         commit("setSent", false);
         const voteorder: SendVoteorder = {
-            rulesetName: state.rules.rulesets[state.selectedRulesetIndex].name,
+            rulesetName: state.selectedRulesetName,
             author: state.voteData.author,
             permlink: state.voteData.permlink,
             weight: parseInt(state.voteData.weight + "", 10),

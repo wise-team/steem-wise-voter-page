@@ -20,8 +20,8 @@ export const mutations = {
             inProggress: payload.inProggress, error: payload.error, message: payload.message,
         };
     },
-    setSelectedRulesetIndex(state: State, index: number) {
-        state.selectedRulesetIndex = index;
+    setSelectedRulesetName(state: State, name: string) {
+        state.selectedRulesetName = name;
     },
     setVoteData(state: State,
                 payload: { author: string, permlink: string, weight: number }) {
