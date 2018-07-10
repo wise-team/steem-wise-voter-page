@@ -44,6 +44,7 @@ import faCog from "@fortawesome/fontawesome-free-solid/faCog";
 
 import SteemPostInputComponent from "./inputs/SteemPostInput.vue";
 import WeightInputComponent from "./inputs/WeightInput.vue";
+import { Actions } from "../../store/actions";
 
 export default Vue.extend({
     props: [],
@@ -53,7 +54,7 @@ export default Vue.extend({
     },
     methods: {
         validateButtonClick() {
-            this.$store.dispatch("validateVoteorder");
+            this.$store.dispatch(Actions.validateVoteorder);
         },
         onSubmit() { return; },
     },

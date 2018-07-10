@@ -49,9 +49,9 @@ export class Api {
     }
     /*tslint:disable align */
     public static generateVoteorderCustomJSON(voter: string, delegator: string, voteorder: SendVoteorder,
-                          proggressCallback: (msg: string, proggress: number) => void): Promise<object []> {
+            proggressCallback: (msg: string, proggress: number) => void, skipValidation: boolean): Promise<object []> {
         const voterWise = new Wise(voter, new DirectBlockchainApi(voter, ""));
-        return voterWise.generateVoteorderCustomJSONAsync(delegator, voteorder, proggressCallback);
+        return voterWise.generateVoteorderCustomJSONAsync(delegator, voteorder, proggressCallback, skipValidation);
     }
 
     public static isWif(key: string): boolean {

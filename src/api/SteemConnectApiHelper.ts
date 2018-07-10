@@ -1,28 +1,7 @@
 /* tslint:disable member-ordering no-console */
 import * as sc2 from "sc2-sdk";
 import { SteemConnectData } from "./SteemConnectData";
-
-/*
-Source: https://stackoverflow.com/a/979995/761265
-*/
-function parseQueryString(query: string) {
-    const vars = query.split("&");
-    const queryString: { [x: string]: any; } = {};
-    for (let i = 0; i < vars.length; i++) {
-        const pair = vars[i].split("=");
-        const key: string = decodeURIComponent(pair[0]);
-        const value = decodeURIComponent(pair[1]);
-        if (typeof queryString[key] === "undefined") {
-            queryString[key] = decodeURIComponent(value);
-        } else if (typeof queryString[key] === "string") {
-            const arr = [queryString[key], decodeURIComponent(value)];
-            queryString[key] = arr;
-        } else {
-            queryString[key].push(decodeURIComponent(value));
-        }
-    }
-    return queryString;
-  }
+import { queryParams } from "../util/url-util";
 
 export class SteemConnectApiHelper {
     private static LS_ACCESS_TOKEN_KEY = "ec2accesstoken";
@@ -32,7 +11,7 @@ export class SteemConnectApiHelper {
     private static SC2_SCOPE: string [] = ["custom_json"];
 
     public static getLoginUrl(): string {
-        return "https://steemconnect.com/oauth2/authorize"
+        return "https://steemconnect.com/api/oauth2/authorize"
         + "?client_id=" + SteemConnectApiHelper.SC2_APP_ACCOUNT
         + "&redirect_uri=" + encodeURIComponent(SteemConnectApiHelper.SC2_CALLBACK_URL)
         + "&scope=" + SteemConnectApiHelper.SC2_SCOPE.join(",");
@@ -137,8 +116,8 @@ export class SteemConnectApiHelper {
         });
     }
 
-    private static getAccessToken(): string {
-        return parseQueryString(window.location.search.substring(1)).access_token
-        || localStorage.getItem(SteemConnectApiHelper.LS_ACCESS_TOKEN_KEY);
+    private static getAccessToken(): string | null {
+        return queryParams.access_token
+            || localStorage.getItem(SteemConnectApiHelper.LS_ACCESS_TOKEN_KEY);
     }
 }

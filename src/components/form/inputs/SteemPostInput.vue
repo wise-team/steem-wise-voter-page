@@ -30,6 +30,8 @@ import Vue from "vue";
 import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
 import faBookmark from "@fortawesome/fontawesome-free-solid/faBookmark";
 
+import { Actions } from "../../../store/actions";
+
 export default Vue.extend({
     props: ["enabled"],
     data() {
@@ -87,7 +89,7 @@ export default Vue.extend({
                         weight: this.$store.state.voteData.weight,
                         action: this.$store.state.voteData.action,
                     };
-                this.$store.commit("setVoteData", voteData);
+                this.$store.dispatch(Actions.setVoteData, voteData);
                 this.slugText = value;
             },
         },

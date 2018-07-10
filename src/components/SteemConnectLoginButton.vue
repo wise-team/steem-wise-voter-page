@@ -1,25 +1,25 @@
 <!-- src/components/SteemConnectLoginButton.vue -->
 <template>
-        <div class="steemconnect-container">
-            <span class="steemconnect-error-msg">{{ errorMessage }}</span>
+        <span class="steemconnect-container">
             <span v-if="isLoggedIn">
-                <span class="steemconnect-account-details">Hello, {{ username }}! &nbsp;&nbsp;&nbsp;&nbsp; </span>
-
-                <b-button class="steemconnect-logout-button" size="sm" variant="outline-secondary" @click="logout">
-                    Logout from SteemConnect
+                <b-button class="steemconnect-logout-button" size="sm" variant="link"
+                     @click="logout" title="Log out from SteemConnect">
+                    log out from SteemConnect
                 </b-button>
             </span>
             <span v-else>
-                <b-button class="steemconnect-login-button" variant="outline-primary" :href="loginUrl">
-                    <img src="/assets/steem-logo.svg" alt="Steem logo">Login with SteemConnect
-                </b-button>
+                <a :href="loginUrl">
+                    login with SteemConnect
+                </a>
             </span>
-        </div>
+            <span class="steemconnect-error-msg">{{ errorMessage }}</span>
+        </span>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import { SteemConnectApiHelper } from "../api/SteemConnectApiHelper";
+import { Actions } from "../store/actions";
 
 export default Vue.extend({
     props: [],
@@ -29,7 +29,7 @@ export default Vue.extend({
     },
     methods: {
         logout() {
-            this.$store.dispatch("logoutFromSteemConnect");
+            this.$store.dispatch(Actions.logoutFromSteemConnect);
         },
     },
     computed: {
@@ -53,17 +53,6 @@ export default Vue.extend({
 <style>
 .steemconnect-container {
     color: #999;
-}
-
-.steemconnect-login-button {
-    white-space: normal !important;
-    word-wrap: break-word;
-}
-
-.steemconnect-login-button img {
-    height: 1em;
-    margin-bottom: 0.2em;
-    margin-right: 1em;
 }
 
 .steemconnect-error-msg {
