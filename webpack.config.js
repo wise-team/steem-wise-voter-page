@@ -71,7 +71,13 @@ module.exports = {
     new VueLoaderPlugin(),
     new Visualizer({
       filename: './statistics.html'
-    })
+    }),
+    new webpack.DefinePlugin({
+      'process.env': (process.env.NODE_ENV === 'production') ? {
+        NODE_ENV: "production"
+      } : {},
+      "__VERSION__": JSON.stringify(require("./package.json").version),
+    }),
   ]
 }
 
@@ -79,11 +85,6 @@ if (process.env.NODE_ENV === 'production') {
   module.exports.devtool = '#source-map'
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"production"'
-      }
-    }),
     new webpack.LoaderOptionsPlugin({
       minimize: true
     })

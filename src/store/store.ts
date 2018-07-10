@@ -7,6 +7,8 @@ import { mutations } from "./mutations";
 import { actions } from "./actions";
 import { getters } from "./getters";
 
+declare const __VERSION__: string;
+export const PERSISTENCE_LOCALSTORAGE_KEY = "steemwise_" + (__VERSION__ ? __VERSION__ : "");
 
 Vue.use(Vuex);
 
@@ -17,7 +19,9 @@ export default new Vuex.Store<State>({
   mutations,
   plugins: [
     createPersistedState({
+      key: PERSISTENCE_LOCALSTORAGE_KEY,
       paths: persistentPaths,
     }),
   ],
 });
+
