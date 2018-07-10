@@ -11,7 +11,7 @@ export class SteemConnectApiHelper {
     private static SC2_SCOPE: string [] = ["custom_json"];
 
     public static getLoginUrl(): string {
-        return "https://steemconnect.com/api/oauth2/authorize"
+        return "https://steemconnect.com/oauth2/authorize"
         + "?client_id=" + SteemConnectApiHelper.SC2_APP_ACCOUNT
         + "&redirect_uri=" + encodeURIComponent(SteemConnectApiHelper.SC2_CALLBACK_URL)
         + "&scope=" + SteemConnectApiHelper.SC2_SCOPE.join(",");
