@@ -67,10 +67,12 @@
 <script lang="ts">
 import Vue from "vue";
 import { mapGetters } from "vuex";
+import * as _ from "lodash";
 import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
 import faArrowCircleRight from "@fortawesome/fontawesome-free-solid/faArrowCircleRight";
 import faCog from "@fortawesome/fontawesome-free-solid/faCog";
 import { SetRules, Rule, TagsRule, AuthorsRule, CustomRPCRule, WeightRule } from "steem-wise-core";
+import { Actions } from "../../store/actions";
 
 export default Vue.extend({
     props: [],
@@ -81,7 +83,7 @@ export default Vue.extend({
     methods: {
         loadButtonClick(): void {
             if (this.$store.getters.rulesSelectorFormEnabled && !this.$store.state.rulesetLoadingState.inProggress) {
-                this.$store.dispatch("loadRulesets");
+                this.$store.dispatch(Actions.loadRulesets);
             }
         },
     },
@@ -110,10 +112,14 @@ export default Vue.extend({
         },
         selectedRulesetIndex: {
             get(): number {
-                return this.$store.state.selectedRulesetIndex;
+                return Math.max(0, // 0 or selected ruleset
+                    _.findIndex(
+                        this.$store.state.rules.rulesets,
+                        (ruleset: { name: string }) => ruleset.name === this.$store.state.selectedRulesetName),
+                );
             },
             set(value: number): void {
-                this.$store.dispatch("setSelectedRulesetIndex", value);
+                this.$store.dispatch(Actions.setSelectedRulesetName, this.$store.state.rules.rulesets[value].name);
             },
         },
     },
