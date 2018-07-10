@@ -29,6 +29,7 @@
 
 <script lang="ts">
 import Vue from "vue";
+import { Actions } from "../../../store/actions";
 
 export default Vue.extend({
     props: [ "enabled" ],
@@ -38,7 +39,7 @@ export default Vue.extend({
     },
     methods: {
         sendVoteorder(): void {
-            this.$store.dispatch("sendWISEVoteUsingSteemconnect");
+            this.$store.dispatch(Actions.sendWISEVoteUsingSteemconnect);
         },
     },
     computed: {

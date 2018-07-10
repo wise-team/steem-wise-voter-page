@@ -57,6 +57,7 @@ import PostingWifInputComponent from "../inputs/PostingWifInput.vue";
 import SendingProgressComponent from "./SendingProgress.vue";
 
 import { Api } from "../../../api/Api";
+import { Actions } from "../../../store/actions";
 
 export default Vue.extend({
     props: [ "enabled" ],
@@ -68,7 +69,7 @@ export default Vue.extend({
     methods: {
         onSubmit() {
             if (this.$store.getters.sendButtonEnabled) {
-                this.$store.dispatch("sendWISEVoteUsingPostingKey", { postingWif: this.postingWif });
+                this.$store.dispatch(Actions.sendWISEVoteUsingPostingKey, { postingWif: this.postingWif });
             }
         },
     },

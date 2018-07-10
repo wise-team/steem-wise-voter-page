@@ -46,7 +46,7 @@ import Vue from "vue";
 import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
 import faWeight from "@fortawesome/fontawesome-free-solid/faWeight";
 
-import { Mutations } from "../../../store/mutations";
+import { Actions } from "../../../store/actions";
 
 export default Vue.extend({
     props: ["enabled"],
@@ -90,7 +90,7 @@ export default Vue.extend({
                     permlink: this.$store.state.voteData.permlink,
                     weight: !isNaN(Number(value)) ? value : -1,
                 };
-                this.$store.commit(Mutations.setVoteData, voteData);
+                this.$store.dispatch(Actions.setVoteData, voteData);
 
                 this.valueText = value;
             },

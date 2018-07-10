@@ -19,6 +19,7 @@
 <script lang="ts">
 import Vue from "vue";
 import { SteemConnectApiHelper } from "../api/SteemConnectApiHelper";
+import { Actions } from "../store/actions";
 
 export default Vue.extend({
     props: [],
@@ -28,7 +29,7 @@ export default Vue.extend({
     },
     methods: {
         logout() {
-            this.$store.dispatch("logoutFromSteemConnect");
+            this.$store.dispatch(Actions.logoutFromSteemConnect);
         },
     },
     computed: {

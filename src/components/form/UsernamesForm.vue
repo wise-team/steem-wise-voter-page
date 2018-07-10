@@ -36,6 +36,7 @@ import faUserTie from "@fortawesome/fontawesome-free-solid/faUserTie";
 import SteemConnectLoginButton from "../SteemConnectLoginButton.vue";
 import SteemUsernameInputComponent from "./inputs/SteemUsernameInput.vue";
 import SteemconnectVoterInputComponent from "./inputs/SteemconnectVoterInput.vue";
+import { Actions } from "../../store/actions";
 
 export default Vue.extend({
     props: [],
@@ -55,7 +56,7 @@ export default Vue.extend({
                 return this.$store.state.voterUsername;
             },
             set(value: string): void {
-                this.$store.dispatch("setVoterUsername", value);
+                this.$store.dispatch(Actions.setVoterUsername, value);
             },
         },
         delegatorUsername: {
@@ -63,7 +64,7 @@ export default Vue.extend({
                 return this.$store.state.delegatorUsername;
             },
             set(value: string): void {
-                this.$store.dispatch("setDelegatorUsername", value);
+                this.$store.dispatch(Actions.setDelegatorUsername, value);
             },
         },
     },

@@ -8,22 +8,51 @@ import { SteemConnectData } from "../api/SteemConnectData";
 import { Promise } from "bluebird";
 import { Mutations } from "./mutations";
 
+export class Actions {
+    public static setVoterUsername = "setVoterUsername";
+    public static setDelegatorUsername = "setDelegatorUsername";
+    public static setRulesetsLoadedFor = "setRulesetsLoadedFor";
+    public static checkRulesetsLoadedFor = "checkRulesetsLoadedFor";
+    public static loadRulesets = "loadRulesets";
+    public static setSelectedRulesetName = "setSelectedRulesetName";
+    public static setVoteData = "setVoteData";
+    public static validateVoteorder = "validateVoteorder";
+    public static setValidated = "setValidated";
+    public static updateBlockchainOps = "updateBlockchainOps";
+    public static setSteemConnectData = "setSteemConnectData";
+    public static initializeSteemConnect = "initializeSteemConnect";
+    public static logoutFromSteemConnect = "logoutFromSteemConnect";
+    public static sendWISEVoteUsingPostingKey = "sendWISEVoteUsingPostingKey";
+    public static sendWISEVoteUsingSteemconnect = "sendWISEVoteUsingSteemconnect";
+}
+
 export const actions: ActionTree<State, State> = {
-    setVoterUsername: ({ commit, dispatch, state }, voterUsername: string): void => {
+    [Actions.setVoterUsername]: (
+        { commit, dispatch, state }, voterUsername: string,
+    ): void => {
         commit(Mutations.setVoterUsername, voterUsername);
-        dispatch("checkRulesetsLoadedFor");
-        dispatch("setVoteData", state.voteData); // reset
+        dispatch(Actions.checkRulesetsLoadedFor);
+        dispatch(Actions.setVoteData, state.voteData); // reset
     },
-    setDelegatorUsername: ({ commit, dispatch, state }, delegatorUsername: string): void => {
+
+    [Actions.setDelegatorUsername]: (
+        { commit, dispatch, state }, delegatorUsername: string,
+    ): void => {
         commit(Mutations.setDelegatorUsername, delegatorUsername);
-        dispatch("checkRulesetsLoadedFor");
-        dispatch("setVoteData", state.voteData); // reset
+        dispatch(Actions.checkRulesetsLoadedFor);
+        dispatch(Actions.setVoteData, state.voteData); // reset
     },
-    setRulesetsLoadedFor: ({ commit, dispatch, state }, payload: {voter: string, delegator: string}): void => {
+
+    [Actions.setRulesetsLoadedFor]: (
+        { commit, dispatch, state }, payload: {voter: string, delegator: string},
+    ): void => {
         commit(Mutations.setRulesetsLoadedFor, payload);
-        dispatch("checkRulesetsLoadedFor");
+        dispatch(Actions.checkRulesetsLoadedFor);
     },
-    checkRulesetsLoadedFor: ({ commit, dispatch, state }): void => {
+
+    [Actions.checkRulesetsLoadedFor]: (
+        { commit, dispatch, state },
+    ): void => {
         if (state.voterUsername !== state.rulesetsLoadedFor.voter
                 || state.delegatorUsername !== state.rulesetsLoadedFor.delegator) {
             commit(Mutations.setRulesetsLoadedFor, { voter: "", delegator: "" });
@@ -31,7 +60,10 @@ export const actions: ActionTree<State, State> = {
             commit(Mutations.setSelectedRulesetName, "");
         }
     },
-    loadRulesets: ({ commit, dispatch, state }): void => {
+
+    [Actions.loadRulesets]: (
+        { commit, dispatch, state },
+    ): void => {
         commit(Mutations.setRulesetLoadingState, {
             inProggress: true, error: "", message: "Checking if accounts exist...",
         });
@@ -46,7 +78,7 @@ export const actions: ActionTree<State, State> = {
         .then(Api.loadRulesets(delegatorUsername, voterUsername))
         .then((rules: SetRules) => {
             commit(Mutations.setRules, { rules: { rulesets: rules.rulesets }});
-            dispatch("setSelectedRulesetName", (rules.rulesets.length > 0 ? rules.rulesets[0] : ""));
+            dispatch(Actions.setSelectedRulesetName, (rules.rulesets.length > 0 ? rules.rulesets[0] : ""));
             commit(Mutations.setRulesetLoadingState, { inProggress: false, error: "", message: "" });
             commit(Mutations.setRulesetsLoadedFor, { voter: voterUsername, delegator: delegatorUsername });
         })
@@ -54,17 +86,26 @@ export const actions: ActionTree<State, State> = {
             commit(Mutations.setRulesetLoadingState, { inProggress: false, error: error.message, message: ""});
         });
     },
-    setSelectedRulesetName: ({ commit, dispatch, state }, payload: string): void => {
+
+    [Actions.setSelectedRulesetName]: (
+        { commit, dispatch, state }, payload: string,
+    ): void => {
         commit(Mutations.setSelectedRulesetName, payload);
-        dispatch("setVoteData", state.voteData);
+        dispatch(Actions.setVoteData, state.voteData);
     },
-    setVoteData: ({ commit, dispatch, state },
-                  payload: { author: string, permlink: string, weight: number, action: "upvote" | "flag" }): void => {
+
+    [Actions.setVoteData]: (
+        { commit, dispatch, state },
+        payload: { author: string, permlink: string, weight: number, action: "upvote" | "flag" },
+    ): void => {
         commit(Mutations.setVoteData, payload);
         commit(Mutations.setSent, false);
-        dispatch("setValidated", false);
+        dispatch(Actions.setValidated, false);
     },
-    validateVoteorder: ({ commit, dispatch, state }, payload: boolean): void => {
+
+    [Actions.validateVoteorder]: (
+        { commit, dispatch, state },
+    ): void => {
         commit(Mutations.setVoteorderValidationState, {
             inProggress: true, error: "", message: "Validating voteorder...",
         });
@@ -82,17 +123,23 @@ export const actions: ActionTree<State, State> = {
         .then(() => {
             commit(Mutations.setVoteorderValidationState, { inProggress: false, error: "", message: "" });
             commit(Mutations.setValidated, true);
-            dispatch("updateBlockchainOps");
+            dispatch(Actions.updateBlockchainOps);
         })
         .catch(error => {
             commit(Mutations.setVoteorderValidationState, { inProggress: false, error: error.message, message: ""});
             commit(Mutations.setValidated, false);
         });
     },
-    setValidated: ({ commit, dispatch, state }, payload: boolean): void => {
+
+    [Actions.setValidated]: (
+        { commit, dispatch, state }, payload: boolean,
+    ): void => {
         commit(Mutations.setValidated, payload);
     },
-    updateBlockchainOps: ({ commit, dispatch, state }): void => {
+
+    [Actions.updateBlockchainOps]: (
+        { commit, dispatch, state },
+    ): void => {
         const voteorder: SendVoteorder = {
             rulesetName: state.selectedRulesetName,
             author: state.voteData.author,
@@ -109,23 +156,35 @@ export const actions: ActionTree<State, State> = {
                 console.error(error);
             });
     },
-    setSteemConnectData: ({ commit, dispatch, state }, payload: SteemConnectData): void => {
+
+    [Actions.setSteemConnectData]: (
+        { commit, dispatch, state }, payload: SteemConnectData,
+    ): void => {
         commit(Mutations.setSteemConnectData, payload);
         if (payload.account) {
-            dispatch("setVoterUsername", payload.account.name);
+            dispatch(Actions.setVoterUsername, payload.account.name);
         }
     },
-    initializeSteemConnect: ({ commit, dispatch, state }, payload: boolean): void => {
+
+    [Actions.initializeSteemConnect]: (
+        { commit, dispatch, state },
+    ): void => {
         SteemConnectApiHelper.initialize((result: SteemConnectData): void => {
-            dispatch("setSteemConnectData", result);
+            dispatch(Actions.setSteemConnectData, result);
         });
     },
-    logoutFromSteemConnect: ({ commit, dispatch, state }, payload: boolean): void => {
+
+    [Actions.logoutFromSteemConnect]: (
+        { commit, dispatch, state },
+    ): void => {
         SteemConnectApiHelper.logout((result: SteemConnectData): void => {
-            dispatch("setSteemConnectData", result);
+            dispatch(Actions.setSteemConnectData, result);
         });
     },
-    sendWISEVoteUsingPostingKey: ({ commit, dispatch, state }, payload: { postingWif: string }): void => {
+
+    [Actions.sendWISEVoteUsingPostingKey]: (
+        { commit, dispatch, state }, payload: { postingWif: string },
+    ): void => {
         commit(Mutations.setSendingState, {inProggress: true, error: "", message: "Sending voteorder..."});
         commit(Mutations.setSent, false);
         const voteorder: SendVoteorder = {
@@ -148,7 +207,10 @@ export const actions: ActionTree<State, State> = {
             commit(Mutations.setSent, false);
         });
     },
-    sendWISEVoteUsingSteemconnect: ({ commit, dispatch, state }, payload: boolean): void => {
+
+    [Actions.sendWISEVoteUsingSteemconnect]: (
+        { commit, dispatch, state },
+    ): void => {
         commit(Mutations.setSendingState, {inProggress: true, error: "", message: "Sending voteorder..."});
         commit(Mutations.setSent, false);
         const voteorder: SendVoteorder = {
