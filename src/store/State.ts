@@ -11,7 +11,7 @@ export interface State {
     selectedRulesetName: string;
     voteData: { author: string, permlink: string, weight: number };
     validated: boolean;
-    voteorderValidationState: { inProggress: boolean, error: string, message: string };
+    voteorderValidationState: { inProggress: boolean, error: string, message: string, warning: string };
     sendingState: { inProggress: boolean, error: string, message: string };
     sent: boolean;
     steemConnectData: SteemConnectData;
@@ -37,7 +37,7 @@ export const initialState: State = { // this is used for "form reset" button
     selectedRulesetName: "",
     voteData: { author: "", permlink: "", weight: 10000 },
     validated: false,
-    voteorderValidationState: { inProggress: false, error: "", message: "" },
+    voteorderValidationState: { inProggress: false, error: "", message: "", warning: "" },
     sendingState: { inProggress: false, error: "", message: "" },
     sent: false,
     steemConnectData: SteemConnectApiHelper.getInitialState(),

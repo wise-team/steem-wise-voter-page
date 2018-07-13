@@ -27,6 +27,7 @@
                         <b-alert variant="info" dismissible :show="loadingMessage.length > 0">{{ loadingMessage }}</b-alert>
                         <b-alert variant="danger" dismissible :show="loadingError.length > 0">{{ loadingError }}</b-alert>
                         <b-alert variant="success" :show="isVoteorderValid">Voteorder is valid</b-alert>
+                        <b-alert variant="warning" dismissable :show="loadingWarning.length > 0">{{ loadingWarning }}</b-alert>
                     </p>
                     
                     </b-col>
@@ -67,6 +68,7 @@ export default Vue.extend({
         loadingInProggress(): boolean { return this.$store.state.voteorderValidationState.inProggress; },
         loadingMessage(): string { return this.$store.state.voteorderValidationState.message; },
         loadingError(): string { return this.$store.state.voteorderValidationState.error; },
+        loadingWarning(): string { return this.$store.state.voteorderValidationState.warning; },
         isButtonDisabled(): boolean {
             return !(
                 this.$store.getters.validationButtonEnabled
