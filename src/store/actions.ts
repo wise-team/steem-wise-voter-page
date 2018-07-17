@@ -40,7 +40,6 @@ export const actions: ActionTree<State, State> = {
             dispatch(Actions.setSteemConnectData, result);
 
             if (Date.now() < state.automaticSendUntilTime // -1 if automatic send was not enabled
-                && queryParams.access_token
                 && state.steemConnectData.loggedIn
                 && getters.canSendAutomatically) {
                 // send voteorder automatically

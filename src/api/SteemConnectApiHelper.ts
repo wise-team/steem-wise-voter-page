@@ -29,6 +29,11 @@ export class SteemConnectApiHelper {
 
     public static initialize(callback: (result: SteemConnectData) => void) {
         const accessToken = this.getAccessToken();
+        if (queryParams.access_token && accessToken) {
+            localStorage.setItem(SteemConnectApiHelper.LS_ACCESS_TOKEN_KEY, accessToken);
+            window.location.search = "";
+        }
+
         if (accessToken) {
             const steemConnectV2 = SteemConnectApiHelper.getSteemConnectObject();
             steemConnectV2.setAccessToken(accessToken);
