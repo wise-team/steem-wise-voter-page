@@ -15,13 +15,16 @@
                             <steem-username-input-component label="Your (voter) username" id="voter-username" :icon="voterIcon" v-model="voterUsername" />
                         </div>
 
-                        <small class="steemconnect-link">
+                        <small class="subinput-info">
                             or 
                             <steem-connect-login-button />
                         </small>
                     </b-col>
                     <b-col cols="12" sm="6">
                         <steem-username-input-component label="Delegator username" id="delegator-username" :icon="delegatorIcon" v-model="delegatorUsername" />
+                        <small class="subinput-info">
+                            <voting-power-indicator :username="delegatorUsername" />
+                        </small>
                     </b-col></b-row>
                 </b-container>
             </b-form>
@@ -35,6 +38,7 @@ import faArrowCircleRight from "@fortawesome/fontawesome-free-solid/faArrowCircl
 import faUser from "@fortawesome/fontawesome-free-solid/faUser";
 import faUserTie from "@fortawesome/fontawesome-free-solid/faUserTie";
 
+import VotingPowerIndicator from "../VotingPowerIndicator.vue";
 import SteemConnectLoginButton from "../SteemConnectLoginButton.vue";
 import SteemUsernameInputComponent from "./inputs/SteemUsernameInput.vue";
 import SteemconnectVoterInputComponent from "./inputs/SteemconnectVoterInput.vue";
@@ -75,12 +79,13 @@ export default Vue.extend({
         SteemUsernameInputComponent,
         SteemconnectVoterInputComponent,
         SteemConnectLoginButton,
+        VotingPowerIndicator,
     },
 });
 </script>
 
 <style>
-.steemconnect-link {
+.subinput-info {
     top: -1rem;
     position: relative;
     width: 100%;
@@ -89,7 +94,7 @@ export default Vue.extend({
     font-size: 0.8rem;
 }
 
-.steemconnect-link a, .steemconnect-link button {
+.subinput-info a, .subinput-info button {
     font-size: 0.8rem;
     text-align: right;
     display: inline;

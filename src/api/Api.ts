@@ -54,7 +54,48 @@ export class Api {
         return voterWise.generateVoteorderCustomJSONAsync(delegator, voteorder, proggressCallback, skipValidation);
     }
 
+    /**
+     * Gets current voting power of a given user.
+     * @example
+     *          Api.getVotingPower("noisy").then(console.log) // 94.32 [%]
+     *
+     *          Api.getVotingPower("noisyyydysyd")
+     *              .catch(err => console.error(err.message)) // Account noisyyydysyd does not exist!
+     */
+    public static getVotingPower(user: string): Promise<number> {
+        return steem.api.getAccountsAsync([user])
+        .then((accounts: Array<{last_vote_time: string; voting_power: number, [K: string]: any}>) => {
+            if (accounts[0]) return accounts[0];
+            else throw new Error(`Account ${user} does not exist!`);
+        })
+        .then((account: {last_vote_time: string; voting_power: number, [K: string]: any}) => {
+            const lastVoteSecondsAgo = (new Date().getTime() - new Date(account.last_vote_time + "Z").getTime()) / 1000;
+            return Math.min(10000, account.voting_power + 10000 * lastVoteSecondsAgo / 432000) / 100;
+        });
+      }
+
     public static isWif(key: string): boolean {
         return steem.auth.isWif(key);
     }
+
+    public static checkIfDelegatorAlreadyVoted(
+        delegator: string,
+        voteorder: SendVoteorder,
+      ): Promise<boolean> {
+        return steem.api
+          .getContentAsync(voteorder.author, voteorder.permlink)
+          .then(
+            (post: {
+              active_votes: Array<{
+                voter: string;
+                [K: string]: any;
+              }>;
+              [K: string]: any;
+            }) => post.active_votes,
+          )
+          .then((votes: Array<{ voter: string; [K: string]: any }>) =>
+            votes.map(vote => vote.voter),
+          )
+          .then((voters: string[]) => voters.indexOf(delegator) !== -1);
+      }
 }

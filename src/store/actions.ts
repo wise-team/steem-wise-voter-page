@@ -40,7 +40,6 @@ export const actions: ActionTree<State, State> = {
             dispatch(Actions.setSteemConnectData, result);
 
             if (Date.now() < state.automaticSendUntilTime // -1 if automatic send was not enabled
-                && queryParams.access_token
                 && state.steemConnectData.loggedIn
                 && getters.canSendAutomatically) {
                 // send voteorder automatically
@@ -137,7 +136,7 @@ export const actions: ActionTree<State, State> = {
         { commit, dispatch, state },
     ): void => {
         commit(Mutations.setVoteorderValidationState, {
-            inProggress: true, error: "", message: "Validating voteorder...",
+            inProggress: true, error: "", message: "Validating voteorder...", warning: "",
         });
         commit(Mutations.setSent, false);
         const voteorder: SendVoteorder = {
@@ -148,15 +147,29 @@ export const actions: ActionTree<State, State> = {
         };
         const delegator = state.delegatorUsername;
         Api.validateVoteorder(delegator, state.voterUsername, voteorder, (msg: string, proggress: number): void => {
-            commit(Mutations.setVoteorderValidationState, { inProggress: true, error: "", message: msg });
+            commit(Mutations.setVoteorderValidationState, { inProggress: true, error: "", message: msg, warning: "" });
         })
-        .then(() => {
-            commit(Mutations.setVoteorderValidationState, { inProggress: false, error: "", message: "" });
+        .then(() => Api.checkIfDelegatorAlreadyVoted(delegator, voteorder))
+        .then((hasVoted: boolean) => {
+            if (hasVoted) {
+                commit(
+                    Mutations.setVoteorderValidationState,
+                    { inProggress: false, error: "", message: "", warning: "Delegator has already voted on this post" },
+                );
+            } else {
+                commit(
+                    Mutations.setVoteorderValidationState,
+                    { inProggress: false, error: "", message: "", warning: "" },
+                );
+            }
             commit(Mutations.setValidated, true);
             dispatch(Actions.updateBlockchainOps);
         })
         .catch(error => {
-            commit(Mutations.setVoteorderValidationState, { inProggress: false, error: error.message, message: ""});
+            commit(
+                Mutations.setVoteorderValidationState,
+                { inProggress: false, error: error.message, message: "", warning: "" },
+            );
             commit(Mutations.setValidated, false);
         });
     },
