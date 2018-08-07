@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -e # fail on first error
+set -x
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.." # parent dir of scripts dir
 cd "${DIR}"
 
@@ -50,6 +51,7 @@ echo "Done creating tag"
 
 echo "Checking out gh-pages branch"
 git checkout gh-pages
+git merge master -m "Merge master"
 
 echo "Building production version"
 NODE_ENV=production npm run build
