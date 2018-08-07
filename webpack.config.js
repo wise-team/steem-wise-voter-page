@@ -68,6 +68,9 @@ module.exports = {
     hints: false
   },
   devtool: '#eval-source-map',
+  node: {
+    fs: "empty" // fix can't resolve "fs" in winston
+  },
   plugins: [
     new VueLoaderPlugin(),
     new Visualizer({
