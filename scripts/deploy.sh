@@ -44,7 +44,7 @@ echo "Creating git tag"
 git add package.json package-lock.json
 git commit -m "Semver ${VERSION}"
 git push
-git tag -a "v${VERSION}" -m "Steem WISE command line tool version ${VERSION}"
+git tag -a "v${VERSION}" -m "Steem WISE voter page ${VERSION}"
 git push --tags
 echo "Done creating tag"
 
