@@ -3,6 +3,7 @@
 var path = require('path');
 var webpack = require('webpack');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Visualizer = require('webpack-visualizer-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
@@ -80,6 +81,12 @@ module.exports = {
       },
       "__VERSION__": JSON.stringify(require("./package.json").version),
     }),
+    new HtmlWebpackPlugin({
+      filename: './index.html',
+      template: './src/index.template.html',
+      hash: true,
+      title: 'Steem WISE voter page'
+    })
   ]
 }
 
