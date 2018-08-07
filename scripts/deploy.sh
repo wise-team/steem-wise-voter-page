@@ -53,7 +53,8 @@ git checkout gh-pages
 
 echo "Building production version"
 NODE_ENV=production npm run build
-git add dist/
+mv dist/index.html ./
+git add dist/ index.html
 git commit -m "Update gh-pages to version ${VERSION}"
 git push
 
