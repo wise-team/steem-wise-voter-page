@@ -3,6 +3,7 @@
 var path = require('path');
 var webpack = require('webpack');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Visualizer = require('webpack-visualizer-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
@@ -67,6 +68,9 @@ module.exports = {
     hints: false
   },
   devtool: '#eval-source-map',
+  node: {
+    fs: "empty" // fix can't resolve "fs" in winston
+  },
   plugins: [
     new VueLoaderPlugin(),
     new Visualizer({
@@ -80,6 +84,12 @@ module.exports = {
       },
       "__VERSION__": JSON.stringify(require("./package.json").version),
     }),
+    new HtmlWebpackPlugin({
+      filename: './index.html',
+      template: './src/index.template.html',
+      hash: true,
+      title: 'Steem WISE voter page'
+    })
   ]
 }
 
