@@ -1,6 +1,6 @@
 {
   "name": "steem-wise-voter-page",
-  "version": "0.19.5",
+  "version": "0.19.7",
   "description": "Vote delegation system for STEEM blockchain: a voting page",
   "main": "index.js",
   "scripts": {
@@ -35,7 +35,7 @@
     "lodash": "^4.17.10",
     "sc2-sdk": "^1.0.2",
     "steem": "^0.7.1",
-    "steem-wise-core": "^0.19.5",
+    "steem-wise-core": "^0.19.7",
     "vue": "^2.5.2",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^6.1.0",
