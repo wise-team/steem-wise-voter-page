@@ -1,10 +1,10 @@
-FROM node:8.12-alpine
+FROM node:10.10-alpine
 
 ADD . /src/
 WORKDIR /src/
 
 RUN npm install
-RUN npm rebuild node-sass  # weird error without that
 RUN npm run build
+RUN mv /src/dist/index.html /src/index.html
 
 CMD npm run serve
