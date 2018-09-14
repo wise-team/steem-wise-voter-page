@@ -85,7 +85,7 @@ module.exports = {
       "__VERSION__": JSON.stringify(require("./package.json").version),
     }),
     new HtmlWebpackPlugin({
-      filename: './index.html',
+      filename: '../index.html',
       template: './src/index.template.html',
       hash: true,
       title: 'Steem WISE voter page'

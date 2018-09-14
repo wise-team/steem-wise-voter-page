@@ -2,7 +2,7 @@
 import { ActionTree } from "vuex";
 import { State } from "./State";
 import { Api } from "../api/Api";
-import { SetRules, SendVoteorder } from "steem-wise-core";
+import { SetRules, SendVoteorder, Ruleset } from "steem-wise-core";
 import { SteemConnectApiHelper } from "../api/SteemConnectApiHelper";
 import { SteemConnectData } from "../api/SteemConnectData";
 import { Promise } from "bluebird";
@@ -105,9 +105,9 @@ export const actions: ActionTree<State, State> = {
             });
         })
         .then(Api.loadRulesets(delegatorUsername, voterUsername))
-        .then((rules: SetRules) => {
-            commit(Mutations.setRules, { rules: { rulesets: rules.rulesets }});
-            dispatch(Actions.setSelectedRulesetName, (rules.rulesets.length > 0 ? rules.rulesets[0].name : ""));
+        .then((rulesets: Ruleset []) => {
+            commit(Mutations.setRules, { rules: { rulesets: rulesets }});
+            dispatch(Actions.setSelectedRulesetName, (rulesets.length > 0 ? rulesets[0].name : ""));
             commit(Mutations.setRulesetLoadingState, { inProggress: false, error: "", message: "" });
             commit(Mutations.setRulesetsLoadedFor, { voter: voterUsername, delegator: delegatorUsername });
         })

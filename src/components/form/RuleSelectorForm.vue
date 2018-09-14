@@ -125,45 +125,12 @@ export default Vue.extend({
     },
     filters: {
         ruleText(rule: Rule): string {
-            if (rule.rule === Rule.Type.Tags) {
-                const tagsRule: TagsRule = rule as TagsRule;
-                if (tagsRule.mode === TagsRule.Mode.ALLOW) {
-                    return "Allow only tags: " + tagsRule.tags.join(", ");
-                } else if (tagsRule.mode === TagsRule.Mode.DENY) {
-                    return "Deny tags: " + tagsRule.tags.join(", ");
-                } else if (tagsRule.mode === TagsRule.Mode.REQUIRE) {
-                    return "Require all of tags: " + tagsRule.tags.join(", ");
-                } else if (tagsRule.mode === TagsRule.Mode.ANY) {
-                    return "Require at least one of tags: " + tagsRule.tags.join(", ");
-                } else {
-                    return "[Unknown mode " + tagsRule.mode + "] tags: " + tagsRule.tags.join(", ");
-                }
-            } else if (rule.rule === Rule.Type.Authors) {
-                const authorsRule: AuthorsRule = rule as AuthorsRule;
-                if (authorsRule.mode === AuthorsRule.Mode.ALLOW) {
-                    return "Allow authors: " + authorsRule.authors.join(", ");
-                } else if (authorsRule.mode === AuthorsRule.Mode.DENY) {
-                    return "Deny authors: " + authorsRule.authors.join(", ");
-                } else {
-                    return "[Unknown mode " + authorsRule.mode + "] authors: " + authorsRule.authors.join(", ");
-                }
-            } else if (rule.rule === Rule.Type.Weight) {
-                const weightRule: WeightRule = rule as WeightRule;
-                return (weightRule.min < 0 ? "Flag: "
-                    + Math.abs(Math.min(0, weightRule.max)) / 100 + " - " + Math.abs(weightRule.min) / 100 + " %"
-                    : "(no flag)")
-
-                    + "<br />" + // separator
-
-                    (weightRule.max > 0 ? "Upvote: "
-                    + Math.max(0, weightRule.min) / 100 + " - " +  weightRule.max / 100 + " %"
-                     : "(no upvote)");
-            } else if (rule.rule === Rule.Type.CustomRPC) {
-                const customRpcRule: CustomRPCRule = rule as CustomRPCRule;
-                return "Custom RPC: " + customRpcRule.host + ":" + customRpcRule.port
-                        + "/" + customRpcRule.path + "@" + customRpcRule.method;
-            } else {
-                return "Unknown rule: " + JSON.stringify(rule);
+            try {
+                rule.validateRuleObject(rule);
+                return rule.getDescription();
+            }
+            catch(error) {
+                return "Invalid rule: " + error + ": " + JSON.stringify(rule);
             }
         },
         ruleListVariant(rule: Rule): string {
@@ -171,10 +138,16 @@ export default Vue.extend({
                 return "success";
             } else if (rule.rule === Rule.Type.Authors) {
                 return "success";
+            } else if (rule.rule === Rule.Type.VotesCount) {
+                return "success";
             } else if (rule.rule === Rule.Type.Weight) {
+                return "primary";
+            } else if (rule.rule === Rule.Type.WeightForPeriod) {
                 return "primary";
             } else if (rule.rule === Rule.Type.CustomRPC) {
                 return "dark";
+            } else if (rule.rule === Rule.Type.ExpirationDate) {
+                return "danger";
             } else {
                 return "light";
             }
