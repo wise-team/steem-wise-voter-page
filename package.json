@@ -31,6 +31,7 @@
     "@fortawesome/vue-fontawesome": "0.0.22",
     "@types/lodash": "^4.14.116",
     "bluebird": "^3.5.2",
+    "bootstrap": "^4.1.2",
     "bootstrap-vue": "^2.0.0-rc.11",
     "lodash": "^4.17.11",
     "sc2-sdk": "^1.0.2",
