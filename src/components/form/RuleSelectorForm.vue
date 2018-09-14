@@ -73,7 +73,6 @@ import faArrowCircleRight from "@fortawesome/fontawesome-free-solid/faArrowCircl
 import faCog from "@fortawesome/fontawesome-free-solid/faCog";
 import { SetRules, Rule, TagsRule, AuthorsRule, CustomRPCRule, WeightRule } from "steem-wise-core";
 import { Actions } from "../../store/actions";
-import { RulePrototyper } from "../../../../steem-wise-core/dist/rules/RulePrototyper";
 
 export default Vue.extend({
     props: [],
@@ -125,14 +124,13 @@ export default Vue.extend({
         },
     },
     filters: {
-        ruleText(rule_: Rule): string {
+        ruleText(rule: Rule): string {
             try {
-                const rule = RulePrototyper.fromUnprototypedRule(rule_);
                 rule.validateRuleObject(rule);
                 return rule.getDescription();
             }
             catch(error) {
-                return "Invalid rule: " + error + ": " + JSON.stringify(rule_);
+                return "Invalid rule: " + error + ": " + JSON.stringify(rule);
             }
         },
         ruleListVariant(rule: Rule): string {
