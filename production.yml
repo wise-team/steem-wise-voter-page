@@ -6,13 +6,13 @@ networks:
       name: caddy-proxy
 
 services:
-  site:
+  voting-page:
+    container_name: voting-page
     build: .
+    ports:
+      - "8080:8080"
     networks:
       - proxy-tier
     environment:
       NODE_ENV: production
-      VIRTUAL_HOST: "testing.wise.vote/voting-page"
-      VIRTUAL_NETWORK: "caddy-proxy"
-      VIRTUAL_PORT: 8080
-      CADDY_TIMEOUTS: "read 5m, write 2m"
+
