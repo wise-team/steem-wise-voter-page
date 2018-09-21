@@ -2,7 +2,7 @@
 <template>
         <div>
             <div class="text-center header">
-                <img class="d-block mx-auto mb-4" src="assets/wise-logo.png" alt="Wise Vote">
+                <a href="/"><img class="d-block mx-auto mb-4" src="assets/wise-logo.png" alt="Wise Vote"></a>
                 <p class="lead">
                     A wise tool that allows you to easily vote on behalf of your delegator.
                     Type a delegator's username, paste link to steem post and vote. Voila!
