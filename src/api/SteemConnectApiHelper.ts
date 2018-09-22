@@ -7,7 +7,7 @@ export class SteemConnectApiHelper {
     private static LS_ACCESS_TOKEN_KEY = "ec2accesstoken";
     private static SC2_APP_ACCOUNT = "wisevote.app";
     private static SC2_CALLBACK_URL: string = (location.hostname === "localhost" || location.hostname === "127.0.0.1" ?
-                                            "http://localhost:8080/" : "https://wise.vote/");
+                                            "http://localhost:8080/" : "https://wise.vote/voting-page/");
     private static SC2_SCOPE: string [] = ["custom_json"];
 
     public static getLoginUrl(): string {

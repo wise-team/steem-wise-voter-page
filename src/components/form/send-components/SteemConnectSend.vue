@@ -9,7 +9,7 @@
             :disabled="!sendButtonEnabled"
             @click="sendVoteorder"
         >
-            <img src="/assets/steemconnect-icon.svg" alt="Steemconnect icon" />
+            <img src="assets/steemconnect-icon.svg" alt="Steemconnect icon" />
             SteemConnect
         </b-button>
 
@@ -21,7 +21,7 @@
             :disabled="!sendButtonEnabled" 
             @click="loginWithAutomaticSend"
         >
-            <img src="/assets/steemconnect-icon.svg" alt="Steemconnect icon" />
+            <img src="assets/steemconnect-icon.svg" alt="Steemconnect icon" />
             SteemConnect (Login &amp; send)
         </b-button>
     </div>

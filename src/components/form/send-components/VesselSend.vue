@@ -9,7 +9,7 @@
             :href="vesselUri" 
             rel="nofollow"
         >
-            <img src="/assets/vessel-64.png" alt="Vessel logo" />
+            <img src="assets/vessel-64.png" alt="Vessel logo" />
             Vessel
         </b-button>
     </div>
