@@ -12,7 +12,7 @@ module.exports = {
   entry: './src/index.ts',
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
+    publicPath: 'dist/',
     filename: 'build.js'
   },
   mode: (process.env.NODE_ENV === 'production' ? 'production' : 'development'),

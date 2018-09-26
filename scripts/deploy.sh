@@ -55,7 +55,7 @@ git merge master -m "Merge master"
 
 echo "Building production version"
 NODE_ENV=production npm run build
-mv "${DIR}/dist/index.html" "${DIR}/index.html"
+# mv "${DIR}/dist/index.html" "${DIR}/index.html"
 git add dist/
 git add index.html
 git commit -m "Update gh-pages to version ${VERSION}"

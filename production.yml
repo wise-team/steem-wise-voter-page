@@ -1,0 +1,18 @@
+version: "3"
+
+networks:
+  proxy-tier:
+    external:
+      name: caddy-proxy
+
+services:
+  voting-page:
+    container_name: voting-page
+    build: .
+    ports:
+      - "8080:8080"
+    networks:
+      - proxy-tier
+    environment:
+      NODE_ENV: production
+
