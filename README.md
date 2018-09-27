@@ -33,12 +33,12 @@ Voter page is an online app for voters that allows them to vote on behalf of the
 
 ### Voting using voter page
 
-You will find the Voter Page here: **https://wise.vote/**.
+You will find the Voter Page here: **https://wise.vote/voting-page/**.
 
 
 ![step_1](https://wise.vote/assets/images/beginners/voting-using-voter-page/step_1.png)
 
-### 1. Go to https://wise.vote &uarr;
+### 1. Go to https://wise.vote/voting-page/ &uarr;
 
 
 
