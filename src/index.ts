@@ -2,7 +2,7 @@
 
 declare const __VERSION__: string;
 console.log("steem-wise-voter-page version: " + __VERSION__);
-console.log("This is open source software: https://github.com/noisy-witness/steem-smartvotes-voter-page");
+console.log("This is open source software: https://github.com/wise-team/steem-smartvotes-voter-page");
 
 /**
  * Import Vue & dependencies
