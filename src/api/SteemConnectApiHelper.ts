@@ -1,5 +1,5 @@
 /* tslint:disable member-ordering no-console */
-import * as sc2 from "sc2-sdk";
+import * as sc2 from "steemconnect";
 import { SteemConnectData } from "./SteemConnectData";
 import { queryParams } from "../util/url-util";
 
