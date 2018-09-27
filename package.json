@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/noisy-witness/steem-wise-voter-page.git"
+    "url": "git+https://github.com/wise-team/steem-wise-voter-page.git"
   },
   "keywords": [
     "steem",
@@ -21,9 +21,9 @@
   "author": "Jędrzej Lewandowski <jedrzejblew@gmail.com> (https://jedrzej.lewandowski.doctor/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/noisy-witness/steem-wise-voter-page/issues"
+    "url": "https://github.com/wise-team/steem-wise-voter-page/issues"
   },
-  "homepage": "https://github.com/noisy-witness/steem-wise-voter-page#readme",
+  "homepage": "https://github.com/wise-team/steem-wise-voter-page#readme",
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.8",
     "@fortawesome/fontawesome-free-brands": "^5.0.13",

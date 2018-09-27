@@ -12,7 +12,7 @@ Please follow the contributing guidelines as it saves both your and maintainers 
 2. Ask for new features (feedback is essential for us)
 3. Write pull requests that fix bugs or adds new features
 4. Write about Wise on steem
-5. Vote for noisy-witness on https://steemit.com/~witnesses
+5. Vote for wise-team on https://steemit.com/~witnesses
 
 
 
@@ -23,7 +23,7 @@ Please follow the contributing guidelines as it saves both your and maintainers 
 - Create an issue (add tag enhancement or bug) before adding a pull request
 - Think twice before adding a new file, but do not hesitate to do that if it increases the readability of the code.
 - Your code tells who you are. Make it art. Keep it quality and beautiful.
-- Be welcoming and warm to the others. See our [Code of conduct](https://github.com/noisy-witness/steem-wise-core/blob/master/CODE_OF_CONDUCT.md).
+- Be welcoming and warm to the others. See our [Code of conduct](https://github.com/wise-team/steem-wise-core/blob/master/CODE_OF_CONDUCT.md).
 
 
 
@@ -44,7 +44,7 @@ Small contributions such as fixing spelling errors, where the content is small e
 3. If you like the change and think the project could use it:
    - Run `npm run build` to check compilation errors. Build also runs the linter that ensures the quality of the code.
    - Run `npm serve`, visit the page in the browser and test it manually.
-   - See our [Code of conduct](https://github.com/noisy-witness/steem-wise-core/blob/master/CODE_OF_CONDUCT.md).
+   - See our [Code of conduct](https://github.com/wise-team/steem-wise-core/blob/master/CODE_OF_CONDUCT.md).
 4. Send a pull request.
 
 

@@ -5,15 +5,15 @@ Vote delegation system for STEEM blockchain: online voting tool available at **[
 
 Wise allows you to securely grant other users your voting power under conditions specified by you.
 
-What is WISE? — see [steem-wise-core#how-does-wise-work](https://github.com/noisy-witness/steem-wise-core#how-does-wise-work) and [Manual](https://noisy-witness.github.io/steem-wise-manual/introduction).
+What is WISE? — see [steem-wise-core#how-does-wise-work](https://github.com/wise-team/steem-wise-core#how-does-wise-work) and [Manual](https://wise.vote/introduction).
 
 Important links:
 
-- [Wise home page](https://noisy-witness.github.io/steem-wise-manual/)
-- [Daemon installation](https://noisy-witness.github.io/steem-wise-manual/installation) — how to delegate
-- [Wise manual](https://noisy-witness.github.io/steem-wise-manual/introduction) — details about wise
-- [Wise core library](https://github.com/noisy-witness/steem-wise-core)
-- [Wise cli tool](https://github.com/noisy-witness/steem-wise-cli)
+- [Wise home page](https://wise.vote/)
+- [Daemon installation](https://wise.vote/installation) — how to delegate
+- [Wise manual](https://wise.vote/introduction) — details about wise
+- [Wise core library](https://github.com/wise-team/steem-wise-core)
+- [Wise cli tool](https://github.com/wise-team/steem-wise-cli)
 
 
 ### Definitions
@@ -28,39 +28,39 @@ Important links:
 
 ## The WISE voter page
 
-Voter page is an online app for voters that allows them to vote on behalf of their delegator's voting power. Below is an instruction on voting using this tool. If you would like to become a delegator please see installation instructions for delegators at [manual/installation](https://noisy-witness.github.io/steem-wise-manual/installation). To read about each of the rules please go to the [manual/rules](https://noisy-witness.github.io/steem-wise-manual/rules).
+Voter page is an online app for voters that allows them to vote on behalf of their delegator's voting power. Below is an instruction on voting using this tool. If you would like to become a delegator please see installation instructions for delegators at [manual/installation](https://wise.vote/installation). To read about each of the rules please go to the [manual/rules](https://wise.vote/rules).
 
 
 ### Voting using voter page
 
-You will find the Voter Page here: **https://wise.vote/**.
+You will find the Voter Page here: **https://wise.vote/voting-page/**.
 
 
-![step_1](https://noisy-witness.github.io/steem-wise-manual/assets/images/beginners/voting-using-voter-page/step_1.png)
+![step_1](https://wise.vote/assets/images/beginners/voting-using-voter-page/step_1.png)
 
-### 1. Go to https://wise.vote &uarr;
+### 1. Go to https://wise.vote/voting-page/ &uarr;
 
 
 
-![step_2](https://noisy-witness.github.io/steem-wise-manual/assets/images/beginners/voting-using-voter-page/step_2.png)
+![step_2](https://wise.vote/assets/images/beginners/voting-using-voter-page/step_2.png)
 
 ### 2. Enter your username and username of the person who has delegated you the vote &uarr;
 
 
 
-![step_3](https://noisy-witness.github.io/steem-wise-manual/assets/images/beginners/voting-using-voter-page/step_3.png)
+![step_3](https://wise.vote/assets/images/beginners/voting-using-voter-page/step_3.png)
 
 ### 3. Click the blue button to load the rules under which you can use the delegation &uarr;
 
 
 
-![step_4](https://noisy-witness.github.io/steem-wise-manual/assets/images/beginners/voting-using-voter-page/step_4.png)
+![step_4](https://wise.vote/assets/images/beginners/voting-using-voter-page/step_4.png)
 
 ### 4. It will take a moment for the rules to load
 
 
 
-![step_5](https://noisy-witness.github.io/steem-wise-manual/assets/images/beginners/voting-using-voter-page/step_5.png)
+![step_5](https://wise.vote/assets/images/beginners/voting-using-voter-page/step_5.png)
 
 ### 5. Now choose under which set of rules you will vote
 
@@ -68,7 +68,7 @@ The delegator can delegate you a few rulesets with different allowed weight and 
 
 
 
-![step_6](https://noisy-witness.github.io/steem-wise-manual/assets/images/beginners/voting-using-voter-page/step_6.png)
+![step_6](https://wise.vote/assets/images/beginners/voting-using-voter-page/step_6.png)
 
 ### 6. Paste a steemit (or busy) link and select weight of the vote
 
@@ -78,7 +78,7 @@ The delegator can delegate you a few rulesets with different allowed weight and 
 
 
 
-![step_7](https://noisy-witness.github.io/steem-wise-manual/assets/images/beginners/voting-using-voter-page/step_7.png)
+![step_7](https://wise.vote/assets/images/beginners/voting-using-voter-page/step_7.png)
 
 ### 7. Enter YOUR posting key and click on the button.
 
@@ -98,26 +98,26 @@ Your voteorder has been placed on blockchain using custom_json command. It will 
 Feel free to talk with us on our #wise channel on steem.chat: https://steem.chat/channel/wise .
 You can also contact Jędrzej at jedrzejblew@gmail.com.
 
-You can also ask questions as issues in appropriate repository: See [issues for this repository](https://github.com/noisy-witness/steem-wise-voter-page/issues).
+You can also ask questions as issues in appropriate repository: See [issues for this repository](https://github.com/wise-team/steem-wise-voter-page/issues).
 
 
 ## Contribute to steem Wise
 
 We welcome warmly:
 
-- Bug reports via [issues](https://github.com/noisy-witness/steem-wise-voter-page/issues).
-- Enhancement requests via via [issues](https://github.com/noisy-witness/steem-wise-voter-page/issues).
-- [Pull requests](https://github.com/noisy-witness/steem-wise-voter-page/pulls)
+- Bug reports via [issues](https://github.com/wise-team/steem-wise-voter-page/issues).
+- Enhancement requests via via [issues](https://github.com/wise-team/steem-wise-voter-page/issues).
+- [Pull requests](https://github.com/wise-team/steem-wise-voter-page/pulls)
 - Security reports to _jedrzejblew@gmail.com_.
 
-**Before** contributing please **read [Wise CONTRIBUTING guide](https://github.com/noisy-witness/steem-wise-voter-page/blob/master/CONTRIBUTING.md)**.
+**Before** contributing please **read [Wise CONTRIBUTING guide](https://github.com/wise-team/steem-wise-voter-page/blob/master/CONTRIBUTING.md)**.
 
 Thank you for developing WISE together!
 
 
 
-## Like the project? Let @noisy-witness become your favourite witness!
+## Like the project? Let @wise-team become your favourite witness!
 
-If you use & appreciate our software — you can easily support us. Just cast a vote for "noisy-witness" on your steem account. You can do it here: [https://steemit.com/~witnesses](https://steemit.com/~witnesses).
+If you use & appreciate our software — you can easily support us. Just cast a vote for "wise-team" on your steem account. You can do it here: [https://steemit.com/~witnesses](https://steemit.com/~witnesses).
 
 <!-- Prayer: Gloria Patri, et Filio, et Spiritui Sancto, sicut erat in principio et nunc et semper et in saecula saeculorum. Amen. In te, Domine, speravi: non confundar in aeternum. -->
