@@ -1,6 +1,6 @@
 {
   "name": "steem-wise-voter-page",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Vote delegation system for STEEM blockchain: a voting page",
   "main": "index.js",
   "scripts": {
@@ -49,7 +49,9 @@
     "url": "git+https://github.com/wise-team/steem-wise-voter-page.git"
   },
   "keywords": [
-    "steem", "blockchain", "wise"
+    "steem",
+    "blockchain",
+    "wise"
   ],
   "author": "The Wise Team (https://wise-team.io/)",
   "contributors": [
@@ -59,5 +61,8 @@
   "bugs": {
     "url": "https://github.com/wise-team/steem-wise-voter-page/issues"
   },
-  "homepage": "https://wise.vote/"
+  "homepage": "https://wise.vote/",
+  "engines": {
+    "node": ">=9.11"
+  }
 }
