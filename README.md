@@ -1,6 +1,6 @@
 # Wise Voter Page
 
-<!--§ data.config.generateDefaultBadges(data) §-->
+<!--§ data.config.repository.readme.generateDefaultBadges(data) §-->
 [![License](https://img.shields.io/github/license/wise-team/steem-wise-voter-page.svg?style=flat-square)](https://github.com/wise-team/steem-wise-voter-page/blob/master/LICENSE) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![Chat](https://img.shields.io/badge/chat%20on%20discord-6b11ff.svg?style=flat-square)](https://discordapp.com/invite/CwxQDbG) [![Wise operations count](https://img.shields.io/badge/dynamic/json.svg?label=wise%20operations%20count&url=http%3A%2F%2Fsql.wise.vote%3A%2Foperations%3Fselect%3Dcount&query=%24%5B0%5D.count&colorB=blue&style=flat-square)](http://sql.wise.vote/operations?select=moment,delegator,voter,operation_type&order=moment.desc)
 <!--§§.-->
 
@@ -96,7 +96,7 @@ The delegator can delegate you a few rulesets with different allowed weight and 
 Your voteorder has been placed on blockchain using custom_json command. It will be then the processed by the delegator's daemon (on his server / computer). If delegator's daemon is running now — it will be a matter of 3-12 seconds.
 
 
-<!--§ data.config.generateHelpMd(data) §-->
+<!--§ data.config.repository.readme.generateHelpMd(data) §-->
 ## Where to get help?
 
 - Feel free to talk with us on our chat: {https://discordapp.com/invite/CwxQDbG} .
@@ -107,7 +107,7 @@ You can also ask questions as issues in appropriate repository: See [issues for 
 
 <!--§§.-->
 
-<!--§ data.config.generateHelpUsMd(data) §-->
+<!--§ data.config.repository.readme.generateHelpUsMd(data) §-->
 ## Contribute to steem Wise
 
 We welcome warmly:

@@ -16,7 +16,6 @@ import BootstrapVue from "bootstrap-vue";
  */
 import store from "./store/store";
 import App from "./components/App.vue";
-import { queryParams } from "./util/url-util";
 
 /**
  * Import global css
