@@ -9,3 +9,10 @@ RUN npm install
 RUN npm run build
 
 CMD npm run serve
+
+##§ '\n' + data.config.docker.generateDockerfileFrontMatter(data) + '\n' §##
+LABEL maintainer="The Wise Team (https://wise-team.io/) <jedrzejblew@gmail.com>"
+LABEL vote.wise.wise-version="1.2.2"
+LABEL vote.wise.license="MIT"
+LABEL vote.wise.repository="steem-wise-voter-page"
+##§ §.##
