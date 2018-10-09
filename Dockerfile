@@ -1,4 +1,6 @@
-FROM node:10.10-alpine
+#§ 'FROM node:' + data.config.npm.node.version + '-alpine'
+FROM node:9.11-alpine
+
 
 ADD . /src/
 WORKDIR /src/
