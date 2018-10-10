@@ -99,7 +99,7 @@ Your voteorder has been placed on blockchain using custom_json command. It will 
 <!--§ data.config.repository.readme.generateHelpMd(data) §-->
 ## Where to get help?
 
-- Feel free to talk with us on our chat: {https://discordapp.com/invite/CwxQDbG} .
+- Feel free to talk with us on our chat: {[https://discordapp.com/invite/CwxQDbG](https://discordapp.com/invite/CwxQDbG)} .
 - You can read [The Wise Manual]({https://wise.vote/introduction})
 - You can also contact Jędrzej at jedrzejblew@gmail.com (if you think that you found a security issue, please contact me quickly).
 
