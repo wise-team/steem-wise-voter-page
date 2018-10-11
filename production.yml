@@ -9,8 +9,8 @@ services:
   voting-page:
     container_name: voting-page
     build: .
-    ports:
-      - "8080:8080"
+    expose:
+      - "8080"
     networks:
       - proxy-tier
     environment:
