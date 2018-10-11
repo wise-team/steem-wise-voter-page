@@ -6,7 +6,7 @@ ADD . /src/
 WORKDIR /src/
 
 RUN npm install
-RUN npm run build
+RUN NODE_ENV=production npm run build | tr -d '{}[]'
 
 CMD npm run serve
 
