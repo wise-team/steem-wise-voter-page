@@ -15,4 +15,5 @@ services:
       - proxy-tier
     environment:
       NODE_ENV: production
+    restart: always
 
