@@ -1,11 +1,13 @@
 import { Promise } from "bluebird";
-import * as steem from "steem";
+import * as steemJs from "steem";
+import { data as wise } from "../wise-config.gen";
 import { Wise, SetRules, DirectBlockchainApi, SendVoteorder, ValidationException, Ruleset, SteemOperationNumber } from "steem-wise-core";
 
 export class Api {
     public static validateAccountsExistence(delegator: string, voter: string): Promise<void> {
         return new Promise((resolve, reject) => {
-            steem.api.lookupAccountNames([delegator, voter], (error: Error | undefined, response: any []) => {
+            const steem = new steemJs.api.Steem({ url: wise.config.steem.defaultApiUrl });
+            steem.lookupAccountNames([delegator, voter], (error: Error | undefined, response: any []) => {
                 if (error) reject(error);
                 else {
                     if (response.length < 2) reject(new Error("Too short response"));
@@ -63,7 +65,8 @@ export class Api {
      *              .catch(err => console.error(err.message)) // Account noisyyydysyd does not exist!
      */
     public static getVotingPower(user: string): Promise<number> {
-        return steem.api.getAccountsAsync([user])
+        const steem = new steemJs.api.Steem({ url: wise.config.steem.defaultApiUrl });
+        return steem.getAccountsAsync([user])
         .then((accounts: Array<{last_vote_time: string; voting_power: number, [K: string]: any}>) => {
             if (accounts[0]) return accounts[0];
             else throw new Error(`Account ${user} does not exist!`);
@@ -75,14 +78,15 @@ export class Api {
       }
 
     public static isWif(key: string): boolean {
-        return steem.auth.isWif(key);
+        return steemJs.auth.isWif(key);
     }
 
     public static checkIfDelegatorAlreadyVoted(
         delegator: string,
         voteorder: SendVoteorder,
       ): Promise<boolean> {
-        return steem.api
+        const steem = new steemJs.api.Steem({ url: wise.config.steem.defaultApiUrl });
+        return steem
           .getContentAsync(voteorder.author, voteorder.permlink)
           .then(
             (post: {
