@@ -1,6 +1,6 @@
 {
   "name": "steem-wise-voter-page",
-  "version": "2.2.2",
+  "version": "2.2.5",
   "description": "Vote delegation system for STEEM blockchain: a voting page",
   "main": "index.js",
   "scripts": {
@@ -20,14 +20,15 @@
     "bootstrap-vue": "^2.0.0-rc.11",
     "lodash": "^4.17.11",
     "steem": "^0.7.1",
-    "steem-wise-core": "^2.2.2",
+    "steem-wise-core": "^2.2.5",
     "steemconnect": "^2.0.0",
     "vue": "^2.5.17",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^6.1.0",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
-    "vuex-persistedstate": "^2.5.4"
+    "vuex-persistedstate": "^2.5.4",
+    "@types/steem-js-alpha": "https://github.com/wise-team/types-for-steem-js/raw/master/bin/types-steem-js-alpha-latest.tgz"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.24",
