@@ -1,28 +1,18 @@
-import { Promise } from "bluebird";
 import * as steemJs from "steem";
 import { data as wise } from "../wise-config.gen";
 import { Wise, SetRules, DirectBlockchainApi, SendVoteorder, ValidationException, Ruleset, SteemOperationNumber } from "steem-wise-core";
 
 export class Api {
-    public static validateAccountsExistence(delegator: string, voter: string): Promise<void> {
-        return new Promise((resolve, reject) => {
-            const steem = new steemJs.api.Steem({ url: wise.config.steem.defaultApiUrl });
-            steem.lookupAccountNames([delegator, voter], (error: Error | undefined, response: any []) => {
-                if (error) reject(error);
-                else {
-                    if (response.length < 2) reject(new Error("Too short response"));
-                    else {
-                        if (!response[0]) reject(new Error("Delegator (@" + delegator + ") account does not exist"));
-                        else if (!response[1]) reject(new Error("Voter (@" + voter + ") account does not exist"));
-                        else resolve();
-                    }
-                }
-            });
-        });
+    public static async validateAccountsExistence(delegator: string, voter: string) {
+        const steem = new steemJs.api.Steem({ url: wise.config.steem.defaultApiUrl });
+        const response = await steem.lookupAccountNamesAsync([delegator, voter]);
+        if (response.length < 2) throw new Error("Too short response");
+        else if (!response[0]) throw new Error("Delegator (@" + delegator + ") account does not exist");
+        else if (!response[1]) throw new Error("Voter (@" + voter + ") account does not exist");
     }
 
     public static loadRulesets(delegator: string, voter: string): (() => Promise<Ruleset []>) {
-        const voterWise = new Wise(voter, new DirectBlockchainApi());
+        const voterWise = new Wise(voter, new DirectBlockchainApi(Wise.constructDefaultProtocol()));
         return () => voterWise.downloadRulesetsForVoter(delegator, voter)
         .then((rulesets: Ruleset []) => {
             if (rulesets.length === 0)
@@ -35,8 +25,8 @@ export class Api {
     public static validateVoteorder(delegator: string, voter: string, voteorder: SendVoteorder,
                                     proggressCallback: (msg: string, proggress: number) => void):
                                     Promise<void> {
-        const voterWise = new Wise(voter, new DirectBlockchainApi());
-        return voterWise.validateVoteorder(delegator, voter, voteorder, SteemOperationNumber.NOW, undefined, proggressCallback)
+        const voterWise = new Wise(voter, new DirectBlockchainApi(Wise.constructDefaultProtocol()));
+        return voterWise.validateVoteorder(delegator, voter, voteorder, SteemOperationNumber.NOW, proggressCallback)
         .then((result: true | ValidationException) => {
             if (result !== true) throw result;
         });
@@ -45,15 +35,15 @@ export class Api {
     public static sendVoteorder(voter: string, postingWif: string, delegator: string, voteorder: SendVoteorder,
                                 proggressCallback: (msg: string, proggress: number) => void):
                                     Promise<void> {
-        const voterWise = new Wise(voter, new DirectBlockchainApi(postingWif));
-        return voterWise.sendVoteorder(delegator, voteorder, undefined, proggressCallback)
+        const voterWise = new Wise(voter, new DirectBlockchainApi(Wise.constructDefaultProtocol(), postingWif));
+        return voterWise.sendVoteorder(delegator, voteorder, proggressCallback)
         .then(() => { /**/ });
     }
     /*tslint:disable align */
     public static generateVoteorderCustomJSON(voter: string, delegator: string, voteorder: SendVoteorder,
             proggressCallback: (msg: string, proggress: number) => void, skipValidation: boolean): Promise<object []> {
-        const voterWise = new Wise(voter, new DirectBlockchainApi());
-        return voterWise.generateVoteorderOperations(delegator, voter, voteorder, undefined, proggressCallback, skipValidation);
+        const voterWise = new Wise(voter, new DirectBlockchainApi(Wise.constructDefaultProtocol()));
+        return voterWise.generateVoteorderOperations(delegator, voter, voteorder, proggressCallback, skipValidation);
     }
 
     /**
