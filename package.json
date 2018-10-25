@@ -63,6 +63,6 @@
   },
   "homepage": "https://wise.vote/",
   "engines": {
-    "node": ">=9.11"
+    "node": ">=10.12"
   }
 }
