@@ -1,7 +1,10 @@
 version: "3"
 
 services:
+  #§ d(data.config.votingPage.docker.services.frontend.name) + ':'
   site:
     build: .
-    ports:
-      - "8080:8080"
+    #§ 'image: ' + d(data.config.votingPage.docker.services.frontend.image)
+    image: wise/voting-page
+    #§ 'container_name: ' + d(data.config.votingPage.docker.services.frontend.container)
+    container_name: voting-page

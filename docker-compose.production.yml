@@ -6,14 +6,13 @@ networks:
       name: caddy-proxy
 
 services:
-  voting-page:
-    container_name: voting-page
+  #§ d(data.config.votingPage.docker.services.frontend.name) + ':'
+  site:
     build: .
     expose:
-      - "8080"
+      #§ '- ' + d(data.config.votingPage.docker.services.frontend.port)
+      - 8080
     networks:
       - proxy-tier
-    environment:
-      NODE_ENV: production
     restart: always
 
