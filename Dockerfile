@@ -12,7 +12,7 @@ CMD npm run serve
 
 ##§ '\n' + data.config.docker.generateDockerfileFrontMatter(data) + '\n' §##
 LABEL maintainer="The Wise Team (https://wise-team.io/) <jedrzejblew@gmail.com>"
-LABEL vote.wise.wise-version="2.2.5"
+LABEL vote.wise.wise-version="3.0.3"
 LABEL vote.wise.license="MIT"
 LABEL vote.wise.repository="steem-wise-voter-page"
 ##§ §.##

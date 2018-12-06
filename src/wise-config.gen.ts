@@ -11,7 +11,7 @@ export const data = {
       "code": "MIT",
     },
     "wise": {
-      "version": "2.2.5",
+      "version": "3.0.3",
       "homepage": "https://wise.vote/",
     },
     "steem": {
@@ -24,7 +24,11 @@ export const data = {
 }, {
   "url": "https://rpc.buildteam.io",
   "get_block": true,
+}, {
+  "url": "https://anyx.io",
+  "get_block": true,
 } ],
+      "waitForNextHeadBlockDelayMs": 3100,
     },
     "witness": {
       "account": "wise-team",
@@ -44,11 +48,17 @@ export const data = {
         "host": "wise.vote",
         "protocol": "https",
         "deployBranch": "master",
+        "certbot": {
+          "email": "noisy.pl@gmail.com",
+        },
       },
       "staging": {
         "host": "dev.wise.jblew.pl",
         "protocol": "https",
         "deployBranch": "staging",
+        "certbot": {
+          "email": "jedrzejblew@gmail.com",
+        },
       },
     },
     "npm": {
@@ -63,9 +73,9 @@ export const data = {
       "maintainer": "The Wise Team (https://wise-team.io/) <jedrzejblew@gmail.com>",
       "labels": {
         "domain": "vote.wise",
-        "defaultLabels": [ () => "maintainer=\"The Wise Team (https://wise-team.io/) <jedrzejblew@gmail.com>\"", () => "vote.wise.wise-version=\"2.2.5\"", () => "vote.wise.license=\"MIT\"", () => "vote.wise.repository=\"steem-wise-voter-page\"" ],
+        "defaultLabels": [ () => "maintainer=\"The Wise Team (https://wise-team.io/) <jedrzejblew@gmail.com>\"", () => "vote.wise.wise-version=\"3.0.3\"", () => "vote.wise.license=\"MIT\"", () => "vote.wise.repository=\"steem-wise-voter-page\"" ],
       },
-      "generateDockerfileFrontMatter": () => "LABEL maintainer=\"The Wise Team (https://wise-team.io/) <jedrzejblew@gmail.com>\"\nLABEL vote.wise.wise-version=\"2.2.5\"\nLABEL vote.wise.license=\"MIT\"\nLABEL vote.wise.repository=\"steem-wise-voter-page\"",
+      "generateDockerfileFrontMatter": () => "LABEL maintainer=\"The Wise Team (https://wise-team.io/) <jedrzejblew@gmail.com>\"\nLABEL vote.wise.wise-version=\"3.0.3\"\nLABEL vote.wise.license=\"MIT\"\nLABEL vote.wise.repository=\"steem-wise-voter-page\"",
     },
     "repository": {
       "github": {
@@ -75,7 +85,7 @@ export const data = {
         "badges": [ () => "[object Object]", () => "[object Object]", () => "[object Object]", () => "[object Object]" ],
         "generateDefaultBadges": () => "\n[![License](https://img.shields.io/github/license/wise-team/steem-wise-voter-page.svg?style=flat-square)](https://github.com/wise-team/steem-wise-voter-page/blob/master/LICENSE) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![Chat](https://img.shields.io/badge/chat%20on%20discord-6b11ff.svg?style=flat-square)](https://discordapp.com/invite/CwxQDbG) [![Wise operations count](https://img.shields.io/badge/dynamic/json.svg?label=wise%20operations%20count&url=https%3A%2F%2Fsql.wise.vote%2Foperations%3Fselect%3Dcount&query=%24%5B0%5D.count&colorB=blue&style=flat-square)](https://sql.wise.vote/operations?select=moment,delegator,voter,operation_type&order=moment.desc)\n",
         "generateHelpUsMd": () => "\n## Contribute to steem Wise\n\nWe welcome warmly:\n\n- Bug reports via [issues](https://github.com/wise-team/steem-wise-voter-page).\n- Enhancement requests via via [issues](https://github.com/wise-team/steem-wise-voter-page/issues).\n- [Pull requests](https://github.com/wise-team/steem-wise-voter-page/pulls)\n- Security reports to _jedrzejblew@gmail.com_.\n\n**Before** contributing please **read [Wise CONTRIBUTING guide](https://github.com/wise-team/steem-wise-core/blob/master/CONTRIBUTING.md)**.\n\nThank you for developing WISE together!\n\n\n\n## Like the project? Let @wise-team become your favourite witness!\n\nIf you use & appreciate our software — you can easily support us. Just vote for \"wise-team\" to become you one of your witnesses. You can do it here: [https://steemit.com/~witnesses](https://steemit.com/~witnesses).\n\n",
-        "generateHelpMd": () => "\n## Where to get help?\n\n- Feel free to talk with us on our chat: [https://discordapp.com/invite/CwxQDbG](https://discordapp.com/invite/CwxQDbG) .\n- You can read [The Wise Manual](https://wise.vote/introduction)\n- You can also contact Jędrzej at jedrzejblew@gmail.com (if you think that you found a security issue, please contact me quickly).\n\nYou can also ask questions as issues in appropriate repository: See [issues for this repository](https://github.com/wise-team/steem-wise-voter-page/issues).\n\n",
+        "generateHelpMd": () => "\n## Where to get help?\n\n- Feel free to talk with us on our chat: [https://discordapp.com/invite/CwxQDbG](https://discordapp.com/invite/CwxQDbG) .\n- You can read [The Wise Manual](https://docs.wise.vote)\n- You can also contact Jędrzej at jedrzejblew@gmail.com (if you think that you found a security issue, please contact me quickly).\n\nYou can also ask questions as issues in appropriate repository: See [issues for this repository](https://github.com/wise-team/steem-wise-voter-page/issues).\n\n",
       },
       "repositories": {
         "core": {
@@ -136,6 +146,60 @@ export const data = {
         },
       },
     },
+    "vault": {
+      "url": "https://127.0.0.1:8200",
+      "backendFilePath": "/opt/wise/vault/Vaultfile",
+      "docker": {
+        "network": "vault-net",
+        "services": {
+          "vault": {
+            "name": "vault",
+            "container": "wise-vault",
+            "image": "wise/vault",
+          },
+        },
+      },
+      "unseal": {
+        "secret_shares": 4,
+        "secret_threshold": 2,
+      },
+      "auths": {
+        "AppRole": {
+          "type": "approle",
+          "description": "Docker service login",
+          "config": {},
+        },
+        "userpass": {
+          "type": "userpass",
+          "description": "User login",
+          "config": {},
+        },
+      },
+      "users": [ {
+  "username": "jblew",
+  "policies": [ "admin" ],
+}, {
+  "username": "noisy",
+  "policies": [ "admin" ],
+} ],
+      "policies": () => { throw new Error(" Only (data)=>{} or ()=>{} functions can be evaluated in generated config file "); },
+      "roles": () => { throw new Error(" Only (data)=>{} or ()=>{} functions can be evaluated in generated config file "); },
+      "secrets": {
+        "humanEnter": {
+          "steemConnectClientId": {
+            "description": "Steemconnect client_id",
+            "key": "/human/steemconnect/client_id",
+          },
+          "slackWebhookUrl": {
+            "description": "Slack Webhook URL",
+            "key": "/human/slack/webhook_url",
+          },
+        },
+        "generated": {
+          "sessionSalt": "/generated/session/salt",
+        },
+      },
+    },
     "communitation": {
       "chat": {
         "name": "discord",
@@ -147,6 +211,7 @@ export const data = {
         "production": "https://sql.wise.vote/",
         "staging": "https://sql.dev.wise.jblew.pl/",
       },
+      "port": 8094,
       "protocol": {
         "version": "1.0",
         "maxRowsPerPage": 1000,
@@ -154,7 +219,7 @@ export const data = {
       "pusher": {
         "requestConcurrencyPerNode": 3,
         "blockProcessingTimeoutMs": 9000,
-        "nextBlockDelayMs": 2900,
+        "nextBlockDelayMs": 3100,
       },
       "docker": {
         "services": {
@@ -170,6 +235,7 @@ export const data = {
           "postgrest": {
             "name": "postgrest",
             "container": "wise-sql-postgrest",
+            "port": 9002,
           },
           "api_proxy": {
             "name": "wise_sql_api_proxy",
@@ -185,16 +251,16 @@ export const data = {
     },
     "manual": {
       "url": {
-        "production": "https://wise.vote/introduction",
-        "staging": "https://dev.wise.jblew.pl/introduction",
+        "production": "https://docs.wise.vote",
+        "staging": "https://docs.dev.wise.jblew.pl",
       },
+      "port": 8096,
       "docker": {
         "services": {
           "frontend": {
             "name": "frontend",
             "container": "wise-manual",
             "image": "wise/manual",
-            "port": 4000,
           },
         },
       },
@@ -217,24 +283,113 @@ export const data = {
     },
     "hub": {
       "url": {
-        "production": "https://hub.wise.vote/",
-        "staging": "https://hub.dev.wise.jblew.pl/",
+        "production": "https://wise.vote/",
+        "staging": "https://dev.wise.jblew.pl/",
       },
+      "port": 8095,
       "visual": {
         "read": {
           "lastActivity": {
-            "numOfOpsToShow": 50,
             "trxLinkBase": "https://steemd.com/tx/{trx}",
             "articleLinkBase": "https://steemit.com/@{author}/{permlink}",
           },
         },
       },
+      "api": {
+        "cookie": {
+          "maxAgeMs": 604800000,
+        },
+      },
+      "daemon": {
+        "log": {
+          "maxHistoryLength": 1000,
+        },
+      },
+      "urls": {
+        "api": {
+          "base": "/api",
+          "auth": {
+            "login": {
+              "scope": {
+                "empty": "/api/auth/login/scope/empty",
+                "custom_json": "/api/auth/login/scope/custom_json",
+                "custom_json_vote_offline": "/api/auth/login/scope/custom_json/vote/offline",
+              },
+            },
+            "callback": "/api/auth/callback",
+            "logout": "/api/auth/logout",
+            "revoke_all": "/api/auth/revoke_all",
+            "test_login": "/api/auth/test_login",
+          },
+          "user": {
+            "base": "/api/user",
+            "settings": "/api/user/settings",
+          },
+          "accounts": {
+            "base": "/api/accounts",
+          },
+        },
+      },
       "docker": {
+        "images": {
+          "backend": {
+            "name": "wise/hub-backend",
+          },
+        },
         "services": {
-          "frontend": {
-            "name": "frontend",
-            "container": "wise-hub-frontend",
-            "image": "wise/wise-hub-frontend",
+          "nginx": {
+            "name": "nginx",
+          },
+          "redis": {
+            "name": "redis",
+            "volume": "wise_hub_redis",
+          },
+          "api": {
+            "name": "api",
+            "appRole": {
+              "role": "wise-hub-api",
+              "policies": () => { throw new Error(" Only (data)=>{} or ()=>{} functions can be evaluated in generated config file "); },
+            },
+            "secrets": {
+              "appRoleId": "hub-api-approle-id",
+              "appRoleSecret": "hub-api-approle-secret",
+            },
+          },
+          "daemon": {
+            "name": "daemon",
+          },
+          "publisher": {
+            "name": "publisher",
+            "appRole": {
+              "role": "wise-hub-daemon",
+              "policies": () => { throw new Error(" Only (data)=>{} or ()=>{} functions can be evaluated in generated config file "); },
+            },
+            "secrets": {
+              "appRoleId": "hub-publisher-approle-id",
+              "appRoleSecret": "hub-publisher-approle-secret",
+            },
+          },
+          "realtime": {
+            "name": "realtime",
+            "port": 8099,
+          },
+        },
+      },
+      "vault": {
+        "secrets": {
+          "users": "/hub/steemconnect/users",
+          "userProfiles": "/hub/steemconnect/users/profiles",
+          "accessTokens": "/hub/steemconnect/users/access_tokens",
+          "refreshTokens": "/hub/steemconnect/users/refresh_tokens",
+        },
+        "policies": {
+          "api": {
+            "name": "wise-hub-api",
+            "policy": () => { throw new Error(" Only (data)=>{} or ()=>{} functions can be evaluated in generated config file "); },
+          },
+          "publisher": {
+            "name": "wise-hub-daemon",
+            "policy": () => { throw new Error(" Only (data)=>{} or ()=>{} functions can be evaluated in generated config file "); },
           },
         },
       },
@@ -280,6 +435,11 @@ export const data = {
         "forbiddenPhrases": [ "noisy-witness", "noisy witness", "smartvote", "muon" ],
       },
     },
+    "proxy": {
+      "docker": {
+        "container": "wise-proxy",
+      },
+    },
     "websites": [ {
   "url": "https://wise.vote/",
   "checkBrokenLinks": true,
@@ -287,10 +447,15 @@ export const data = {
   "url": "https://wise-team.io/",
   "checkBrokenLinks": true,
 }, {
-  "url": "https://wise.vote/introduction",
+  "url": "https://docs.wise.vote",
   "checkBrokenLinks": false,
 } ],
     "steemconnect": {
+      "oauth2Settings": {
+        "baseAuthorizationUrl": "https://steemconnect.com/oauth2/authorize",
+        "tokenUrl": "https://steemconnect.com/api/oauth2/token",
+        "tokenRevocationUrl": "https://steemconnect.com/api/oauth2/token/revoke",
+      },
       "owner": {
         "account": "wise.vote",
         "profile": {
@@ -323,7 +488,7 @@ export const data = {
         "id": 493,
         "client_id": "wisevote.app",
         "owner": "wise.vote",
-        "redirect_uris": [ "https://wise.vote/voting-page/", "https://hub.wise.vote/", "http://localhost:8080/" ],
+        "redirect_uris": [ "https://wise.vote/voting-page/", "https://wise.vote/api/auth/callback", "https://dev.wise.jblew.pl/api/auth/callback", "http://localhost:8080/", "http://localhost:8080/api/auth/callback" ],
         "name": "WISE",
         "description": "Vote delegation system for STEEM blockchain: https://wise.vote/",
         "icon": "https://wise.vote/assets/wise-full-color-icon-128.png",
@@ -332,7 +497,7 @@ export const data = {
         "is_public": true,
         "is_disabled": false,
         "created_at": "2018-07-06T09:53:05.827Z",
-        "updated_at": "2018-10-16T15:00:15.365Z",
+        "updated_at": "2018-11-03T13:10:36.467Z",
       },
     },
   },

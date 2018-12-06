@@ -3,6 +3,9 @@ version: "3"
 services:
   #§ d(data.config.votingPage.docker.services.frontend.name) + ':'
   site:
+    ports:
+      #§ '- ' + data.config.sql.port + ':8080'
+      - 8094:8080
     build: .
     #§ 'image: ' + d(data.config.votingPage.docker.services.frontend.image)
     image: wise/voting-page
