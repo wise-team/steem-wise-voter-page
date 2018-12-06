@@ -266,6 +266,7 @@ export const data = {
       },
     },
     "votingPage": {
+      "port": 8093,
       "url": {
         "production": "https://wise.vote/voting-page/",
         "staging": "https://dev.wise.jblew.pl/voting-page/",
@@ -276,7 +277,6 @@ export const data = {
             "name": "site",
             "container": "voting-page",
             "image": "wise/voting-page",
-            "port": 8080,
           },
         },
       },
