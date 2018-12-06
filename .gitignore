@@ -1,5 +1,7 @@
 # Application specific
 /node_modules
+/dist
+/index.html
 
 # Mac OS X stuff
 .DS_Store
