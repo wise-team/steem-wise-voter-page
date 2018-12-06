@@ -1,0 +1,8 @@
+version: "3"
+
+services:
+  #§ d(data.config.votingPage.docker.services.frontend.name) + ':'
+  site:
+    ports:
+      #§ '- "' + d(data.config.votingPage.docker.services.frontend.port) + ':8080"'
+      - "8080:8080"

@@ -11,7 +11,7 @@ export const data = {
       "code": "MIT",
     },
     "wise": {
-      "version": "3.0.3",
+      "version": "2.2.5",
       "homepage": "https://wise.vote/",
     },
     "steem": {
@@ -25,7 +25,6 @@ export const data = {
   "url": "https://rpc.buildteam.io",
   "get_block": true,
 } ],
-      "waitForNextHeadBlockDelayMs": 3100,
     },
     "witness": {
       "account": "wise-team",
@@ -45,17 +44,11 @@ export const data = {
         "host": "wise.vote",
         "protocol": "https",
         "deployBranch": "master",
-        "certbot": {
-          "email": "noisy.pl@gmail.com",
-        },
       },
       "staging": {
         "host": "dev.wise.jblew.pl",
         "protocol": "https",
         "deployBranch": "staging",
-        "certbot": {
-          "email": "jedrzejblew@gmail.com",
-        },
       },
     },
     "npm": {
@@ -70,9 +63,9 @@ export const data = {
       "maintainer": "The Wise Team (https://wise-team.io/) <jedrzejblew@gmail.com>",
       "labels": {
         "domain": "vote.wise",
-        "defaultLabels": [ () => "maintainer=\"The Wise Team (https://wise-team.io/) <jedrzejblew@gmail.com>\"", () => "vote.wise.wise-version=\"3.0.3\"", () => "vote.wise.license=\"MIT\"", () => "vote.wise.repository=\"steem-wise-voter-page\"" ],
+        "defaultLabels": [ () => "maintainer=\"The Wise Team (https://wise-team.io/) <jedrzejblew@gmail.com>\"", () => "vote.wise.wise-version=\"2.2.5\"", () => "vote.wise.license=\"MIT\"", () => "vote.wise.repository=\"steem-wise-voter-page\"" ],
       },
-      "generateDockerfileFrontMatter": () => "LABEL maintainer=\"The Wise Team (https://wise-team.io/) <jedrzejblew@gmail.com>\"\nLABEL vote.wise.wise-version=\"3.0.3\"\nLABEL vote.wise.license=\"MIT\"\nLABEL vote.wise.repository=\"steem-wise-voter-page\"",
+      "generateDockerfileFrontMatter": () => "LABEL maintainer=\"The Wise Team (https://wise-team.io/) <jedrzejblew@gmail.com>\"\nLABEL vote.wise.wise-version=\"2.2.5\"\nLABEL vote.wise.license=\"MIT\"\nLABEL vote.wise.repository=\"steem-wise-voter-page\"",
     },
     "repository": {
       "github": {
@@ -143,60 +136,6 @@ export const data = {
         },
       },
     },
-    "vault": {
-      "url": "https://127.0.0.1:8200",
-      "backendFilePath": "/opt/wise/vault/Vaultfile",
-      "docker": {
-        "network": "vault-net",
-        "services": {
-          "vault": {
-            "name": "vault",
-            "container": "wise-vault",
-            "image": "wise/vault",
-          },
-        },
-      },
-      "unseal": {
-        "secret_shares": 4,
-        "secret_threshold": 2,
-      },
-      "auths": {
-        "AppRole": {
-          "type": "approle",
-          "description": "Docker service login",
-          "config": {},
-        },
-        "userpass": {
-          "type": "userpass",
-          "description": "User login",
-          "config": {},
-        },
-      },
-      "users": [ {
-  "username": "jblew",
-  "policies": [ "admin" ],
-}, {
-  "username": "noisy",
-  "policies": [ "admin" ],
-} ],
-      "policies": () => { throw new Error(" Only (data)=>{} or ()=>{} functions can be evaluated in generated config file "); },
-      "roles": () => { throw new Error(" Only (data)=>{} or ()=>{} functions can be evaluated in generated config file "); },
-      "secrets": {
-        "humanEnter": {
-          "steemConnectClientId": {
-            "description": "Steemconnect client_id",
-            "key": "/human/steemconnect/client_id",
-          },
-          "slackWebhookUrl": {
-            "description": "Slack Webhook URL",
-            "key": "/human/slack/webhook_url",
-          },
-        },
-        "generated": {
-          "sessionSalt": "/generated/session/salt",
-        },
-      },
-    },
     "communitation": {
       "chat": {
         "name": "discord",
@@ -215,7 +154,7 @@ export const data = {
       "pusher": {
         "requestConcurrencyPerNode": 3,
         "blockProcessingTimeoutMs": 9000,
-        "nextBlockDelayMs": 3100,
+        "nextBlockDelayMs": 2900,
       },
       "docker": {
         "services": {
@@ -284,104 +223,18 @@ export const data = {
       "visual": {
         "read": {
           "lastActivity": {
+            "numOfOpsToShow": 50,
             "trxLinkBase": "https://steemd.com/tx/{trx}",
             "articleLinkBase": "https://steemit.com/@{author}/{permlink}",
           },
         },
       },
-      "daemon": {
-        "log": {
-          "maxHistoryLength": 100,
-        },
-      },
-      "urls": {
-        "api": {
-          "base": "/api",
-          "auth": {
-            "login": {
-              "scope": {
-                "empty": "/api/auth/login/scope/empty",
-                "custom_json": "/api/auth/login/scope/custom_json",
-                "custom_json_vote_offline": "/api/auth/login/scope/custom_json/vote/offline",
-              },
-            },
-            "callback": "/api/auth/callback",
-            "logout": "/api/auth/logout",
-            "revoke_all": "/api/auth/revoke_all",
-            "test_login": "/api/auth/test_login",
-          },
-          "user": {
-            "base": "/api/user",
-            "settings": "/api/user/settings",
-          },
-        },
-      },
       "docker": {
-        "images": {
-          "backend": {
-            "name": "wise/hub-backend",
-          },
-        },
         "services": {
-          "nginx": {
-            "name": "nginx",
-            "container": "wise-hub-serve",
-          },
-          "redis": {
-            "name": "redis",
-            "container": "wise-hub-redis",
-            "volume": "wise_hub_redis",
-          },
-          "api": {
-            "name": "api",
-            "container": "wise-hub-api",
-            "appRole": {
-              "role": "wise-hub-api",
-              "policies": () => { throw new Error(" Only (data)=>{} or ()=>{} functions can be evaluated in generated config file "); },
-            },
-            "secrets": {
-              "appRoleId": "hub-api-approle-id",
-              "appRoleSecret": "hub-api-approle-secret",
-            },
-          },
-          "daemon": {
-            "name": "daemon",
-            "container": "wise-hub-daemon",
-          },
-          "publisher": {
-            "name": "publisher",
-            "container": "wise-hub-publisher",
-            "appRole": {
-              "role": "wise-hub-daemon",
-              "policies": () => { throw new Error(" Only (data)=>{} or ()=>{} functions can be evaluated in generated config file "); },
-            },
-            "secrets": {
-              "appRoleId": "hub-publisher-approle-id",
-              "appRoleSecret": "hub-publisher-approle-secret",
-            },
-          },
-          "realtime": {
-            "name": "realtime",
-            "container": "wise-hub-realtime",
-            "port": 8099,
-          },
-        },
-      },
-      "vault": {
-        "secrets": {
-          "users": "/hub/steemconnect/users",
-          "userProfiles": "/hub/steemconnect/users/profiles",
-          "accessTokens": "/hub/steemconnect/users/access_tokens",
-          "refreshTokens": "/hub/steemconnect/users/refresh_tokens",
-        },
-        "policies": {
-          "api": {
-            "name": "wise-hub-api",
-            "policy": () => { throw new Error(" Only (data)=>{} or ()=>{} functions can be evaluated in generated config file "); },
-          },
-          "publisher": {
-            "name": "wise-hub-daemon",
-            "policy": () => { throw new Error(" Only (data)=>{} or ()=>{} functions can be evaluated in generated config file "); },
+          "frontend": {
+            "name": "frontend",
+            "container": "wise-hub-frontend",
+            "image": "wise/wise-hub-frontend",
           },
         },
       },
@@ -427,20 +280,6 @@ export const data = {
         "forbiddenPhrases": [ "noisy-witness", "noisy witness", "smartvote", "muon" ],
       },
     },
-    "proxy": {
-      "docker": {
-        "container": "wise-proxy",
-      },
-      "certs": {
-        "letsencryptEtcDir": "/opt/wise/certs/letsencrypt_etc",
-        "letsencryptLibDir": "/opt/wise/certs/letsencrypt_lib",
-        "webroot": "/opt/wise/certs/webroot",
-        "domains": {
-          "staging": [ "dev.wise.jblew.pl", "sql.dev.wise.jblew.pl", "hub.dev.wise.jblew.pl", "test.dev.wise.jblew.pl" ],
-          "production": [ "wise.vote", "sql.wise.vote", "hub.wise.vote", "test.wise.vote" ],
-        },
-      },
-    },
     "websites": [ {
   "url": "https://wise.vote/",
   "checkBrokenLinks": true,
@@ -452,11 +291,6 @@ export const data = {
   "checkBrokenLinks": false,
 } ],
     "steemconnect": {
-      "oauth2Settings": {
-        "baseAuthorizationUrl": "https://steemconnect.com/oauth2/authorize",
-        "tokenUrl": "https://steemconnect.com/api/oauth2/token",
-        "tokenRevocationUrl": "https://steemconnect.com/api/oauth2/token/revoke",
-      },
       "owner": {
         "account": "wise.vote",
         "profile": {
@@ -489,7 +323,7 @@ export const data = {
         "id": 493,
         "client_id": "wisevote.app",
         "owner": "wise.vote",
-        "redirect_uris": [ "https://wise.vote/voting-page/", "https://hub.wise.vote/api/auth/callback", "https://hub.dev.wise.jblew.pl/api/auth/callback", "http://localhost:8080/", "http://localhost:8080/api/auth/callback" ],
+        "redirect_uris": [ "https://wise.vote/voting-page/", "https://hub.wise.vote/", "http://localhost:8080/" ],
         "name": "WISE",
         "description": "Vote delegation system for STEEM blockchain: https://wise.vote/",
         "icon": "https://wise.vote/assets/wise-full-color-icon-128.png",
@@ -498,7 +332,7 @@ export const data = {
         "is_public": true,
         "is_disabled": false,
         "created_at": "2018-07-06T09:53:05.827Z",
-        "updated_at": "2018-11-03T13:10:36.467Z",
+        "updated_at": "2018-10-16T15:00:15.365Z",
       },
     },
   },
