@@ -2,26 +2,24 @@
 
 # For enhancements (remove if irrelevant)
 
-The feature:
+#### The feature:
 
-It is important for me because:
+#### It is important for me because:
 
-It is important for steem because:
+#### It is important for steem because:
 
 
 # For bugs (remove if irrelevant)
 
-The problem: 
+#### The problem: 
 
-I did:
+#### I did:
 
-I expected to see:
+#### I expected to see:
 
-Instead, I saw:
+#### Instead, I saw:
 
-Version of steem-wise-core: 
-
-Version of nodejs: 
+-------------
 
 Links to gist with output / logs (or at least a picture):
 
