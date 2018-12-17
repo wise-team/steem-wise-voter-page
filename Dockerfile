@@ -13,6 +13,7 @@ RUN NODE_ENV=production npm run build | tr -d '{}[]'
 FROM nginx:alpine
 COPY --from=0 /src/index.html /usr/share/nginx/html/index.html
 COPY --from=0 /src/dist /usr/share/nginx/html/dist
+COPY --from=0 /src/assets /usr/share/nginx/html/assets
 RUN ls -a /usr/share/nginx/html
 
 ##§ '\n' + data.config.docker.generateDockerfileFrontMatter(data) + '\n' §##
