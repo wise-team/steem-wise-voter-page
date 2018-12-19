@@ -129,7 +129,7 @@ export default Vue.extend({
                 rule.validateRuleObject(rule);
                 return rule.getDescription();
             }
-            catch(error) {
+            catch (error) {
                 return "Invalid rule: " + error + ": " + JSON.stringify(rule);
             }
         },
