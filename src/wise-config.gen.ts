@@ -11,7 +11,7 @@ export const data = {
       "code": "MIT",
     },
     "wise": {
-      "version": "3.1.0-rc.1",
+      "version": "3.1.0",
       "homepage": "https://wise.vote/",
     },
     "steem": {
@@ -73,9 +73,9 @@ export const data = {
       "maintainer": "The Wise Team (https://wise-team.io/) <contact@wiseteam.io>",
       "labels": {
         "domain": "vote.wise",
-        "defaultLabels": [ () => "maintainer=\"The Wise Team (https://wise-team.io/) <contact@wiseteam.io>\"", () => "vote.wise.wise-version=\"3.1.0-rc.1\"", () => "vote.wise.license=\"MIT\"", () => "vote.wise.repository=\"steem-wise-voter-page\"" ],
+        "defaultLabels": [ () => "maintainer=\"The Wise Team (https://wise-team.io/) <contact@wiseteam.io>\"", () => "vote.wise.wise-version=\"3.1.0\"", () => "vote.wise.license=\"MIT\"", () => "vote.wise.repository=\"steem-wise-voter-page\"" ],
       },
-      "generateDockerfileFrontMatter": () => "LABEL maintainer=\"The Wise Team (https://wise-team.io/) <contact@wiseteam.io>\"\nLABEL vote.wise.wise-version=\"3.1.0-rc.1\"\nLABEL vote.wise.license=\"MIT\"\nLABEL vote.wise.repository=\"steem-wise-voter-page\"",
+      "generateDockerfileFrontMatter": () => "LABEL maintainer=\"The Wise Team (https://wise-team.io/) <contact@wiseteam.io>\"\nLABEL vote.wise.wise-version=\"3.1.0\"\nLABEL vote.wise.license=\"MIT\"\nLABEL vote.wise.repository=\"steem-wise-voter-page\"",
     },
     "repository": {
       "github": {
