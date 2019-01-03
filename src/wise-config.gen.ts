@@ -53,7 +53,7 @@ export const data = {
         },
       },
       "staging": {
-        "host": "dev.wise.vote",
+        "host": "staging.wise.vote",
         "protocol": "https",
         "deployBranch": "staging",
         "certbot": {
@@ -152,7 +152,7 @@ export const data = {
           "url": "https://vault.wise.vote:8200",
         },
         "staging": {
-          "url": "https://vault.dev.wise.vote:8200",
+          "url": "https://vault.staging.wise.vote:8200",
         },
       },
       "url": "https://127.0.0.1:8200",
@@ -216,7 +216,7 @@ export const data = {
     "sql": {
       "url": {
         "production": "https://sql.wise.vote/",
-        "staging": "https://sql.dev.wise.vote/",
+        "staging": "https://sql.staging.wise.vote/",
       },
       "port": 8094,
       "protocol": {
@@ -259,7 +259,7 @@ export const data = {
     "manual": {
       "url": {
         "production": "https://docs.wise.vote/introduction",
-        "staging": "https://docs.dev.wise.vote/introduction",
+        "staging": "https://docs.staging.wise.vote/introduction",
       },
       "port": 8096,
       "docker": {
@@ -276,7 +276,7 @@ export const data = {
       "port": 8093,
       "url": {
         "production": "https://wise.vote/voting-page/",
-        "staging": "https://dev.wise.vote/voting-page/",
+        "staging": "https://staging.wise.vote/voting-page/",
       },
       "docker": {
         "services": {
@@ -291,7 +291,7 @@ export const data = {
     "hub": {
       "url": {
         "production": "https://wise.vote/",
-        "staging": "https://dev.wise.vote/",
+        "staging": "https://staging.wise.vote/",
       },
       "port": 8095,
       "visual": {
@@ -409,7 +409,7 @@ export const data = {
         "hostedLogs": {
           "url": {
             "production": "https://test.wise.vote/",
-            "staging": "https://test.dev.wise.vote/",
+            "staging": "https://test.staging.wise.vote/",
           },
           "port": 8097,
         },
@@ -448,7 +448,7 @@ export const data = {
         "port": 8092,
         "url": {
           "production": "https://wise.vote/",
-          "staging": "https://dev.wise.vote/",
+          "staging": "https://staging.wise.vote/",
         },
       },
     },
@@ -536,11 +536,11 @@ export const data = {
             "id": 718,
             "client_id": "wisevote.staging",
             "owner": "wise.vote",
-            "redirect_uris": [ "https://dev.wise.vote/voting-page/", "https://dev.wise.vote/api/auth/callback", "http://localhost:8080", "http://localhost:8080/api/auth/callback" ],
+            "redirect_uris": [ "https://staging.wise.vote/voting-page/", "https://staging.wise.vote/api/auth/callback", "http://localhost:8080", "http://localhost:8080/api/auth/callback" ],
             "name": "Staging WISE",
             "description": "Staging WISE",
             "icon": "https://wise.vote/wise-assets/wise/wise-logo-color_128x128.png",
-            "website": "https://dev.wise.vote/",
+            "website": "https://staging.wise.vote/",
             "beneficiaries": null,
             "is_public": false,
             "is_disabled": false,
