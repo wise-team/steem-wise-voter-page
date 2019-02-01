@@ -11,7 +11,7 @@ export const data = {
       "code": "MIT",
     },
     "wise": {
-      "version": "3.1.0",
+      "version": "3.1.1",
       "homepage": "https://wise.vote/",
     },
     "steem": {
@@ -20,9 +20,6 @@ export const data = {
       "defaultApiUrl": "https://anyx.io",
       "apis": [ {
   "url": "https://api.steemit.com",
-  "get_block": true,
-}, {
-  "url": "https://rpc.buildteam.io",
   "get_block": true,
 }, {
   "url": "https://anyx.io",
@@ -63,7 +60,7 @@ export const data = {
     },
     "npm": {
       "node": {
-        "version": "10.12",
+        "version": "10.15",
       },
       "keywords": [ "steem", "blockchain", "wise" ],
       "author": "The Wise Team (https://wise-team.io/)",
@@ -73,9 +70,9 @@ export const data = {
       "maintainer": "The Wise Team (https://wise-team.io/) <contact@wiseteam.io>",
       "labels": {
         "domain": "vote.wise",
-        "defaultLabels": [ () => "maintainer=\"The Wise Team (https://wise-team.io/) <contact@wiseteam.io>\"", () => "vote.wise.wise-version=\"3.1.0\"", () => "vote.wise.license=\"MIT\"", () => "vote.wise.repository=\"steem-wise-voter-page\"" ],
+        "defaultLabels": [ () => "maintainer=\"The Wise Team (https://wise-team.io/) <contact@wiseteam.io>\"", () => "vote.wise.wise-version=\"3.1.1\"", () => "vote.wise.license=\"MIT\"", () => "vote.wise.repository=\"steem-wise-voter-page\"" ],
       },
-      "generateDockerfileFrontMatter": () => "LABEL maintainer=\"The Wise Team (https://wise-team.io/) <contact@wiseteam.io>\"\nLABEL vote.wise.wise-version=\"3.1.0\"\nLABEL vote.wise.license=\"MIT\"\nLABEL vote.wise.repository=\"steem-wise-voter-page\"",
+      "generateDockerfileFrontMatter": () => "LABEL maintainer=\"The Wise Team (https://wise-team.io/) <contact@wiseteam.io>\"\nLABEL vote.wise.wise-version=\"3.1.1\"\nLABEL vote.wise.license=\"MIT\"\nLABEL vote.wise.repository=\"steem-wise-voter-page\"",
     },
     "repository": {
       "github": {
@@ -479,7 +476,7 @@ export const data = {
           "name": "Wise",
           "website": "https://wise.vote/",
         },
-        "last_account_update": "2018-10-22T13:31:54",
+        "last_account_update": "2019-01-09T22:12:00",
         "last_owner_update": "2018-10-22T13:31:54",
         "keys": {
           "owner": "STM5qMTthdfQMQREDNxjz3zsKBRY15SfLToNnzPM7RwWddiHwD3Xq",
@@ -539,13 +536,13 @@ export const data = {
             "redirect_uris": [ "https://staging.wise.vote/voting-page/", "https://staging.wise.vote/api/auth/callback", "http://localhost:8080", "http://localhost:8080/api/auth/callback" ],
             "name": "Staging WISE",
             "description": "Staging WISE",
-            "icon": "https://wise.vote/wise-assets/wise/wise-logo-color_128x128.png",
+            "icon": "https://staging.wise.vote/wise-assets/wise/wise-logo-color_128x128.png",
             "website": "https://staging.wise.vote/",
             "beneficiaries": null,
             "is_public": false,
             "is_disabled": false,
             "created_at": "2018-12-14T10:47:57.939Z",
-            "updated_at": "2018-12-19T16:07:48.365Z",
+            "updated_at": "2019-01-29T11:45:20.395Z",
           },
         },
       },

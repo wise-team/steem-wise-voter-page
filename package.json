@@ -1,6 +1,6 @@
 {
   "name": "steem-wise-voter-page",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Vote delegation system for STEEM blockchain: a voting page",
   "main": "index.js",
   "scripts": {
@@ -15,13 +15,13 @@
     "@fortawesome/fontawesome-free-solid": "^5.0.13",
     "@fortawesome/vue-fontawesome": "0.0.22",
     "@types/lodash": "^4.14.116",
-    "@types/steem-js-alpha": "https://github.com/wise-team/types-for-steem-js/raw/master/bin/types-steem-js-alpha-latest.tgz",
+    "@types/steem-js-alpha": "https://github.com/wise-team/types-for-steem-js/raw/master/bin/types-steem-js-alpha-3.1.2.tgz",
     "bluebird": "^3.5.2",
     "bootstrap": "^4.1.2",
     "bootstrap-vue": "^2.0.0-rc.11",
     "lodash": "^4.17.11",
     "steem": "^0.7.1",
-    "steem-wise-core": "^3.1.0",
+    "steem-wise-core": "^3.1.1",
     "steemconnect": "^2.0.0",
     "vue": "^2.5.17",
     "vue-class-component": "^6.0.0",
@@ -64,6 +64,6 @@
   },
   "homepage": "https://wise.vote/",
   "engines": {
-    "node": ">=10.12"
+    "node": ">=10.15"
   }
 }
