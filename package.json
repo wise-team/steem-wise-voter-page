@@ -16,6 +16,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.17",
     "@fortawesome/vue-fontawesome": "^0.1.6",
     "@types/lodash": "^4.14.123",
+    "@types/steem-js-alpha": "https://github.com/wise-team/types-for-steem-js/raw/master/bin/types-steem-js-alpha-3.1.2.tgz",
     "bluebird": "^3.5.4",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.18",
