@@ -47,7 +47,7 @@
 <script lang="ts">
 import * as _ from "lodash";
 import Vue from "vue";
-import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import faWeight from "@fortawesome/fontawesome-free-solid/faWeight";
 
 import { Actions } from "../../../store/actions";

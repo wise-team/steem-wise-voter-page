@@ -15,7 +15,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import faIndicator from "@fortawesome/fontawesome-free-solid/faThermometerThreeQuarters";
 import { Api } from "../api/Api";
 

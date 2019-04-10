@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import faGithub from "@fortawesome/fontawesome-free-brands/faGithub";
 
 export default Vue.extend({

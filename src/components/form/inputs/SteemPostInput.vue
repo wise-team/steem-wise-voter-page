@@ -27,7 +27,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import faBookmark from "@fortawesome/fontawesome-free-solid/faBookmark";
 
 import { Actions } from "../../../store/actions";

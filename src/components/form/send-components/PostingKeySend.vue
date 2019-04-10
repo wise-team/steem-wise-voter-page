@@ -49,7 +49,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import faKey from "@fortawesome/fontawesome-free-solid/faKey";
 import faCog from "@fortawesome/fontawesome-free-solid/faCog";
 

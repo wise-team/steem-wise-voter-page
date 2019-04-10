@@ -26,7 +26,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import faShieldAlt from "@fortawesome/fontawesome-free-solid/faShieldAlt";
 
 import { Api } from "../../../api/Api";

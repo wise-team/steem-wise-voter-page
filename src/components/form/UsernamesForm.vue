@@ -33,7 +33,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import faArrowCircleRight from "@fortawesome/fontawesome-free-solid/faArrowCircleRight";
 import faUser from "@fortawesome/fontawesome-free-solid/faUser";
 import faUserTie from "@fortawesome/fontawesome-free-solid/faUserTie";

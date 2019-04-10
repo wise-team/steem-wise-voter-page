@@ -68,7 +68,7 @@
 import Vue from "vue";
 import { mapGetters } from "vuex";
 import * as _ from "lodash";
-import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import faArrowCircleRight from "@fortawesome/fontawesome-free-solid/faArrowCircleRight";
 import faCog from "@fortawesome/fontawesome-free-solid/faCog";
 import { SetRules, Rule, TagsRule, AuthorsRule, CustomRPCRule, WeightRule } from "steem-wise-core";

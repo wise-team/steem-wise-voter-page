@@ -25,7 +25,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import faSpinner from "@fortawesome/fontawesome-free-solid/faSpinner";
 
 export default Vue.extend({
