@@ -7,7 +7,9 @@
     "build": "rm -rf dist && webpack",
     "serve": "http-server ./",
     "build-and-serve": "npm run build & npm run serve",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.8",
@@ -28,7 +30,8 @@
     "vue-property-decorator": "^6.1.0",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
-    "vuex-persistedstate": "^2.5.4"
+    "vuex-persistedstate": "^2.5.4",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.24",
@@ -65,5 +68,6 @@
   "homepage": "https://wise.vote/",
   "engines": {
     "node": ">=10.15"
-  }
+  },
+  "snyk": true
 }
