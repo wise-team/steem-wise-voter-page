@@ -22,7 +22,7 @@
     "lodash": "^4.17.11",
     "steem": "^0.7.1",
     "steem-wise-core": "^3.1.1",
-    "steemconnect": "^2.0.0",
+    "steemconnect": "^3.0.0",
     "vue": "^2.5.17",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^6.1.0",
